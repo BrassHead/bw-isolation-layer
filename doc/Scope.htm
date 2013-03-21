@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>BW Scope</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=#FFFFFF>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+<H1>Scope</H1>
+What facilities are needed?  
+The full intended scope is illustrated by this 
+diagram which was the start of the project.
+<CENTER>
+<BR>
+<IMG SRC="BWOverview.gif">
+<BR>
+BW Overview
+<BR>
+</CENTER>
+<P>
+Thus the "packages" of BW facilities are:
+<UL>
+<LI><A HREF="Language.htm">Language</A>
+<LI><A HREF="Windowing.htm">Graphics</A>
+<LI><A HREF="Files.htm">Files and directories</A>
+<LI><A HREF="Parameters.htm">Resources and preferences</A>
+<LI><A HREF="Processes.htm">Processes and threads</A>
+<LI><A HREF="Persistence.htm">Persistent storage</A>
+<LI><A HREF="Network.htm">Network access</A>
+<LI><A HREF="Distributed.htm">Distributed objects</A>
+<LI><A HREF="FileFormat.htm">File format experts</A>
+<LI><A HREF="Scripts.htm">Scripting</A>
+<LI><A HREF="Help.htm">Help system</A>
+<LI><A HREF="Localization.htm">Localization</A>
+</UL>
+<P>
+This is a big project and it will not succeed by pie in the sky dreaming
+or big bang implementation.  Thus, we expect to drive the implementation
+by doing real applications and working to provide the necessary isolation
+layer as required.  
+These <A HREF=Applications.htm>applications</A> will get 
+increasingly sophisticated
+and thus require an increasingly sophisticated isolation layer.
+<P>
+What things are not in the scope?
+<DL>
+<DT>The Makefile
+<DD>The mechanism to build BW applications is not defined as part of
+BW and the makefile is not considered part of the "code" that 
+has long duration.  Note that in order to have standard makefiles, you
+need to define a shell, a set of standard utilities, and standard options
+for development tools and then provide isolation tools for all of these
+on the target platform.  This is a huge effort with a small return.
+Furthermore, most modern environments have a lot of automation for 
+makefile creation, so this is not, in practice, a huge portability problem.
+<DT>Installation
+<DD>BW applications are installed in some platform dependent way.
+</DL>
+
+</BODY>
+</HTML>

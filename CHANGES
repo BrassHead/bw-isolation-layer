@@ -1,0 +1,51 @@
+Beyond 0.9 (Feb 2013)
+=====================
+
+There is not much point in upgrading this codebase. Here's what's changed:
+
+-	some of the original classes are now much better formed in the standard library
+		-	bw::String needs to be std::string containing utf-8 and ustring just needs to disappear
+		-	bw::Exception(s) need to be subclasses of std::exception
+		-	cptr needs to be unique_ptr, shared_ptr, and weak_ptr from <memory>
+-	X and all windowing systems based on an event loop are now obsolete
+		-	The drawing surface and primitives need to be based on OpenGL and/or OpenVG, not Xlib
+		-	Controls (widgets) and text processing need to be based on HTML DOM (The "view" of MVC)
+			with XML and/or JSON resources, composited with images/animations/video
+		-	Input processing based on ECMA/Javascript (The "control" of MFC)
+		-	Tied together with interthread messaging (like go channels)
+-	remaining bits needs to be based on reverse dependency interface (callers only see their own 
+	abstract interface needs and callee provide factory methods returning pointers to subclasses
+	of the caller defined interface.
+-	Not much left of current BW code with these changes...INI files, ODBC, file system directory, XML, asserts,
+	maybe logging.
+-	Salvaged code for new projects needs more c++11 upgrade:
+		-	to_string() and sto???() instead of stringstreams
+		-	std::strings, std::exceptions, std::???_ptrs
+		-	check for loops for "auto" and "range-for" opportunities
+		-	reverse dependency moves header files into caller
+		-	some asserts should be exception throws
+		-	Some list<>s should be vector<>s or array<>s
+		-	add back release makefile target that just does "strip"
+-	Save goes for salvaged application code.
+
+
+Oh, and put "main", back in the application, even if it's not totally portable....just because
+some people don't like international standards is no excuse...sheesh
+
+
+New for 0.9
+===========
+
+License changed
+dropped NO_NAMESPACES support
+c++11
+ubuntu font changes
+-Werror -Wall fixes
+No #include's inside .h files and removed duplicate inclusion guards
+Eliminated distclean make target, simplified makefiles
+Removed autoconf
+
+New for version 0.6
+===================
+Updated links from .htm tp .html in generated documentation
+added bwsign() routine for autoconf

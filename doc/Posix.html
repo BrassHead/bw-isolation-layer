@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Cross Reference to POSIX Routines</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=#FFFFFF>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+<H1>Cross Reference to POSIX</H1>
+
+<P>
+The posix standard (IEEE Std 1003.1-1988) for operating system 
+interface has "C" routines in the areas of Processes (including Signals), 
+Process environment, Files and Directories, I/O Primitives, Device 
+Specific functions, C Language Services, and System Databases. A 
+separate standard covers POSIX Threads.
+</P><P>
+Within the BW framework, POSIX routines are handled by classes specific to
+different operating system resources as follows:
+</P>
+<TABLE BORDER="1">
+<TR><TD><TABLE>
+<TR><TD>Process primitives:        </TD><TD>process.h</TD></TR>
+<TR><TD>Process environment:       </TD><TD>process.h</TD></TR>
+<TR><TD>Files and directories:     </TD><TD>directory.h, filename.h</TD></TR>
+<TR><TD>I/O primitives:            </TD><TD>file.h</TD></TR>
+<TR><TD>Device specific functions: </TD><TD>n/a</TD></TR>
+<TR><TD>C language services:       </TD><TD>process.h</TD></TR>
+<TR><TD>System databases:          </TD><TD>n/a</TD></TR>
+<TR><TD>POSIX threads:             </TD><TD>T.B.D.</TD></TR>
+</TABLE></TD></TR>
+</TABLE>
+
+<P>
+A list of the BW exposure of posix calls follows:
+</P>
+
+<TABLE BORDER="1">
+<TR><TD><TABLE>
+<TR><TD COLSPAN="2" BGCOLOR="lightblue">Process primitives:</TD></TR>
+<TR><TD>fork</TD><TD>				tbd (Process)</TD></TR>
+<TR><TD>execl, execv, execle, ...</TD><TD>	tbd (Process)</TD></TR>
+<TR><TD>wait, waitpid</TD><TD>			tbd (Process)</TD></TR>
+<TR><TD>_exit</TD><TD>			        Process::fatalError</TD></TR>
+<TR><TD>errno</TD><TD>			        ???</TD></TR>
+<TR><TD>environ</TD><TD>		        ???</TD></TR>
+
+<TR><TD COLSPAN="2" BGCOLOR="lightblue">Process primitives (signals):</TD></TR>
+<TR><TD>kill</TD><TD>				tbd (Signal?)</TD></TR>
+<TR><TD>sig*set, sigismember</TD><TD>		tbd</TD></TR>
+<TR><TD>sigaction</TD><TD>			tbd</TD></TR>
+<TR><TD>sigprocmask</TD><TD>			tbd</TD></TR>
+<TR><TD>sigpending</TD><TD>			tbd</TD></TR>
+<TR><TD>sigsuspend</TD><TD>			tbd</TD></TR>
+<TR><TD>alarm</TD><TD>				tbd</TD></TR>
+<TR><TD>pause</TD><TD>				tbd</TD></TR>
+<TR><TD>sleep</TD><TD>				tbd</TD></TR>
+
+<TR><TD COLSPAN="2" BGCOLOR="lightblue">Process environment:</TD></TR>
+<TR><TD>getpid, getppid</TD><TD>		tbd</TD></TR>
+<TR><TD>getuid, geteuid, getgid, getegid</TD><TD> na</TD></TR>
+<TR><TD>setuid, setgid</TD><TD>			na</TD></TR>
+<TR><TD>getgroups</TD><TD>			na</TD></TR>
+<TR><TD>getlogin, cuserid</TD><TD>		tbd</TD></TR>
+<TR><TD>getpgrp, setsid, setpgid</TD><TD>	na</TD></TR>
+<TR><TD>uname</TD><TD>				tbd</TD></TR>
+<TR><TD>time</TD><TD>				tbd</TD></TR>
+<TR><TD>times</TD><TD>				tbd</TD></TR>
+<TR><TD>getenv</TD><TD>				???</TD></TR>
+<TR><TD>ctermid</TD><TD>			na</TD></TR>
+<TR><TD>ttyname, isatty</TD><TD>		na</TD></TR>
+<TR><TD>sysconf</TD><TD>			na</TD></TR>
+
+<TR><TD COLSPAN="2" BGCOLOR="lightblue">Files and directories:</TD></TR>
+<TR><TD>opendir, readdir, rewindir, closedir</TD><TD> bw::Directory Class</TD></TR>
+<TR><TD>chdir</TD><TD>			tbd (FileName)</TD></TR>
+<TR><TD>getcwd</TD><TD>			FileName::currentDirectory</TD></TR>
+<TR><TD>open, creat			bw::BFile object</TD></TR>
+<TR><TD>umask</TD><TD>			na</TD></TR>
+<TR><TD>link</TD><TD>			na</TD></TR>
+<TR><TD>mkdir</TD><TD>			tbd (Directory)</TD></TR>
+<TR><TD>mkfifo</TD><TD>			na</TD></TR>
+<TR><TD>unlink</TD><TD>			tbd (FileName)</TD></TR>
+<TR><TD>rmdir</TD><TD>			tbd (Directory)</TD></TR>
+<TR><TD>rename</TD><TD>			tbd (FileName)</TD></TR>
+<TR><TD>stat, fstat</TD><TD>		FileName::getFileType</TD></TR>
+<TR><TD>access</TD><TD>			tbd (FileName)</TD></TR>
+<TR><TD>chmod</TD><TD>			na</TD></TR>
+<TR><TD>chown</TD><TD>			na</TD></TR>
+<TR><TD>utime</TD><TD>			na</TD></TR>
+<TR><TD>pathconf, fpathconf</TD><TD>	na</TD></TR>
+
+<TR><TD COLSPAN="2" BGCOLOR="lightblue">I/O primitives:</TD></TR>
+<TR><TD>pipe				tbd</TD></TR>
+<TR><TD>dup, dup2			na</TD></TR>
+<TR><TD>close				bw::BFile object</TD></TR>
+<TR><TD>read				bw::BFile object</TD></TR>
+<TR><TD>write				bw::BFile object</TD></TR>
+<TR><TD>fcntl				tbd (BFile)</TD></TR>
+<TR><TD>lseek				bw::BFile object</TD></TR>
+
+<TR><TD COLSPAN="2" BGCOLOR="lightblue">Device control functions (terminals):</TD></TR>
+<TR><TD>cf*speed			na</TD></TR>
+<TR><TD>tcgetattr, tcsetattr		na</TD></TR>
+<TR><TD>tcsendbreak, tcdrain, tcflush, tcflow na</TD></TR>
+<TR><TD>tcgetpgrp, tcsetpgrp		na</TD></TR>
+
+<TR><TD COLSPAN="2" BGCOLOR="lightblue">C Language services (locales):</TD></TR>
+<TR><TD>setlocale			bw::Process object</TD></TR>
+<TR><TD>fileno				na</TD></TR>
+<TR><TD>fdopen				na</TD></TR>
+<TR><TD>sigsetjmp, siglongjmp		na</TD></TR>
+<TR><TD>tzset				tbd (Process)</TD></TR>
+
+<TR><TD COLSPAN="2" BGCOLOR="lightblue">System databases (users and groups):</TD></TR>
+<TR><TD>getgrgid, getgrnam		na</TD></TR>
+<TR><TD>getpwuid, getpwnam		na</TD></TR>
+</TABLE></TD></TR>
+</TABLE>
+
+
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+

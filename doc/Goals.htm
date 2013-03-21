@@ -1,0 +1,167 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>BW Goals</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=#FFFFFF>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+<H1>Goals</H1>
+<P>
+Minoru Development Corporation has plans to write applications that
+explore the space of designable, dynamic, 3D, and video rate user interfaces.
+It is not clear what the final operating environment of this code will be, but
+it is expected that the market for this work is on platforms yet to be 
+developed.  Thus, the code needs to be isolated from changes in the underlying
+OS, windowing, and graphics systems.
+<p>
+BW (Basic Windows) is an isolation layer
+for this type of application development.  It defines the
+virtual world that the application code executes in.  The isolation layer
+needs to interface to a current platform and be small enough to ease the
+porting efforts to new platforms in the future.
+<p>
+The goals of this effort are to be able to write:
+<UL>
+<LI>high performance
+<LI>large scale
+<LI>distributed
+<LI>international
+<LI>graphic
+<LI>object oriented
+</UL>
+applications that will run without code changes well into the future.
+The goal is not primarily to provide platform independence between 
+Windows, Macintoshes, and X Windows platforms, 
+but to base the design on long term principles that translate
+well into any sufficiently rich environment.  
+The isolation layer reduces the code's dependence
+on specific features in the environment while accommodating 
+all the required features in concert.
+
+
+<p>
+Why is this needed?
+<p>
+Don't industry and international standards provide this level of 
+abstraction? Yes and No:
+<UL>
+<LI>These APIs are sometimes too general.  Things like the win32 API 
+and the ANSI C++
+	library are designed to support nearly any type of application.  The 
+	"width" of these APIs is thus overly broad and complex.
+<LI>Most APIs with a guaranteed long duration are not object oriented.
+	OO thinking has obsoleted many standard interfaces, such as
+	the "C" library and POSIX.
+<LI>These APIs are sometimes targetted at the wrong application types.
+	MFC is basically for editing data stored in a file system.  It has no
+	concept of data changing outside the control of the user as in a 
+	distributed application.  Java is
+	only ready for small to mid-sized client applications and is missing
+	features needed for server coding and internationalization.  The C++
+	standard library and POSIX are focused on character based applications.
+	Thus, these facilities solve only part of the problem.
+<LI>This wouldn't be so bad except it is difficult to
+	combine them natively.  For example, when using win32, 
+	some parts of the C++ standard
+	library (standard file handles and asserts) don't work, and others 
+	features are duplicated (internationalization and localization support)
+	in incompatible ways.  Also, look at Posix support in Win NT (it's 
+	only for character based programs).
+<LI>The standards for "vendor" APIs are owned by others.  Providing
+	a "platform" is big business.  APIs like win32 are owned by a single
+	vendor and thus their lifetime is tied to the products and companies
+	that implement them.
+<LI>The implementations of internationally standardized APIs are owned by
+	others.  Since large vendors are in the "platform" business, their
+	implementations of standard APIs tend to be technically complete, but
+	inferior to the native APIs of the vendor.  
+	For examples, look at the speed of "C" standard I/O vs "UNIX" style "C"
+	I/O vs native I/O.
+</UL>
+That said, these APIs contain great ideas and have efficient implementations.
+To use international standard APIs in BW, only a superficial 
+level of indirection is required, so that they can be replaced in environments
+with an insufficient implementation. Thus I'm expecting that a big part
+of BW is really a selection of which standards, or more accurately, parts of
+standards to use.
+<P>
+The goals of the POSIX standard are, in fact, very similar to this project --
+creation of portable applications at the source code level.  The problems
+are that Posix systems are not the commercial client 
+mainstream at the present time,
+the APIs are not generally object oriented, and there is no support 
+for portable graphic applications.
+<P>
+The goals of Java are also very similar to this project.  It is totally
+object oriented, produces portable graphic applications, and is well
+supported on the primary target environments.  
+The disadvantage is that it is
+a proprietary API and language with little facilities for isolation from
+provided implementations.  See the <A HREF="Language.htm">Language</A> chapter
+of this specification for more discussion of this issue.
+
+
+<H1>Target platforms</H1>
+<P>
+BW applications are primarily targetted at non-standard systems, so selection
+of a part of a standard implies that the BW isolation layer may need to 
+actually implement selected parts of a standard in a non-standard environment.
+For this reason,
+only the parts of the standard used or likely to be used in BW applications
+will be included in the interface.
+<P>
+A key point is that a BW application must use only the features of
+BW and never dive down to use proprietary features.  Such a use will 
+imply code changes in future.  Furthermore, the interface
+implementation must map BW classes and calls onto native facilities in
+a way that makes BW applications full partners in their native environment.
+This means that BW itself is a moving target -- it needs to support new
+features as they become available on target platforms.  BW cannot be
+a "lowest common denominator" system.
+<P>
+The target platforms for BW applications have the following 
+characteristics:
+<UL>
+<LI>ANSI standard C++ compiler
+<LI>ANSI standard C++ library
+<LI>Multithreading OS with Posix equivalent I/O
+<LI>Network protocols with an interface equivalent to UNIX Sockets
+<LI>Object oriented remote procedure invokation (eg: Corba, DCOM)
+<LI>Posix standard Lex and Yacc
+<LI>Graphical User Interface (GUI).  This includes an integrated set of:
+    <UL>
+    <LI>Drawing facilities including support for fonts, clipping, colours,
+        and images.
+    <LI>3D drawing primitives with hardware acceleration
+    <LI>Windowing facilities for hierarchical overlapping windows from multiple
+        applications.
+    </UL>
+</UL>
+<P>
+In addition, the following platform facilities will be available through BW 
+applications, but not required for BW implementation
+<UL>
+<LI>Drawing facilities for printers.
+<LI>Storage of preferences and options on a site, application, or user basis.
+<LI>A native HTML viewing control
+<LI>A native VRML viewing control
+</UL>
+<P>
+Also, some facilities will be provided by BW in preference to the native
+facilities because the wide platform differences prevent a common code
+base using just an isolation layer.
+<UL>
+<LI>Help facility
+<LI>Resources compiled into the application such as 
+    predefined UI elements and localized strings.
+<LI>Scripting language
+</UL>
+
+</BODY>
+</HTML>

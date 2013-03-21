@@ -1,0 +1,396 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Windowing Fundamental Concepts</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=white>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+
+<H2>Windowing fundamental concepts</H2>
+<P>
+This section provides a high level overview a an arbitrary windowing system.
+It was written to help identify the classes and objects of BW.
+<P>
+For my purposes, a computer system supporting graphical applications will have:
+<UL>
+<LI>One bitmapped screen capable of displaying visual patterns formed by
+	controlling the light color and intensity at individual points (pixels).
+	Only a limited number of colors and intensities is available and there
+	may be a limit on the number of different intensities and colors on the
+	screen at the same time.  Thus, true color, palettes, and monochrome 
+	devices are supported, but not vector devices.  Also not considered
+	are applications that deal with more than one screen at a time.
+	<P>
+	To be more specific, BW applications need to run well on the following
+	display types:
+	<UL>
+	<LI>Monochrome, Black and white display, one bit per pixel
+	<LI>16 colour, A pallette of 16 user definable colours or grey levels,
+	    4 bits per pixel.
+	<LI>256 colour, A pallette of 256 user definable colours, 
+	    8 bits per pixel.
+	<LI>True colour, Directly mapped colours, 
+	    15, 16, 24, or 32 bits per pixel.
+	</UL>
+<LI>A pointing device (mouse, trackball, or equivalent).  This generates an
+	event each time it is moved in the vertical and/or horizontal direction
+	and when one of the buttons on the device is pushed or released.  
+	The state of the
+	shift keys on the keyboard is stored as part of these events.
+<LI>A keyboard with alpha, numeric, and control keys along with several
+	"shift" keys that can be combined with the other keys.  The keyboard
+	generates an event each time a key is pressed or released.
+<LI>A timer capable of generating events at requested intervals.
+<LI>An optional printer capable of rendering text and bitmaps into physical
+	form.
+<LI>Access to one or more mass storage devices
+<LI>Optional network connections
+<LI>Optional devices for playing and recording sound
+<LI>An optional positioning device (Joystick)
+</UL>
+<P>
+These devices are shared among all of the active processes on the machine,
+so a BW application can expect, in general, to have available only a portion of the screen 
+surface and to be notified of only a portion of the input events.  In addition,
+to manage this sharing of resources, the host environment will also generate
+events that indicate changes in the availability of resources.
+<P>
+The technology
+that allocates regions of the screen and routes events to the right process
+is also available within an application.  In the traditional model,
+applications create "windows" known to the host OS that represent 
+regions or potential regions of the screen.  Each window has a 
+rectangular or complex drawing area.
+The OS controls the mapping of this drawing
+area onto the screen surface.
+It thus controls the position, size, and visible areas of windows.  
+Because of overlapping windows, at
+any point in time, a window can be allocated a surface area on the
+screen that is is mapped from any subset of its drawing area.
+This includes the allocation of no surface 
+on the screen at all (eg: the window is completely hidden by other overlapping
+windows or is a child of a minimized window).
+<P>
+These windows are related to each other as follows:
+<UL>
+<LI>Child windows are contained within their parent surface area and subdivide
+	that area. Child windows with the same parent are peers.
+<LI>Conceptually, a window mapped to the entire screen surface can be considered the
+	ancestor of all other windows.
+<LI>Peer windows can overlap, but only one can output to the overlapped
+	region at a time.
+<LI>Frame windows have adornments that are managed by the host OS.  These
+	adornments are used to control and visualize the allocation of the screen
+	surface.  The usable area within the frame is known as the "client" area.
+<LI>Children of the screen are almost always frame windows.
+<LI>Children of the screen can be "minimized" meaning that their allocated
+	surface area and behavioural possibilities are drastically reduced for
+	a time.
+<LI>Windows can own other windows meaning that the lifetime and visibility
+	of the owned
+	window is tied to the lifetime and minization state of the owner.
+	Parent windows typically own their children.
+<LI>Small windows that "pop-up" can expect the host OS to save the contents
+	of other windows under them for faster repainting.  The host OS may also
+	save parts of windows when they are moved or resized to minimize 
+	repainting.
+</UL>
+
+
+<H3>Events</H3>
+<P>
+In the traditional model, keyboard and mouse actions generate <i>events</i>
+that are polled by the application.  These events indicate the window where the
+event occurred according to the focus rules described below.
+Normally, the application will dispatch these events to a routine or routines
+associated with the window.  These routines are defined by the application
+or selected from a set of standard routines.  Events are also generated by the
+host system, other window's event handling routines, 
+application code, and even other applications.
+<P>
+The routines for handling events constitute a windows "class".  
+Because of the tight coupling of windows 
+(as screen regions) and their event handling routines, the entire ensemble
+and each specific window is considered an
+instantiation of that class by virtue of the association between the window
+and it's event handling routine(s).  
+<P>
+The concept of focus and cursors is used to manage the input devices
+and route their messages appropriately. A
+pointer cursor is a small bitmap that is drawn on the screen to indicate
+the current location of the pointer.  Drawing this bitmap in a non-destructive
+way is the responsibility of the host OS, but the application can control
+<UL>
+<LI>Which bitmap is drawn
+<LI>Whether the cursor is shown or not
+</UL>
+Also, an application can "seize" the pointer and thus get cursor events even though
+they occur while the cursor is outside the screen surface allocated to the
+application's window.
+<P>
+There is also the concept of keyboard focus and the keyboard cursor.  Only
+the window with the keyboard focus receives keyboard events.  Changing the
+window with the focus is accomplished by reacting to special keys and pointer
+events.  The window with the keyboard focus is normally drawn with a keyboard
+cursor.  The existence, form, location, and control of this cursor is entirely under
+the control of the window's event handling code.
+<P>
+Because the user interacting with the host OS can change the allocation of
+the screen surface, it will send events to request that a window
+or a portion thereof be redrawn from
+time to time.  This is one of the events routed to an event handling routine.
+When a parent
+window (or part thereof) is redrawn, the child windows that overlap the
+affected region of the screen are also redrawn.
+<P>
+The drawing area of a window is modified by calling 
+output primitives for lines,
+curves, bitmaps, text, etc. This can be initiated by a 
+request from the operating system
+or immediately to provide user feedback or indicate changes in the underlying
+data.
+
+<H3>Controls</H3>
+<P>
+Although at this basic level, all windows are similar, the standard
+architecture for graphic applications makes extensive use of routines
+and data associated with a window so that the application code can operate 
+at a higher
+level of abstraction.  In addition to routines for handling the input events, 
+a <i>control</i> class will provide services to application code and store 
+attributes
+attached to the window structure maintained by the OS.  The coupling of
+controls to windows is so tight that it is not usually possible to create
+a window without an associated control.
+<P>
+Many controls are specifically designed 
+to operate with child windows.  On the output side, the control
+provides a set
+of high level services accepting data in convenient formats and converts
+these to drawing primitives as required.  On the input side, it handles
+almost all the input events and provides notifications of events significant
+at a higher level.
+<P>
+In MS Windows, the event routing mechanism is used for all communication with
+controls, so there is no distinction between a control and a window.  Windows
+are created as instances of their control class.  To communicate with the
+control, a message is dispatched to a window.  The event handing routine
+constitutes the object model of Win32 controls and the ensemble is called
+simply a window.  Communication to the window is effected by sending
+special event messages.  Communication from the window is effected by
+receiving special events in the parent window or by sending query event
+messages.  
+<p>
+In X, controls are called widgets and have a number
+of tightly coupled routines to handle different event types and provide
+services.  Communication to the widget is effected by calling routines 
+directly, by setting attributes of the window, or by changing a database
+searched by the widget for it's parameters.  Communication from the widget
+is effected by callback routines or by retrieving windows attributes.
+
+
+<H3>Other visual elements</H3>
+<P>
+A <i>menu</i> is a list of choices that appears at a host OS dependent location
+and time, usually initiated from the adornments of a frame window or from
+a selected mouse button.  Menus are sensitive to the current state of the
+application, the location of the keyboard focus and the location of the
+mouse cursor.  Multiple levels of windows can contribute to the menu 
+contents (ie: there may be choices tied to the actions of several windows
+appearing at the same time).  Menu
+choices are tied to actions within the application.  There may be multiple
+kinds of menus (eg: text, buttons and popups) active at the same time.  
+There is a limited ability to represent state information in the
+menu (active/inactive, selected/deselected)
+<P>
+A <i>dialog</i> is a window specialized to be a parent of one or more controls.
+It creates the contained controls, manages their location and interactions,
+and uses their services to provide even higher level services to its own 
+client.
+Dialogs can appear as child windows of the application or peers.  Peers can
+be modal or nonmodal -- ie: operate concurrently with other application windows
+or operate sequentially.
+
+<H3>Drawing Primitives</H3>
+<P>
+For a control to draw on a window, it calls drawing primitives on a 
+<i>context</i>.  The context is an object that records
+common attributes used by default in the drawing primitives.  These 
+attributes are:
+<UL>
+<LI>Foreground colour (pen) -- the colour value or image used when drawing.
+<LI>Background or fill bitmap (brush) -- the colour or image used when 
+	filling in a drawing primitive.  Eg: a filled rectangle, arc, or the
+	center of wide lines.  The image is tiled across the screen and has an
+	origin -- usually the screen origin, the window origin, or the parent
+	window origin.
+<LI>Drawing mode -- describes how the foreground colour is combined with
+	the existing screen colours.  Common options are to overwrite (ie: ignore)
+	the existing screen contents or to "XOR" the screen colour with the
+	drawing colour.  XOR mode is used so that the drawn item can be erased
+	by redrawing.
+<LI>Fill mode -- describes how the background colour or image is
+	combined with the screen colours.  Common options are overwrite
+	or transparent -- where either the background or the existing screen
+	contents are ignored.
+<LI>The stipple (mask) -- a bitmap that determines a pattern of pixels 
+	on the screen affected by drawing operations.
+<LI>Line Style -- width, dashing, end style (cap), and corner style (bevel).
+	Because the algorithm used for single width lines and wider lines is
+	different, there are two ways to draw a line of unit width -- as a simple
+	line or as a wide line of width one.  The cap and bevel styles only
+	apply to wide lines.
+<LI>A <i>font</i> is a set of bitmaps or other descriptions of images 
+        indexed by a 
+	character set.  Fonts are selected by partially specifying properties:
+	size, weight, family, character set, etc.  The system then matches the
+	closest available font to the request.  Alternatively, the font can be
+	selected by the user using a standard dialog.
+<LI>The drawing area is conceptually a viewport of arbitrary size and 
+	location that is mapped to the window.  The drawing area can be moved
+	by changing the origin.  Some host OS's also allow the drawing area
+	to be scaled so that drawing primitive co-ordinates are in units
+	other than pixels.
+<LI>The clipping region is the area within which drawing primitives will 
+	have effect.  Output outside the clipping region will not be drawn.
+	The clipping region is created for a repaint by the intersection of
+	all the areas exposed by changes in other windows.  The application may
+	adjust the clipping region to add areas that need changing or to set
+	a new region during the painting of a subcomponent.
+</UL>
+In addition, there are attributes that can either be used or not depending on
+which primitives are used:
+<UL>
+<LI>Current position -- the last position drawn.  For example lines can be
+	drawn by primitives like moveto() and lineto() that specify only one 
+	endpoint, or by primitives like line() or polyline(), that completely
+	specify all endpoints.
+<LI>Fill style -- specifies whether to fill a primitive or not.  "Filling"
+	has different meaning for each primitive.  For rectangles, the meaning
+	is obvious.  For polygons, the fill style affects the meaning of crossed
+	lines.  For text, it refers to filling the bounding rectangle of each 
+	character.
+</UL>
+
+
+<H3>Colour</H3>
+<P>
+The specification of colours is complex and depends on the nature of the
+display and the requirements of the application.  The host OS will try to
+match the expectations of the application as closely as possible.  Applications
+are usually written to be monochrome, to use a fixed pallette, 
+to use a modifiable pallette, or to expect truecolour capabilities.
+A pallette can be simulated on a truecolour device by mapping all of the
+colours while drawing.  Truecolour can be simulated on palette devices
+by setting the pallette to provide a distributed range of colours and then
+mapping the requested colour to the nearest match.  The range of colours on
+displays with small pallettes can be increased by using small bitmaps with
+alternating colours or by "dithering".  Modifiable palettes require hardware
+support.
+<P>
+On pallette devices, each window can be specified to use the "system"
+pallette, or to have its own custom pallette.  Because most pallette
+devices only support a single pallette for the entire screen, windows
+with their own pallettes will only be displayed accurately when they 
+have the focus.  Also, when they have the focus, the appearance of all
+other windows will degrade.
+<P>
+In X, colours are set using the resource manager and command line
+arguments.  The advantage of using command line arguments is that the same
+application can appear differently in different contexts.  This facility is
+in direct contrast with the win32 approach that favours uniformity across
+all applications and a constant look for an application.  X Windows also 
+leaves a portion of the system palette undefined and has a mechanism for
+applications to allocate colours as needed without requiring a custom
+pallette.  To make it easy for the user to specify colours, X has a colour
+name database and has routines for colour calculations.
+For example, a colour can be specified as "slate green" or "grey90" and 
+routines are available to darken or lighten a colour for 3D effects.
+<P>
+Colours for screens are usually specified using levels of Red, Green, and Blue.
+Colours for printers are usually specified using a mix of Yellow, Cyan,
+Magenta and Black.  The range of colours available is different for
+different devices, so a specific colour may or may not be available on all
+devices.
+For high end graphics and image processing, both X and win32 have 
+alternative colour specifications that permit specifying an exact, device
+independent colour using a variety of formats.
+<P>
+Applications restricted to text and simple line graphics (ie: most
+applications) can benefit 
+from using "colour schemes" -- a small predefined palette of 
+colours with assigned roles.  The palette can be set by the user using
+to match the display capabilities and the system pallette well.
+Using a colour scheme also ensures that the colours used in every 
+application match well.  This mechanism is built into MS-Windows.  Using
+colour schemes means that these applications port easily between monochrome,
+small pallette, big pallette, and truecolour devices.  In X windows, this
+type of application is often written in monochrome in order to be portable
+across the same range.
+<P>
+Other application types expect different colour capabilities.  Applications
+that display or manipulate images expect either a large pallette or true
+colour and do their own mapping between them.  Thus, they will manipulate
+both paletted and truecolour images for display on both types of devices.
+3D applications usually assume truecolour and may fall back to the 
+closest available approximation.
+
+
+<H3>Controls and Dialogs</H3>
+<P>
+The nature of the interactions between dialogs, controls, drawing primitives 
+and input events is at such a low level and
+requires such immediate feedback to the user that these objects 
+need to be co-located on the same machine as the display device.  The
+services provided by controls and dialogs to their clients is at a 
+sufficiently high level that it can cross a process or machine boundary.
+<P>
+The host OS will provide a standard set of controls and dialogs.  It is
+important to use the host provided facilities in order to match the
+look and feel of the host environment.  A basic set of controls includes:
+<UL>
+<LI>Button
+<LI>Check box
+<LI>Radio button
+<LI>Constant text
+<LI>Single line text
+<LI>Multiline text
+<LI>Icon
+<LI>Bitmap Image
+<LI>Scrollbar
+<LI>List box (to select one or more choices)
+<LI>Spin control
+</UL>
+More advanced controls:
+<UL>
+<LI>Rich text
+<LI>List control (columnar or icon based display/control of polymorphic objects)
+<LI>Tree control (hierachical display/control of polymorphic object)
+</UL>
+A basic set of dialogs includes:
+<UL>
+<LI>Message box
+<LI>Toolbar / toolbox
+<LI>Status bar
+<LI>File selection
+<LI>Font selection
+<LI>Color selection
+<LI>Printer selection
+</UL>
+More advanced dialogs:
+<UL>
+<LI>Form (really of a class of dialogs)
+<LI>Paged / notebook (a container for other dialogs)
+<LI>Help system
+</UL>
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,26 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Win32 platform notes</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=white>
+
+<H1>Win32 platform notes</H1>
+
+Compiler options for VC++:
+<UL>
+<LI>Preprocessor definitions:  WIN32, _WINDOWS
+<LI>Enable exception handling
+<LI>Enable RTTI
+<LI>Disable language extensions (actually NO, since &lt;iostream> needs
+	the language extensions (how strange!)
+<LI>Additional include directories: d:\src\BW
+<LI>Add "d:\src\BW\[Debug|Release]\BW.lib" to start of library
+	modules
+<LI>Warning level 3 (Recommended)
+<LI>Enable incremental compilation (Recommended)
+</UL>
+
+</BODY>
+</HTML>

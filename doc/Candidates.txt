@@ -1,0 +1,395 @@
+AcceleratorKey
+AcceleratorTable
+AccessControlList
+AccessControlEntry-WIN32 ACE
+AccessMask-WIN32
+Action
+ActionKey
+ActiveControl
+ActiveApplication
+ActiveWindow
+Actor (Figure)
+Adapter "adds a Control interface to a domain object"
+Adornment
+AffectedRegion for repaint
+Angle
+Animation
+Application
+ApplicationBar-WIN32
+ApplicationState Context for menus
+Arc
+Atom
+Author of application
+Background
+BitGravity-X
+BitPlane-X
+BitMap
+Border
+Brush-WIN32
+ButtonControl
+Button - on keyboard
+Button - on mouse
+ButtonGrab
+Canvas (*)
+CanvasSizeInterface
+Cell (Figure)
+Challenge in security
+Character in Character set
+CharacterInterface - indicates that control can accept keyboard focus
+CharacterSet
+CheckBox
+ChildControl
+ChildWindow
+Client-X
+ClientArea
+Clipboard
+ClippingRegion
+Coat (Frame)
+ColorMap-X
+ColorRef-WIN32
+ColorSpace-WIN32
+ColorSpaceType-WIN32
+Colour
+ColourMap
+ColourSelectDialog
+ColourSelectionDialog
+Command - like action
+COMObject
+Component (Figure)
+CompositionWindow-WIN32 created by IME
+Connection-X - to server
+Context
+Control (Figure)
+ControlKey
+ControlPanel-WIN32
+ControlPanelApplication-WIN32
+Coordinate
+CoordinateSystem
+Cursor
+DC-WIN32 Device Context
+Depth-X - number of bits in pixel
+DeferedWindowPositionStructure-WIN32
+Depiction
+Device
+DeviceContext-WIN32 DC
+DeviceDependentBitmap-WIN32
+DeviceIndependentBitmap-WIN32 DIB
+Dialog
+DialogWindow (No painting, special background)
+DirectColor-X
+Display-X
+DomainObject
+DomainIndependentControl
+Drawable (Figure)
+Drawing (Figure)
+DrawingArea
+DropDownBox
+DropFile-WIN32
+EditBox
+EditControl
+Element (Figure)
+Elipse
+EmbeddedObject-WIN32
+Error
+ErrorLog
+Event (X, WIN32)
+EventLog-WIN32
+EventMask-X
+EventMessage-WIN32
+EventSource-X - deepest window under pointer
+ExceptionRecord-WIN32
+ExposureInterface
+ExposureEvent
+Extension-X - module in server
+ExtensionButton-WIN32
+Extent of text
+Figure *
+FileSelectDialog
+FileSelectionDialog
+FindCommonDialog-WIN32 finds text
+FixedLayout
+Flash
+Font
+FontDirectory-WIN32
+FontGroup-WIN32 groups a set of fonts in resources
+FontPalette
+FontSelectDialog
+FontSelectionDialog
+FontSignature-WIN32 identifies char set range of glyphs in font
+FontTable
+Form
+From-WIN32 on a printer
+Frame (*) - around a control
+Frame (*) - of animation
+FrameControl
+FrameInterface
+FrameWindow
+GC-X Context
+Gadget (Figure)
+GlobalUniqueIdentifier-WIN32 GUID
+Glyph - image in a font
+GlyphMetrics-WIN32
+Grab-X
+GraphicsContext-X
+Gravity-X
+GreyScale
+Handle-WIN32
+HandleTable-WIN32
+HardwareProfile-WIN32
+HeaderControl-WIN32
+HeaderControlItem-WIN32
+HeaderControlLayout-WIN32
+HelpDialog
+HelpIdentifier-WIN32
+HelpSystem
+HelpInfoItem-WIN32
+HelpKeyword-WIN32
+HelpKeywordTable-WIN32
+HelpWindow-WIN32
+HitTest-WIN32
+HorizontalScrollBar
+HorizontalScrollInterface
+HorizontalPosition
+HorizontalSize
+Host-X
+HostName-X
+Hotspot - on cursor
+Icon
+IconButton
+IconMetrics-WIN32
+Identifier-X - of a resource
+Image (*)
+IME-WIN32 - Input Manager
+IndexedPixel
+InputManager-X - processes keyboard input
+InputOnlyWindow-X
+InputOutputWindow-X
+Instance-WIN32
+ItemMEasure-WIN32 measures a drawable item
+Job on printer
+KerningPair-WIN32
+Key on keyboard
+Key-Win32 in registry
+Keyboard
+KeyboardCursor
+KeyboardEvent
+KeyboardFocus
+KeyboardInterface - receives low level keyboard events
+KeyGrab-X
+KeySym-X - "Encoding of a symbol on a keycap on a keyboard"
+Label
+LabelControl
+Layout
+LayoutInterface
+LayoutManager
+LifetimeInterface
+ListBox
+ListViewColumn-WIN32
+ListViewControl-WIN32
+ListViewItem-WIN32
+LocaleSignature-WIN32 matches fonts to locales
+LocalUniqueIdentifier-WIN32 LUID
+Location - of Control or Window
+LogicalBrush-WIN32
+LogicalColorSpace-WIN32
+LogicalFont-WIN32
+LogicalPalette-WIN32
+LogicalPen-WIN32
+Machine
+MainControl
+MainWindow
+Mapping (drawing area to screen)
+Menu
+MenuChoice
+MenuEvent-WIN32
+MenuHelpIdentifier-WIN32
+MenuItem-WIN32
+MenuItemTemplate-WIN32
+MenuTemplate-WIN32
+MenuTemplateItem-WIN32
+Message-WIN32
+MessageBox-WIN32
+MessageFilter-WIN32
+MessageQueue-WIN32
+Metafile-WIN32
+Metrics
+MinimizedMetrics-WIN32
+MinMaxInfo-WIN32
+ModifierKey-X "Shift, Alt,..."
+Monitor on your desk
+MonochromePixel
+MochromeDisplay
+Mouse
+MouseButton
+MouseEvent
+MouseInterface
+MouseMoveInterface
+MultilineEditControl
+NoWindow
+Node (Figure)
+NonclientArea-WIN32
+NonclientMetrics-WIN32
+NormalMenuItem-WIN32
+Notebook
+NotificationMessage-WIN32
+NumberFormat-WIN32 specifies how numbers are formated by locale
+OperatingSystem
+Optic (Figure)
+Option
+OS
+OutlineTextMetric
+OutputPrimitive
+PageSetupCommonDialog-WIN32
+PagedDialog
+PaintStruct-WIN32
+Palette
+PaletteEntry-WIN32
+Panel - drawing area = viewport
+PanelSizeInterface
+Panose-WIN32 font associations
+Paragraph
+ParagraphFormat
+ParentWindow (X, WIN32)
+ParentControl
+PassiveGrab-X
+Pen-WIN32
+PictureFormat-WIN32
+Pixel
+PixelMap
+Pixmap-X
+Plane - of image memory
+PlaneMask-X
+Point
+Pointer into memory
+Pointer where the cursor is
+PointerGrab
+PointingDevice
+PolyText-WIN32
+PopupMenu-WIN32
+PopupMenuItem-WIN32
+Portrait (Figure)
+Position
+PositioningDevice
+PhysicalBrush-WIN32
+PrintCommonDialogBox
+Printer
+PrinterSelectDialog
+PrinterSelectionDialog
+PrintProcessor-WIN32
+PrintProvider-WIN32
+PrintSpooler-Win32
+Process
+Property of window
+PropertyList lists properties on a window
+PropertySheet-WIN32
+PropertySheetPage-WIN32
+PseudoColor-X
+PunctuationCharacter
+PunctuationTable-WIN32
+RadioBox
+Rasterizer-WIN32
+Rectangle
+RedirectingControl-X
+Region (*) - for clipping
+ReplaceCommonDialog replaces strings in text
+Reply-X from server
+Request-X to server
+ResizeRequest
+Resource - image, icon, etc
+RadioButton
+RichEditControl
+RichLayout
+RichText
+RootWindow
+SaveSet-X
+Scanline
+Scene (*)
+Screen
+ScrollBar
+ScrollLayout
+ScrollWindow (Canvas)
+Section (Figure)
+SecurityAccessMask-WIN32
+SecurityIdentifier-WIN32
+Segment (Figure)
+Selection
+Semblance (Figure)
+Server-X
+ServerGrab-X
+Service-WIN32 background process
+ServiceStatus-WIN32
+Shape (Figure)
+ShiftKey
+Sibling window/control
+SimpleWindow (Panel)
+SimpleWindow - no children
+SingleLineEditControl
+Size
+Sketch (Figure)
+Snap (Flash, Frame)
+SoundSentry-WIN32 rings silent bell
+SpinControl
+StackingOrder
+StaticColorDisplay-X
+StaticGreyDisplay-X
+StatusBar
+Stipple-X
+Subject (Figure)
+Subwindow
+SystemChangeEvent
+TableControl
+TabControl
+TabStop
+Text (string with font/colour info)
+TextArea
+TextButton
+TextExtent
+TextField
+TextMetric-WIN32
+TextRange of selection
+Theme
+Tile replicated across a window
+TiledLayout
+TimeInterval
+Timer
+TimerInterface
+TimeStamp
+ToolBar
+ToolBox
+ToolTip
+ToolTipControl
+TopWindow
+Transform
+TransformationMatrix
+TreeControl
+TrueColourPixel
+TrueColourDisplay
+TreeViewControl-WIN32
+UnitLayout
+User
+VerticalScrollBar
+VerticalScrollInterface
+VerticalPosition
+VerticalSize
+View
+Viewable (Figure)
+Viewport
+Visage (Figure)
+Visual-X
+Visual (Figure)
+Visel (Figure) - Visual Element
+VisualBell-X
+Widget (Figure)
+Window (Figure)
+Window - Control (X, WIN32)
+WindowAttribute-X characteristic of window
+WindowClass-X
+WindowClass-WIN32
+WindowGravity-X
+WindowManager-X
+WindowPlacement-WIN32
+WindowPos-WIN32
+WindowStyle-WIN32
+XYFormatPixmap-X
+ZFormatPixmap-X
+Zone (Figure)

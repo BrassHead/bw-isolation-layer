@@ -1,0 +1,191 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>BW Marketing Vision</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=#FFFFFF>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+<H1>Project Vision</H1>
+
+<p>
+<H2>1) "Designable" Controls</H2>
+<P>
+The Internet is raising peoples expectations for user interfaces.
+<P>
+The look of standards windows controls is going to start looking
+dull as dishwater real soon now.  "You can have any colour button
+you want ...as long as you want grey."  How often have you seen a grey
+text button on a web page?
+<P>
+<IMG SRC="GreyButton.gif">
+<P>
+Looks pretty sad doesn't it? The graphic expectations for web pages are 
+presently higher than those for applications.
+<P>
+Professional web pages are created by graphic designers
+carrying forward a tradition from print and video media.
+Corporations want to have a consistent "look" to their
+colateral material, advertising, and even everyday stationary.
+This desire already extends to their web presence and is starting 
+to extend to their applications.
+<P>
+For some examples of this trend, look at 
+Microsoft&reg; Internet Explorer 3 (1996).  The buttons
+on the main screen do not look or behave like standard windows buttons.
+They appear as icons on a textured backgrounds that become etched and 
+coloured when the cursor is over them.  More extreme examples in the 
+Microsoft product line include the explorer for MSN which uses 
+nonstandard menus combined with the title bar to create a unique
+style.  In the X world, look at the styles that developers and users 
+have created for the "E" window manager.
+<P>
+At the moment, these innovations are the exception.  Even in applications
+with distinctive looks, the dialogs beyond the main window are
+usually quite standard.
+<P>
+Other developers are going to follow.  They will want their applications
+imprinted with a distinctive but consistent graphic style.
+No-one wants their 
+applications to look like the dullest and oldest parts of alternative
+products.
+<P>
+At present the tools, with the notable exception of Web browsers, are
+not well suited to creating a non-standard look.
+This is expensive and requires extensive
+custom coding.
+<P>
+This is a problem that will never go away without new tools that support
+more customizable "designable" interfaces.  There is essentially
+no limit to style -- interface style will continue to evolve in applications
+forever, just as it evolves in all other media, including the oldest -- print.
+<P>
+This anticipated market need creates two opportunities for new tools:
+<OL>
+<LI>New control sets with a distinctive consistent new style.
+<LI>"Designable" controls.  Technology that allows developers to evolve
+their style to match their image and, frankly, current fashion
+sense, without breaking their code.
+</OL>
+Once the base technology for designable controls
+is in place, the market for specific style sets will expload and there is room
+for many players of all sizes.  Companies and individuals will start 
+using a consistent
+style even for smaller applications if the technical means are
+available.  The long term opportunity is basically for 
+graphics designers, because the technical skills needed will
+decline over time.
+
+<H2>2) Dynamic data</H2>
+<P>
+A second area where user expecations for graphical user interfaces are
+rising is the display of dynamically changing data.  Increasing performance
+of microprocessors is making possible the increase in video
+and animation visible today on the web.
+<P>
+Again, application development tools have not kept pace.  While it is
+possible to have a dialog with dynamically changing information, this
+usage is not easy to achieve in application code.  The most common
+programming models for application development are based on designs
+for "editors".  The program reads in a file or information from 
+a database into memory,
+displays the information in a scrollable window, and allows a single user
+to update the information in a session and then writes a new file or
+database records back onto permanent storage. Simulaneous changes to the
+data from other sources is either prohibited by locking mechanisms or
+treated as an error condition upon update.
+<P>
+The assumption that the user is acting alone 
+is very strongly built into these application designs.
+<P>
+Dynamic data is more like a stream of information which needs to be 
+filtered and displayed according to the users current viewpoint.
+Changes also need to be merged and reflected back into the stream.
+<P>
+As the use of computers expands into new application areas, there will be
+growing demand for applications that deal with dynamic data.  
+Specific niches include: process control, process monitoring,
+financial trading, network management, and critical health care.
+This creates a niche opportunity to provide GUI frameworks and development
+tools to support these applications.
+
+<H2>3) 3D and Video</H2>
+
+<P>
+Even further down the road in graphical user interface evolution is the
+processing of data at video speeds.
+<P>
+The problems here are more fundamental than just the application code,
+however.  Windowing systems, such as MS Windows and X are based on the 
+assumption that most of the screen remains static.  It is possible to
+have an animation or a video stream in a small window, but there is
+little support for the stream to merge with other information.
+<P>
+The technical reason for this is that
+unlike a television, windowing systems have no concept of "frames".
+The windowing
+system sets the hardware to display a fixed area of memory and then
+"draws" into this area by changing the memory contents.
+The video card repeatedly reads
+this fixed memory area and sends its contents sequentially to the display
+monitor.  Each reread is a frame.  Most drawing by the windowing system
+is not synchronized with the frame transmission, so changes appear on the
+screen with a random, but slight delay.
+<P>
+This approach is very efficient and works well if the updates are much 
+slower than the
+frame rate or are localized to a small screen area.  
+If the rate or visual size of continuous update increases however, this 
+"slight random delay" becomes
+unacceptable -- it produces jerkiness and discontinuities in the
+image.
+<P>
+Older processors are not powerful enough to update more than
+a small region at video rates.
+Today's microprocessors, on the other hand,
+are quite capable of generating information fast enough to
+approach the frame rate over the entire screen.  Some applications, 
+particularly games, 3D object viewing, and video,
+use this power.
+Expectations for dynamic behaviour in all applications will increase as
+the hardware enables dynamic behaviour and extant applications provide
+common examples.
+<P>
+Not only does this mean large changes in applications, but the windowing
+system itself needs to have additional features if one of these dynamic
+applications is to be active at the same time as any other application.
+Adding facilities for "frames" (ie: double or multiple buffering) and 
+3D interaction necessitates changes in the fundamental structure 
+of the windowing system.
+<P>
+It should be noted that the current limitations are primarily
+in the software realm --
+the video hardware in modern PCs commonly supports everything needed for
+frame rate video and 3D at a basic level.  
+What's missing are easy ways to access this 
+functionality and the co-ordination facilities so that frame rate 
+and 3D applications
+can co-exist comfortably with each other and with traditional applications.
+<P>
+The opportunities here are large but nebulous.  The change from
+conventional graphics to video rate
+processing is a platform shift.  It's not clear at present
+whether this shift will occur for just a few application categories or be
+widespread. The timing is a complete guess.  What is clear is that the shift
+will be sudden when it arrives.  The issues involved are easier to solve
+all at once using a new architecture than to solve individually on a specific
+existing platform.  It is easier to see the endpoint as a new approach with
+"backward compatibility" for existing code than as an enhancement to a
+current platform.
+<P>
+A key barrier is that there are no guidelines or practices for interaction 
+with video rate images.  Solving the problems here first can set
+the standard for this type of interaction.
+
+</BODY>
+</HTML>

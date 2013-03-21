@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='ISO-8859-1' standalone='no'?>
+<!DOCTYPE spec SYSTEM "spec.dtd" [
+
+<!-- LAST TOUCHED BY: Tim Bray, 8 February 1997 -->
+
+<!-- The words 'FINAL EDIT' in comments mark places where changes
+need to be made after approval of the document by the ERB, before
+publication.  -->
+
+<!ENTITY XML.version "1.0">
+<!ENTITY doc.date "10 February 1998">
+<!ENTITY iso6.doc.date "19980210">
+<!ENTITY w3c.doc.date "02-Feb-1998">
+<!ENTITY draft.day '10'>
+<!ENTITY draft.month 'February'>
+<!ENTITY draft.year '1998'>
+
+<!ENTITY WebSGML 
+ 'WebSGML Adaptations Annex to ISO 8879'>
+
+<!ENTITY lt     "<"> 
+<!--ENTITY gt     ">"--> 
+<!ENTITY xmlpio "'&lt;?xml'">
+<!--ENTITY pic    "'?>'"-->
+<!ENTITY br     "\n">
+<!ENTITY cellback '#c0d9c0'>
+<!ENTITY mdash  "--"> <!-- &#x2014, but nsgmls doesn't grok hex -->
+<!ENTITY com    "--">
+<!ENTITY como   "--">
+<!ENTITY comc   "--">
+<!ENTITY hcro   "&amp;#x">
+<!-- <!ENTITY nbsp " "> -->
+<!ENTITY nbsp   "&#160;">
+<!--ENTITY magicents "<code>amp</code>,
+<code>lt</code>,
+<code>gt</code>,
+<code>apos</code>,
+<code>quot</code>"-->
+ 
+<!-- audience and distribution status:  for use at publication time -->
+<!ENTITY doc.audience "public review and discussion">
+<!ENTITY doc.distribution "may be distributed freely, as long as
+all text and legal notices remain intact">
+
+]>
+
+<!-- for Panorama *-->
+<?VERBATIM "eg" ?>
+
+<spec>
+<header>
+<title>Extensible Markup Language (XML) 1.0</title>
+<version></version>
+<w3c-designation>REC-xml-&iso6.doc.date;</w3c-designation>
+<w3c-doctype>W3C Recommendation</w3c-doctype>
+<pubdate><day>&draft.day;</day><month>&draft.month;</month><year>&draft.year;</year></pubdate>
+
+<publoc>
+<loc  href="http://www.w3.org/TR/1998/REC-xml-&iso6.doc.date;">
+http://www.w3.org/TR/1998/REC-xml-&iso6.doc.date;</loc>
+<loc  href="http://www.w3.org/TR/1998/REC-xml-&iso6.doc.date;.xml">
+http://www.w3.org/TR/1998/REC-xml-&iso6.doc.date;.xml</loc>
+<loc  href="http://www.w3.org/TR/1998/REC-xml-&iso6.doc.date;.html">
+http://www.w3.org/TR/1998/REC-xml-&iso6.doc.date;.html</loc>
+<loc  href="http://www.w3.org/TR/1998/REC-xml-&iso6.doc.date;.pdf">
+http://www.w3.org/TR/1998/REC-xml-&iso6.doc.date;.pdf</loc>
+<loc  href="http://www.w3.org/TR/1998/REC-xml-&iso6.doc.date;.ps">
+http://www.w3.org/TR/1998/REC-xml-&iso6.doc.date;.ps</loc>
+</publoc>
+<latestloc>
+<loc  href="http://www.w3.org/TR/REC-xml">
+http://www.w3.org/TR/REC-xml</loc>
+</latestloc>
+<prevlocs>
+<loc  href="http://www.w3.org/TR/PR-xml-971208">
+http://www.w3.org/TR/PR-xml-971208</loc>
+<!--
+<loc  href='http://www.w3.org/TR/WD-xml-961114'>
+http://www.w3.org/TR/WD-xml-961114</loc>
+<loc  href='http://www.w3.org/TR/WD-xml-lang-970331'>
+http://www.w3.org/TR/WD-xml-lang-970331</loc>
+<loc  href='http://www.w3.org/TR/WD-xml-lang-970630'>
+http://www.w3.org/TR/WD-xml-lang-970630</loc>
+<loc  href='http://www.w3.org/TR/WD-xml-970807'>
+http://www.w3.org/TR/WD-xml-970807</loc>
+<loc  href='http://www.w3.org/TR/WD-xml-971117'>
+http://www.w3.org/TR/WD-xml-971117</loc>-->
+</prevlocs>
+<authlist>
+<author><name>Tim Bray</name>
+<affiliation>Textuality and Netscape</affiliation>
+<email 
+href="mailto:tbray@textuality.com">tbray@textuality.com</email></author>
+<author><name>Jean Paoli</name>
+<affiliation>Microsoft</affiliation>
+<email href="mailto:jeanpa@microsoft.com">jeanpa@microsoft.com</email></author>
+<author><name>C. M. Sperberg-McQueen</name>
+<affiliation>University of Illinois at Chicago</affiliation>
+<email href="mailto:cmsmcq@uic.edu">cmsmcq@uic.edu</email></author>
+</authlist>
+<abstract>
+<p>The Extensible Markup Language (XML) is a subset of
+SGML that is completely described in this document. Its goal is to
+enable generic SGML to be served, received, and processed on the Web
+in the way that is now possible with HTML. XML has been designed for
+ease of implementation and for interoperability with both SGML and
+HTML.</p>
+</abstract>
+<status>
+<p>This document has been reviewed by W3C Members and
+other interested parties and has been endorsed by the
+Director as a W3C Recommendation. It is a stable
+document and may be used as reference material or cited
+as a normative reference from another document. W3C's
+role in making the Recommendation is to draw attention
+to the specification and to promote its widespread
+deployment. This enhances the functionality and
+interoperability of the Web.</p>
+<p>
+This document specifies a syntax created by subsetting an existing,
+widely used international text processing standard (Standard
+Generalized Markup Language, ISO 8879:1986(E) as amended and
+corrected) for use on the World Wide Web.  It is a product of the W3C
+XML Activity, details of which can be found at <loc
+href='http://www.w3.org/XML'>http://www.w3.org/XML</loc>.  A list of
+current W3C Recommendations and other technical documents can be found
+at <loc href='http://www.w3.org/TR'>http://www.w3.org/TR</loc>.
+</p>
+<p>This specification uses the term URI, which is defined by <bibref
+ref="Berners-Lee"/>, a work in progress expected to update <bibref
+ref="RFC1738"/> and <bibref ref="RFC1808"/>. 
+</p>
+<p>The list of known errors in this specification is 
+available at 
+<loc href='http://www.w3.org/XML/xml-19980210-errata'>http://www.w3.org/XML/xml-19980210-errata</loc>.</p>
+<p>Please report errors in this document to 
+<loc href='mailto:xml-editor@w3.org'>xml-editor@w3.org</loc>.
+</p>
+</status>
+
+
+<pubstmt>
+<p>Chicago, Vancouver, Mountain View, et al.:
+World-Wide Web Consortium, XML Working Group, 1996, 1997.</p>
+</pubstmt>
+<sourcedesc>
+<p>Created in electronic form.</p>
+</sourcedesc>
+<langusage>
+<language id='EN'>English</language>
+<language id='ebnf'>Extended Backus-Naur Form (formal grammar)</language>
+</langusage>
+<revisiondesc>
+<slist>
+<sitem>1997-12-03 : CMSMcQ : yet further changes</sitem>
+<sitem>1997-12-02 : TB : further changes (see TB to XML WG,
+2 December 1997)</sitem>
+<sitem>1997-12-02 : CMSMcQ : deal with as many corrections and
+comments from the proofreaders as possible:
+entify hard-coded document date in pubdate element,
+change expansion of entity WebSGML,
+update status description as per Dan Connolly (am not sure
+about refernece to Berners-Lee et al.),
+add 'The' to abstract as per WG decision,
+move Relationship to Existing Standards to back matter and
+combine with References,
+re-order back matter so normative appendices come first,
+re-tag back matter so informative appendices are tagged informdiv1,
+remove XXX XXX from list of 'normative' specs in prose,
+move some references from Other References to Normative References,
+add RFC 1738, 1808, and 2141 to Other References (they are not
+normative since we do not require the processor to enforce any 
+rules based on them),
+add reference to 'Fielding draft' (Berners-Lee et al.),
+move notation section to end of body,
+drop URIchar non-terminal and use SkipLit instead,
+lose stray reference to defunct nonterminal 'markupdecls',
+move reference to Aho et al. into appendix (Tim's right),
+add prose note saying that hash marks and fragment identifiers are
+NOT part of the URI formally speaking, and are NOT legal in 
+system identifiers (processor 'may' signal an error).
+Work through:
+Tim Bray reacting to James Clark,
+Tim Bray on his own,
+Eve Maler,
+
+NOT DONE YET:
+change binary / text to unparsed / parsed.
+handle James's suggestion about &lt; in attriubte values
+uppercase hex characters,
+namechar list,
+</sitem>
+<sitem>1997-12-01 : JB : add some column-width parameters</sitem>
+<sitem>1997-12-01 : CMSMcQ : begin round of changes to incorporate
+recent WG decisions and other corrections:
+binding sources of character encoding info (27 Aug / 3 Sept),
+correct wording of Faust quotation (restore dropped line),
+drop SDD from EncodingDecl,
+change text at version number 1.0,
+drop misleading (wrong!) sentence about ignorables and extenders,
+</sitem>
+</slist>
+</revisiondesc>
+</header>
+</spec>
+
+
+

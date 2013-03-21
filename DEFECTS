@@ -1,0 +1,68 @@
+		Code status for BW
+		==================
+
+In general, this is development level software, not ready for prime time and
+still in early stages of development.  Some portions are relatively complete,
+but the majority is still in development.  Some files don't even compile.
+
+The version number is indicated in the name of the tar file of the distribution
+source.  Tested releases have a version number of <major>.<minor> such as
+0.5.  Development builds have a version number of <major>.<minor>-<date>
+such as 0.5-19981203.  This last example indicates a build subsequent to the
+0.5 release.  Development builds are the most unstable, they may not
+even compile.
+
+Shared libraries are not built because the interface is changing too rapidly
+for this to have any value.
+
+
+As of 0.5, the following portions are relatively stable:
+
+bwassert and trace
+Directory
+BFile
+FileName
+html
+http
+string
+
+The GUI framework is the most unstable.  Virtually all of this code is expected
+to change before the 0.6 release.  The GUI code in 0.5 is basically a proof of
+concept to try out some of the ideas -- little beyond "hello world" works
+
+In particular, the goals of 0.6 are:
+
+separation of platform dependent and independent portions of GUI framework
+more stock figures
+image display
+database access
+customization and preference APIs (including rudimentary resources)
+change startup to use a global "bwmain" instead of Process::main()
+
+"Pens" should be simplified
+	- No width
+	- No cap/join styles
+	- Only takes "solid" colours
+	- I.E. their use is depreciated
+
+"Brush" should be the primary tool
+
+"Brushes" take "Paint"
+	- can be a colour
+	- can be a pattern
+	- can be transparent
+	- can be partially transparent
+
+Child windows should default to redraw on move (so that patterns will
+	line up)
+ts_origin should be set so that everything painted under the same frame
+	window will line up.
+
+0.8 TODO:
+
+
+
+
+
+
+

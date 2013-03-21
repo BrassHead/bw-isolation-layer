@@ -1,0 +1,221 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>BW Language</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=white>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+<H1>Source code language(s)</H1>
+<P>
+What language(s) should BW applications be written in?
+<P>
+Candidates need to be:
+<UL>
+<LI>Object Oriented
+<LI>Can build graphic applications
+<LI>Can handle large applications (ie: lots of source)
+<LI>Good development tools
+<LI>Widely available
+<LI>Can build distributed applications
+<LI>Long term viability of the language
+</UL>
+Widely available object oriented languages are:
+<UL>
+<LI>C++
+<LI>Java
+<LI>Smalltalk
+</UL>
+Both C++ (via C), Smalltalk, and Java are supported graphically on every platform
+of commercial interest.  Smalltalk has already proven to be unsuitable for
+large scale high performance use.
+<P>
+Java is appropriate for the following tasks:
+<UL>
+<LI>Scripting (via Javascript)
+<LI>Extending HTML with custom features (ie: controls on web browsers)
+<LI>Server administration (via HTML)
+<LI>Simple server front ends
+<LI>Applications that are primarily graphical in nature, not compute
+	intensive, and that do not requiring extensive OS services.
+</UL>
+<P>
+Java's strengths are it's platform independence, platform independent
+windowing, small executable size, understanding of network protocols,
+understanding of image formats, and built-in multithreading.
+Java's weaknesses are performance, access to OS services other than
+high level networking, and lack of facilities for customization and
+localization (no resources (as of version 1.0), no preprocessor, no templates).  
+<p>
+Java is a proprietary language and its future is entirely dependent on the
+fortunes of Sun.  Java apps
+and applets are platform independent only if they use exactly the facilities
+defined by Sun.  The most serious problem is that
+Sun's licencing restrictions prohibit the promotion of
+alternative APIs to basic facilities (ie: prohibits the creation of
+isolation layers like BW).
+<P>
+There is a standard, if awkward, way to call outside of the Java
+virtual machine and other standard connections such as communication
+over a network connection or pipe to another process can be used to
+access functions written for "C". Although Java 
+native compilers (including "just in time" compilers) will improve the
+performance of java applications over time, the language is missing features
+such as inline functions, ability to do dangerous casts, customizable
+storage allocation, and templates
+that assist writing highly efficient code.
+<P>
+C++ is appropriate for the following tasks:
+<UL>
+<LI>Servers
+<LI>Larger graphic applications
+<LI>Complex controls
+<LI>Applications that need extensive OS services
+</UL>
+C++'s strengths are its abilities as a meta-language, it's privileged
+status (because of C) with the OS, it's lack of "cliffs" (if it can be done,
+it can be done in C++), its tools (again via C) for interpreting application
+specific languages, a large base of open source code, 
+and it's ability to produce large high performance applications
+while retaining type safety and clean designs (templates and inlines).  
+C++'s weaknesses are the lack of a standard windowing interface, no
+facilities for localization, dangerous multithreading constructs,
+the low level of its interfaces, and large platform specific 
+binary executable size.
+<P>
+BW applications will be written mainly in C++, with use of 
+Javascript, and Java in HTML output.
+<P>
+It is unfortunate that Java is so proprietary and immature, because
+Java has more of the low level work required for the target applications
+already done.  
+However, given the current (97/5/5) status of Java and it's standardization
+efforts, it is
+unclear how many of the target applications can be 
+accomplished solely in Java in a sufficiently platform independent way.
+Also large scale use of Java is untried at present.  In contrast,
+I have high confidence in the ability to accomplish everything in C++, and
+the language has already been used for larger projects.  Thus, it is the
+prudent choice.
+<P>
+An expanded role for Java should be evaluated if the following
+happens:
+<UL>
+<LI>The source for a java compiler and interpreter is available in open source
+format.
+<LI>There are Java to C++ translators available.
+<LI>There are alternative implementations from numerous vendors.
+<LI>Java becomes or is well along the way to being an internationally
+standardized language with the corresponding relaxation of licensing
+restrictions.
+</UL>
+
+
+<H1>Isolation decisions</H1>
+<P>
+BW is not a standard or a specification, it is a series of decisions
+about what to use directly, what to use with isolation and what to
+implement to aid portability.  These decisions are made
+"as required" to implement target applications.  I am writing them
+down here so that these decisions will be applied consistently across
+all code.
+<P>
+This document just lists the decisions and the rationale for them.
+Details of the defined APIs are documented elsewhere.
+<DL>
+
+<DT>assert -- implemented
+<DD>I decided to implement a custom assert macro rather than depend on
+the "C" and "C++" standard.  This package also includes a 'trace' iostream
+that can be used to display trace output.
+
+<DT>Exceptions -- incomplete
+<DD>BW has it's own exception hierarchy independent of the standard
+library hierarchy.  This decision needs to be revisited.
+The unexpected handler is set to rethrow the unexpected exception
+after printing a trace message (in debug only).
+
+<DT>iostream -- direct
+<DD>I decided to use iostream for character based I/O and in-memory
+formatting.  If the provided library is inadequate, it can be replaced by
+including a header file with the same name in front of the standard library
+on the include path.  Note that this library is not guaranteed to be thread
+safe.  The relevent include files are &lt;iomanip>, &lt;ostream>, &lt;streambuf>,
+&lt;ios>, &lt;iosfwd>, &lt;iostream>, &lt;sstream>, &lt;istream>, &lt;fstream>.
+
+<DT>String -- implemented
+<DD>The standard library string class has few operations and undefined memory
+allocation characteristics.  BW strings are not thread safe.
+A pending decision is wide character string
+support (always or sometimes).  Thus, the C++ standard &lt;string> 
+header file should not be used.
+
+<DT>String constants -- draft
+<DD>In order to aid localization, string constants are defined in a way that
+their value can be changed at runtime to localize or customize the product.
+
+<DT>Source comments -- implemented
+<DD>A source comment extractor generating HTML has been written.
+
+<DT>Namespace
+<DD>The namespace for isolation objects is "bw".
+
+<DT>std data structures and algorithms - direct
+<DD>This adds the following header files to the "approved" list:
+&lt;algorithm>, &lt;bitset>, &lt;deque>, &lt;functional>, 
+&lt;iterator>, &lt;list>, &lt;map>, &lt;numeric>, &lt;queue>, &lt;set>,
+&lt;stack>, &lt;valarray>, and &lt;vector>.
+
+<DT>Other standard headers - TBD
+<DD>These are:  &lt;complex>, &lt;exception>, &lt;limits>,
+&lt;locale>, &lt;memory>, &lt;new>, &lt;stdexcept>, 
+&lt;typeinfo>, and &lt;utility>.
+
+</DL>
+  
+<P>
+In general, the C++ compiler and the standard C++ library do not need
+much of an isolation layer. The ability to provide an include path as a
+compilation parameter provides a sufficient level of indirection.  In 
+environments without an adequate standard library implementation, another
+implementation can be substituted.
+
+
+
+<P>
+Still needs to cover:
+<UL>
+<LI>Metadata (for scripting and distributed access)
+<LI>Run time linkage
+<LI>Object model
+	<UL>
+	<LI>Message and calls
+	<LI>Relationship to persistence
+	<LI>"Publishing" for dynamic linkage
+	<LI>"Publishing" for distributed access
+	<LI>"Publishing" for script access
+	<LI>"Publishing" for Events and callbacks
+	<LI>Allocation
+	<LI>Notifications
+	<LI>Relationship to multiprocessing
+	</UL>
+<LI>Proxies and stubs
+<LI>Preprocessing / Compile steps for published objects
+<LI>Exceptions traps and signals
+<LI>List of include files
+</UL>
+<P>
+The following issues are out of scope for this document
+	<UL>
+	<LI>Coding style
+	<LI>Source code control
+	</UL>
+
+
+</BODY>
+</HTML>

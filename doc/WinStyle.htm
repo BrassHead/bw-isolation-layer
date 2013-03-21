@@ -1,0 +1,288 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>User Interface Style in BW</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=white>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+
+<H1>User Interface Style</H1>
+<P>
+The BW library does not force a particular UI style onto it's applications.
+In the area of application "look", BW is expected to support and encourage
+innovative and unique styles.  In the area of "feel", however, it is important
+that users of BW applications are able to transfer their experience in other
+applications to BW applications.  For this reason, some standards for 
+"drivability" are strongly encouraged by the available interface elements.
+This section documents these elements.
+
+<P>
+These are guidelines rather than hard rules -- every one of them will 
+have exceptions in certain circumstances and sometimes they will conflict
+with each other in a design.
+
+
+<DL>
+<DT>Object - Action
+<DD>The general flow of control by the user involves selecting an object and
+    then specifying the action to be performed on the object.  Actions can be
+    direct (ie: draging or double clicking an object), from an application 
+    menu, from a context (pop-up) menu, or from a toolbar.
+    An obvious exception to this is the creation of new objects.
+<DT>Mouse Cursor
+<DD>The mouse cursor is owned by the user and should not be warped or 
+    moved by the application independent of mouse movement.  
+    If the application has different operating modes (where the action of 
+    clicking the cursor varies), then these are indicated by different cursor
+    shapes.
+<DT>Mouse
+<DD>The mouse is optional.  All functions of an application need to have
+    keyboard equivalents.
+<DT>Mouse buttons
+<DD>The leftmost mouse button is the primary mouse button. It is used to 
+    select (click), manipulate (drag), and open (double click) objects.
+    The rightmost button brings up a context menu for the object.  Applications
+    should not assume that a middle button is available.  Mouse clicks and
+    drags 
+    can be combined with Shift, Control, and Alt keys for additional functions.
+    Shift-Left click is reserved for extending the current selection to the
+    mouse location.  Control-Left click is reserved for extending the 
+    selection by adding the item under the mouse cursor.  While a draging 
+    action moves an object, Control-Drag (with the left button) copies it
+    at the new location.
+<DT>Application Menus
+<DD>Menus are the primary means of accessing program functions.  All program
+    functions should be available from application menus at the top of
+    the main windows of the application.
+<DT>Context menus
+<DD>Context (pop-up) menus can provide an abbreviated list of actions for the
+    currently selected items.  These items are redundant with items in the
+    application menu.
+<DT>Button bars
+<DD>An alternate action specifier for the most common actions.
+</DL>
+
+<H1>Reserved key assignments</H1>
+
+The following table presents a list of key assignments that are reserved
+for specific actions.  Most of these should be implemented in BW applications.
+The key combinations indicated "(by OS)" are reserved for actions by the OS 
+and should not be defined within the application.
+<P>
+
+<TABLE>
+<TR>
+<TD><B>Key</B></TD>
+<TD><B>Function</B></TD>
+</TR><TR>
+<TD>Escape</TD>
+<TD>Cancel</TD>
+</TR><TR>
+<TD>CTRL-Escape</TD>
+<TD>Select application (by OS)</TD>
+</TR><TR>
+<TD>F1</TD>
+<TD>Help</TD>
+</TR><TR>
+<TD>ALT-F4</TD>
+<TD>Close (by OS)</TD>
+</TR><TR>
+<TD>F5</TD>
+<TD>Refresh</TD>
+</TR><TR>
+<TD>F10</TD>
+<TD>Application Menu</TD>
+</TR><TR>
+<TD>Print Screen</TD>
+<TD>Desktop image to file/clipboard (by OS)</TD>
+</TR><TR>
+<TD>ALT-Print Screen</TD>
+<TD>Window image to file/clipboard (by OS)</TD>
+</TR><TR>
+<TD>Scroll Lock</TD>
+<TD>Reserved</TD>
+</TR><TR>
+<TD>Pause/Break</TD>
+<TD>Reserved</TD>
+</TR><TR>
+<TD>ALT-"-"</TD>
+<TD>System menu (by OS)</TD>
+</TR><TR>
+<TD>Backspace</TD>
+<TD>Delete selected region OR delete before cursor</TD>
+</TR><TR>
+<TD>ALT-Backspace</TD>
+<TD>Undo</TD>
+</TR><TR>
+<TD>CTRL-ALT-Backspace</TD>
+<TD>Reserved (by OS)</TD>
+</TR><TR>
+<TD>Insert</TD>
+<TD>Toggle Insert/Overwrite mode</TD>
+</TR><TR>
+<TD>SHIFT-Insert</TD>
+<TD>Paste</TD>
+</TR><TR>
+<TD>CTRL-Insert</TD>
+<TD>Copy</TD>
+</TR><TR>
+<TD>Home</TD>
+<TD>Move cursor to begining of line</TD>
+</TR><TR>
+<TD>SHIFT-Home</TD>
+<TD>Move cursor to begining of line while extending selection</TD>
+</TR><TR>
+<TD>CTRL-Home</TD>
+<TD>Move cursor to begining of document</TD>
+</TR><TR>
+<TD>Page Up</TD>
+<TD>Move cursor back one screenful and to the start of a line</TD>
+</TR><TR>
+<TD>SHIFT-Page Up</TD>
+<TD>Move cursor back one screenful extending selection</TD>
+</TR><TR>
+<TD>Num Lock</TD>
+<TD>Reserved (by OS)</TD>
+</TR><TR>
+<TD>ALT-Keypad-"-"</TD>
+<TD>Change screen resolution (by OS)</TD>
+</TR><TR>
+<TD>Tab</TD>
+<TD>Move focus to next control.  If editing, insert a tab</TD>
+</TR><TR>
+<TD>SHIFT-Tab</TD>
+<TD>Move focus to previous control</TD>
+</TR><TR>
+<TD>CNTL-Tab</TD>
+<TD>Move focus to next control</TD>
+</TR><TR>
+<TD>ALT-Tab</TD>
+<TD>Move focus to next application (by OS)</TD>
+</TR><TR>
+<TD>CTRL-O</TD>
+<TD>Open</TD>
+</TR><TR>
+<TD>CTRL-P</TD>
+<TD>Print</TD>
+</TR><TR>
+<TD>Delete</TD>
+<TD>Delete selected region OR delete after cursor</TD>
+</TR><TR>
+<TD>SHIFT-Delete</TD>
+<TD>Cut</TD>
+</TR><TR>
+<TD>CTRL-ALT-Delete</TD>
+<TD>Reboot system (by OS)</TD>
+</TR><TR>
+<TD>End</TD>
+<TD>Move cursor to end of line</TD>
+</TR><TR>
+<TD>SHIFT-End</TD>
+<TD>Move cursor to end of line while extending selection</TD>
+</TR><TR>
+<TD>CTRL-End</TD>
+<TD>Move cursor to end of document</TD>
+</TR><TR>
+<TD>Page Down</TD>
+<TD>Move cursor forward one screenful and to the start of a line</TD>
+</TR><TR>
+<TD>SHIFT-Page Down</TD>
+<TD>Move cursor forward on screenful while extending selection</TD>
+</TR><TR>
+<TD>ALT-Keypad-"+"</TD>
+<TD>Change resolution (by OS)</TD>
+</TR><TR>
+<TD>Caps Lock</TD>
+<TD>Reserved (by OS)</TD>
+</TR><TR>
+<TD>CTRL-S</TD>
+<TD>Save</TD>
+</TR><TR>
+<TD>Enter</TD>
+<TD>Open selected item OR insert paragraph/line boundary</TD>
+</TR><TR>
+<TD>ALT-Enter</TD>
+<TD>Display properties of current selection</TD>
+</TR><TR>
+<TD>CTRL-Z</TD>
+<TD>Undo</TD>
+</TR><TR>
+<TD>CTRL-X</TD>
+<TD>Cut</TD>
+</TR><TR>
+<TD>CTRL-C</TD>
+<TD>Copy</TD>
+</TR><TR>
+<TD>CTRL-V</TD>
+<TD>Paste</TD>
+</TR><TR>
+<TD>CTRL-N</TD>
+<TD>New</TD>
+</TR><TR>
+<TD>Up Arrow</TD>
+<TD>Move cursor up one line OR previous item in list</TD>
+</TR><TR>
+<TD>SHIFT-Up Arrow</TD>
+<TD>Move cursor up one line while extending selection</TD>
+</TR><TR>
+<TD>ALT</TD>
+<TD>By itself, activates the application menu.  In conjuction with a letter
+or number, it activates the indicated menu item, button, or other control.</TD>
+</TR><TR>
+<TD>Space Bar</TD>
+<TD>Select Item</TD>
+</TR><TR>
+<TD>ALT-Space Bar</TD>
+<TD>System menu (by OS)</TD>
+</TR><TR>
+<TD>Windows Key (extended keyboard)</TD>
+<TD>Reserved (by OS)</TD>
+</TR><TR>
+<TD>Application Key (extended keyboard)</TD>
+<TD>Application menu</TD>
+</TR><TR>
+<TD>Left Arrow</TD>
+<TD>Move cursor left one character OR previous item in list</TD>
+</TR><TR>
+<TD>SHIFT-Left Arrow</TD>
+<TD>Move cursor left one character while extending selection</TD>
+</TR><TR>
+<TD>CTRL-Left Arrow</TD>
+<TD>Move cursor left one word</TD>
+</TR><TR>
+<TD>SHIFT-CTRL-Left Arrow</TD>
+<TD>Move cursor left one word while extending selection</TD>
+</TR><TR>
+<TD>Down Arrow</TD>
+<TD>Move cursor down one line OR next item in list</TD>
+</TR><TR>
+<TD>SHIFT-Down Arrow</TD>
+<TD>Move cursor down one line while extending selection</TD>
+</TR><TR>
+<TD>Right Arrow</TD>
+<TD>Move cursor right one character</TD>
+</TR><TR>
+<TD>SHIFT-Right Arrow</TD>
+<TD>Move cursor right one character while extending selection</TD>
+</TR><TR>
+<TD>CTRL-Right Arrow</TD>
+<TD>Move cursor right one word</TD>
+</TR><TR>
+<TD>CTRL-SHIFT-Right Arrow</TD>
+<TD>Move cursor right one word while extending selection</TD>
+
+
+
+
+
+
+</TR>
+</TABLE>
+
+</BODY>

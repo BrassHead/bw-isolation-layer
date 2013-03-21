@@ -1,0 +1,669 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Xlib Base Windows Services</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=white>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+
+<H1>Xlib Calls</H1>
+<P>
+Here is a complete list of Xlib X11R0 calls along with the BW object (if any)
+they are associated with.
+<P>
+Display Functions
+<UL>
+<LI>XOpenDisplay - Process
+<LI>AllPlanes - None
+<LI>BlackPixel - Color
+<LI>WhitePixel - Color
+<LI>ConnectionNumber - None
+<LI>DefaultColourmap - Screen
+<LI>DefaultDepth - Screen
+<LI>DefaultGC - None
+<LI>DefaultRootWindow - Screen
+<LI>DefaultScreenOfDisplay - None
+<LI>ScreenOfDisplay - None
+<LI>DefaultScreen - None
+<LI>DefaultVisual - Screen
+<LI>DisplayCells - Screen
+<LI>DisplayPlanes - Screen
+<LI>DisplayString - GUIError
+<LI>LastKnownRequestProcessed - None
+<LI>NextRequest - None
+<LI>ProtocolVersion - None
+<LI>ProtocolRevision - None
+<LI>QLength - None
+<LI>RootWindow - Screen
+<LI>ScreenCount - None
+<LI>ServerVendor - None
+<LI>VendorRelease - None
+<LI>ImageByteOrder - Screen
+<LI>BitmapUnit - Screen
+<LI>BitmapBitOrder - Screen
+<LI>BitmapPad - Screen
+<LI>DisplayHeight - Screen
+<LI>DisplayHeightMM - Screen
+<LI>DisplayWidth - Screen
+<LI>DisplayWidthMM - Screen
+<LI>BlackPixelOfScreen - Palette
+<LI>WhitePixelOfScreen - Palette
+<LI>CellsOfScreen - Palette
+<LI>DefaultColormapOfScreen - Screen
+<LI>DefaultDepthOfScreen - Screen
+<LI>DefaultGCOfScreen - None
+<LI>DefaultVisualOfScreen - Screen
+<LI>DoesBackingStore - Screen (if any)
+<LI>DoesSaveUnders - Screen (if any)
+<LI>DisplayOfScreen - None
+<LI>EventMaskOfScreen - None
+<LI>WidthOfScreen - Screen
+<LI>HeightOfScreen - Screen
+<LI>WidthMMOfScreen - Screen
+<LI>HeightMMOfScreen - Screen
+<LI>MaxCmapsOfScreen - None
+<LI>MinCmapsOfScreen - None
+<LI>PlanesOfScreen - Screen
+<LI>RootWindowOfScreen - None
+<LI>XNoOp - None
+<LI>XFree - None
+<LI>XCloseDisplay - None
+</UL>
+<P>
+Window Functions
+<UL>
+<LI>XCreateWindow - Parent::addChild
+<LI>XCreateSimpleWindow - Parent::addChild
+<LI>XDestroyWindow - Parent::removeChild
+<LI>XDestroySubwindows - Parent::removeChild
+<LI>XMapWindow - Figure (if any)
+<LI>XMapRaised - Figure (if any)
+<LI>XMapSubwindows - Figure (if any)
+<LI>XUnmapWindows - Figure (if any)
+<LI>XUnmapSubwindows - Figure (if any)
+<LI>XConfigureWindow - Parent
+<LI>XMoveWindow - Parent
+<LI>XResizeWindow - Parent
+<LI>XMoveResizeWindow - Parent
+<LI>XSetWindowBorderWidth - Figure (if any)
+<LI>XRaiseWindow - Parent
+<LI>XLowerWindow - Parent
+<LI>XCirculateSubwindows - Parent (if any)
+<LI>XCirculateSubwindowsUp - Parent (if any)
+<LI>XCirculateSubwindowsDown - Parent (if any)
+<LI>XRestackWindows - Parent (if any)
+<LI>XChangeWindowAttributes - Figure (if any)
+<LI>XSetWindowBackground - Figure
+<LI>XSetWindowBackgroundPixmap - Figure
+<LI>XSetWindowBorder - Figure (if any)
+<LI>XSetWindowBorderPixmap - Figure (if any)
+<LI>XTranslateCoordinates - Parent
+</UL>
+<P>
+Window Information Functions
+<UL>
+<LI>XQueryTree - Parent (to get children), Figure (to get parent)
+<LI>XGetWindowAttributes - Figure (if any)
+<LI>XGetGeometry - Figure or Parent
+<LI>XQueryPointer - Screen (if any)
+<LI>XInternAtom - None
+<LI>XGetAtomName - None
+<LI>XGetWindowProperty - Figure (if any)
+<LI>XListProperties - Figure (if any)
+<LI>XChangeProperty - Figure (if any)
+<LI>XRotateWindowProperties - None
+<LI>XDeleteProperty - Figure (if any)
+<LI>XSetSelectionOwner - Selection
+<LI>XGetSelectionOwner - Selection
+<LI>XConvertSelection - Selection
+</UL>
+<P>
+Graphics Resource Functions
+<UL>
+<LI>XCreateColormap - Palette
+<LI>XCopyColormapAndFree - Palette
+<LI>XSetWindowColormap - Palette
+<LI>XFreeColormap - Palette
+<LI>XAllocColor - Screen
+<LI>XAllocNamedColor - Screen
+<LI>XLookupColor - Color, Palette
+<LI>XAllocColorCells - Palette, Color
+<LI>XAllocColorPlanes - Palette, Color (if any)
+<LI>XStoreColors - Palette
+<LI>XStoreColor - Palette
+<LI>XStoreNamedColor - Palette
+<LI>XFreeColors - Screen
+<LI>XQueryColor - Palette
+<LI>XQueryColors - Palette
+<LI>XCreatePixmap - Image
+<LI>XFreePixmap - Image
+<LI>XCreateGC - Context
+<LI>XCopyGC - Context
+<LI>XChangeGC - Context
+<LI>XFreeGC - Context
+<LI>XGContextFromGC - None
+<LI>XSetState - Context
+<LI>XSetForeground - Context
+<LI>XSetBackground - Context
+<LI>XSetFunction - Context
+<LI>XSetPlaneMask - Context (if any)
+<LI>XSetLineAttributes - Context
+<LI>XSetDashes - Context
+<LI>XSetFillStyle - Context
+<LI>XSetFillRule - Context
+<LI>XQueryBestSize - Screen (if any)
+<LI>XQueryBestTile - Screen (if any)
+<LI>XQueryBestStipple - Screen (if any)
+<LI>XSetTile - Context
+<LI>XSetStipple - Context
+<LI>XSetTSOrigin - Context
+<LI>XSetFont - Context
+<LI>XSetClipOrigin - Context
+<LI>XSetClipMask - Context
+<LI>XSetClipRectangles - Context
+<LI>XSetArcMode - Context
+<LI>XSetSubwindowMode - Context, Parent
+<LI>XSetGraphicsExposures - Context (depends on WIN32 functionality)
+<LI>XSetICFocus - Intl
+<LI>XSetICValues - Intl
+<LI>XSetIMValues - Intl
+</UL>
+<P>
+Graphics Functions
+<UL>
+<LI>XClearArea - Context
+<LI>XClearWindow - Context
+<LI>XCopyArea - Context
+<LI>XCopyPlane - Context (if any)
+<LI>XDrawPoint - Context
+<LI>XDrawPoints - Context
+<LI>XDrawLine - Context
+<LI>XDrawLines - Context
+<LI>XDrawSegments - Context
+<LI>XDrawRectangle - Context
+<LI>XDrawRectangles - Context
+<LI>XDrawArc - Context
+<LI>XDrawArcs - Context
+<LI>XFillRectangle - Context
+<LI>XFillRectangles - Context
+<LI>XFillPolygon - Context
+<LI>XFillArc - Context
+<LI>XFillArcs - Context
+<LI>XLoadFont - FontPalette
+<LI>XQueryFont - Font
+<LI>XLoadQueryFont - FontPalette
+<LI>XFreeFont - Font, FontPalette
+<LI>XGetFontProperty - Font
+<LI>XUnloadFont - FontPalette
+<LI>XListFonts - FontPalette
+<LI>XFreeFontNames - FontPalette
+<LI>XListFontsWithInfo - FontPalette
+<LI>XFreeFontInfo - FontPalette
+<LI>XSetFontPath - None
+<LI>XGetFontPath - None
+<LI>XTextWidth - Font
+<LI>XTextWidth16 - Font
+<LI>XTextExtents - Font
+<LI>XTextExtents16 - Font
+<LI>XQueryTextExtents - Font (if any)
+<LI>XQueryTextExtents16 - Font (if any)
+<LI>XDrawText - Context
+<LI>XDrawText16 - Context
+<LI>XDrawString - Context
+<LI>XDrawString16 - Context
+<LI>XDrawImageString - Context
+<LI>XDrawImageString16 - Context
+<LI>XPutImage - Context
+<LI>XGetImage - Context
+<LI>XGetSubImage - Context
+<LI>XCreateFontCursor - Cursor
+<LI>XCreatePixmapCursor - Cursor
+<LI>XCreateGlyphCursor - Cursor
+<LI>XRecolorCursor - Cursor (if any)
+<LI>XFreeCursor - Cursor
+<LI>XQueryBestCursor - Screen (if any)
+<LI>XDefineCursor - Figure
+<LI>XUndefineCursor - Figure
+</UL>
+<P>
+Window Manager Functions
+<UL>
+<LI>XReparentWindow - Parent
+<LI>XChangeSaveSet - None
+<LI>XAddToSaveSet - None
+<LI>XRemoveFromSaveSet - None
+<LI>XInstallColormap - Screen
+<LI>XUninstallColormap - Screen
+<LI>XListInstalledColormaps - Screen (if any)
+<LI>XGrabPointer - MouseMove
+<LI>XUngrabPointer - MouseMove
+<LI>XChangeActivePointerGrab - MouseMove
+<LI>XGrabButton - Mouse (if any)
+<LI>XUngrabButton - Mouse (if any)
+<LI>XGrabKeyboard - Screen (if any)
+<LI>XUngrabKeyboard - Screen (if any)
+<LI>XGrabKey - None
+<LI>XUngrabKey - None
+<LI>XAllowEvents - None
+<LI>XGrabServer - None
+<LI>XUngrabServer - None
+<LI>XWarpPointer - Screen (if any)
+<LI>XSetInputFocus - Focus
+<LI>XGetInputFocus - Focus
+<LI>XSetCloseDownMode - None
+<LI>XKillClient - None
+<LI>XChangeKeyboardControl - None
+<LI>XAutoRepeatOn - RawKeyboard (if any)
+<LI>XAutoRepeatOff - RawKeyboard (if any)
+<LI>XBell - Screen, RawKeyboard
+<LI>XQueryKeymap - RawKeyboard (if any)
+<LI>XSetPointerMapping - None
+<LI>XGetPointerMapping - None
+<LI>XChangePointerControl - Screen (if any)
+<LI>XGetPointerControl - Screen (if any)
+<LI>XDisplayKeycodes - None
+<LI>XGetKeyboardMapping - None
+<LI>XChangeKeyboardMapping - None
+<LI>XNewModifierMap - None
+<LI>XInsertModifiermapEntry - None
+<LI>XDeleteModifiermapEntry - None
+<LI>XFreeModifiermap - None
+<LI>XSetModifierMapping - None
+<LI>XModifierKeymap - None
+<LI>XSetScreenSaver - Screen (if any)
+<LI>XForceScreenSaver - Screen (if any)
+<LI>XActivateScreenSaver - Screen (if any)
+<LI>XResetScreenSaver - Screen (if any)
+<LI>XGetScreenSaver - Screen (if any)
+<LI>XAddHost - None
+<LI>XAddHosts - None
+<LI>XListHosts - None
+<LI>XRemoveHost - None
+<LI>XRemoveHosts - None
+<LI>XSetAccessControl - None
+<LI>XEnableAccessControl - None
+<LI>XDisableAccessControl - None
+</UL>
+<P>
+Events and Event Handling
+<UL>
+<LI>Event: KeyPress - RawKeyboard
+<LI>Event: KeyRelease - RawKeyboard
+<LI>Event: ButtonPress - Mouse
+<LI>Event: ButtonRelease - Mouse
+<LI>Event: MotionNotify - MouseMove
+<LI>Event: EnterNotify - Mouse
+<LI>Event: LeaveNotify - Mouse
+<LI>Event: FocusIn - Focus
+<LI>Event: FocusOut - Focus
+<LI>Event: KeymapNotify - None (Int)
+<LI>Event: Expose - Figure
+<LI>Event: GraphicsExpose - Figure (if any, depends on WIN32)
+<LI>Event: NoExpose - Figure (if any, depends on WIN32)
+<LI>Event: CirculateRequest - Parent (if any)
+<LI>Event: ConfigureRequest - Parent (if any)
+<LI>Event: MapRequest - Parent (if any)
+<LI>Event: ResizeRequest - Parent (if any)
+<LI>Event: CirculateNotify - Parent (if any)
+<LI>Event: ConfigureNotify - Parent (if any)
+<LI>Event: CreateNotify - Figure
+<LI>Event: DestroyNotify - Figure
+<LI>Event: GravityNotify - None
+<LI>Event: MapNotify - Figure
+<LI>Event: MappingNotify - ?
+<LI>Event: ReparentNotify - Figure
+<LI>Event: UnmapNotify - Figure
+<LI>Event: VisibilityNotify - Figure
+<LI>Event: ColormapNotify - Screen (if any)
+<LI>Event: ClientMessage - Figure (if any)
+<LI>Event: PropertyNotify - Figure (if any)
+<LI>Event: SelectionClear - Selection
+<LI>Event: SelectionNotify - Selection
+<LI>Event: SelectionRequest - Selection
+<LI>XSelectInput - Figure (and its mix-in's)
+<LI>XFlush - None (Int.)
+<LI>XSync - None (Int)
+<LI>XEventsQueued - None (Int)
+<LI>XPending - None (Int)
+<LI>XNextEvent - None (Int)
+<LI>XPeekEvent - None (Int)
+<LI>XIfEvent - None (Int)
+<LI>XCheckIfEvent - None (Int)
+<LI>XPeekIfEvent - None (Int)
+<LI>XWindowEvent - None (Int)
+<LI>XCheckWindowEvent - None (Int)
+<LI>XMaskEvent - None (Int)
+<LI>XCheckMaskEvent - None (Int)
+<LI>XCheckTypedEvent - None (Int)
+<LI>XCheckTypedWindowEvent - None (Int)
+<LI>XPutBackEvent - None (Int)
+<LI>XSendEvent - None (Int)
+<LI>XDisplayMotionBufferSize - MouseMove (if any)
+<LI>XGetMotionEvents - MouseMove (if any)
+<LI>Variable: _Xdebug - Process (if any)
+<LI>XSetAfterFunction - None (Int)
+<LI>XSynchronize - None (Int)
+<LI>XSetErrorHandler - None (Int)
+<LI>XGetErrorText - None (Int)
+<LI>XGetErrorDatabaseText - GUIError
+<LI>XDisplayName - Screen
+<LI>XSetIOErrorHandler - None (Int)
+</UL>
+<P>
+Predefined Property Functions
+<UL>
+<LI>XSetStandardProperties - Parent::addChild
+<LI>XStoreName - Frame
+<LI>XFetchName - Frame
+<LI>XSetIconName - Frame
+<LI>XGetIconName - Frame
+<LI>XSetCommand - Frame, main, Process
+<LI>XSetWMHints - Frame
+<LI>XGetWMHints - Frame
+<LI>XSetNormalHints - Frame
+<LI>XGetNormalHints - Frame
+<LI>XSetZoomHints - Frame
+<LI>XGetZoomHints - Frame
+<LI>XSetSizeHints - Frame
+<LI>XGetSizeHints - Frame
+<LI>XSetIconSizes - Frame
+<LI>XGetIconSizes - Frame
+<LI>XSetClassHint - Frame (Int?)
+<LI>XGetClassHint - Frame (Int?)
+<LI>XSetTransientForHint - Parent (window ownership)
+<LI>XGetTransientForHint- Parent
+<LI>XGetStandardColormap - Palette, screen
+<LI>XSetStandardColormap - Palette, screen
+</UL>
+<P>
+Application Utility Functions
+<UL>
+<LI>XLookupKeysym - RawKeyboard
+<LI>XRefreshKeyboardMapping - None (Int.)
+<LI>XLookupString - RawKeyboard
+<LI>XRebindKeysym - RawKeyboard 
+<LI>XStringToKeysym - RawKeyboard 
+<LI>XKeysymToString - RawKeyboard 
+<LI>XKeycodeToKeysym - RawKeyboard 
+<LI>XKeysymToKeycode - RawKeyboard 
+<LI>IsCursorKey - RawKeyboard 
+<LI>IsFunctionKey - RawKeyboard 
+<LI>IsKeypadKey - RawKeyboard 
+<LI>IsMiscFunctionKey - RawKeyboard 
+<LI>IsModifierKey - RawKeyboard 
+<LI>IsPFKey - RawKeyboard 
+<LI>XGetDefault - Resource/Preference
+<LI>XResourceManagerString - None (Int.)
+<LI>XParseGeometry - Parent
+<LI>XGeometry - Parent
+<LI>XParseColor - Color
+<LI>XPolygonRegion - Region
+<LI>XClipBox - Region
+<LI>XCreateRegion - Region
+<LI>XSetRegion - Region
+<LI>XDestroyRegion - Region
+<LI>XOffsetRegion - Region
+<LI>XShrinkRegion - Region
+<LI>XIntersectRegion - Region
+<LI>XUnionRegion - Region
+<LI>XUnionRectWithRegion - Region
+<LI>XSubtractRegion - Region
+<LI>XXorRegion - Region
+<LI>XEmptyRegion - Region
+<LI>XEqualRegion - Region
+<LI>XPointInRegion - Region
+<LI>XRectInRegion - Region
+<LI>XStoreBytes - None (obs)
+<LI>XStoreBuffer - None (obs)
+<LI>XFetchBytes - None (obs)
+<LI>XFetchBuffer - None (obs)
+<LI>XRotateBuffers - None (obs)
+<LI>XGetVisualInfo - Screen
+<LI>XMatchVisualInfo - Screen
+<LI>XCreateImage - Image
+<LI>XGetPixel - Image
+<LI>XPutPixel - Image
+<LI>XSubImage - Image
+<LI>XAddPixel - Image
+<LI>XDestroyImage - Image
+<LI>XReadBitmapFile - Image
+<LI>XWriteBitmapFile - Image
+<LI>XCreatePixmapFromBitmapData - Image
+<LI>XCreateBitmapFromData - Image
+<LI>XrmInitialize - Resource/Preferences
+<LI>XrmUniqueQuark - None
+<LI>Xpermalloc - None
+<LI>XrmStringToQuark - None
+<LI>XrmQuarkToString - None
+<LI>XrmStringToQuarkList - None
+<LI>XrmStringToBindingQuarkList - None
+<LI>XrmPutResource - Resource/Preferences
+<LI>XrmQPutResource - Resource/Preferences
+<LI>XrmPutStringResource - Resource/Preferences
+<LI>XrmQPutStringResource - Resource/Preferences
+<LI>XrmPutLineResource - Resource/Preferences
+<LI>XrmGetResource - Resource/Preferences
+<LI>XrmQGetSearchList - Resource/Preferences
+<LI>XrmQGetSearchResource - Resource/Preferences
+<LI>XrmMergeDatabases - Resource/Preferences
+<LI>XrmGetFileDatabase - Resource/Preferences
+<LI>XrmPutFileDatabase - Resource/Preferences
+<LI>XrmGetStringDatabase - Resource/Preferences
+<LI>XrmParseCommand - Resource/Preferences
+<LI>XSaveContext - Figure (new mix-in?)
+<LI>XFindContext - Figure (new mix-in?)
+<LI>XDeleteContext - Figure (new mix-in?)
+<LI>XUniqueContext - Figure (new mix-in?)
+</UL>
+<P>
+Calls not in the above.  These are either in
+optional packages or in later Releases.
+<UL>
+<LI>ClientWhitePointOfCCC - Color
+<LI>DefaultColormap - Screen, Palette
+<LI>DisplayOfCCC - Color
+<LI>IsPrivateKeypadKey - RawKeyboard
+<LI>ScreenNumberOfCCC - Color
+<LI>ScreenWhitePointOfCCC - Color
+<LI>VisualOfCCC - Color
+<LI>XAddConnectionWatch - None
+<LI>XAllocClassHint - None
+<LI>XAllocIconSize - None
+<LI>XAllocSizeHints - None
+<LI>XAllocStandardColormap - None
+<LI>XAllocWMHints - None
+<LI>XAllowDeviceEvents - Device
+<LI>XAnyEvent - Event
+<LI>XArc - Context
+<LI>XBaseFontNameListOfFontSet - Font
+<LI>XButtonEvent - Event
+<LI>XChangeDeviceControl - Device
+<LI>XChangeDeviceDontPropagateList - Device
+<LI>XChangeDeviceKeyMapping - Device
+<LI>XChangeFeedbackControl - Device
+<LI>XChangeKeyboardDevice - Device
+<LI>XChangePointerDevice - Device
+<LI>XCirculateEvent - Event
+<LI>XCirculateRequestEvent - Event
+<LI>XClientMessageEvent - Event
+<LI>XCloseDevice - Device
+<LI>XCloseIM - Intl
+<LI>XCloseOM - Intl
+<LI>XColormapEvent - Event
+<LI>XConfigureEvent - Event
+<LI>XConfigureRequestEvent - Event
+<LI>XContextDependentDrawing - Font
+<LI>XContextualDrawing - Font
+<LI>XConvertCase - RawKeyboard
+<LI>XCreateIC - Intl
+<LI>XCreateOC - Intl
+<LI>XCreateWindowEvent - Event
+<LI>XCrossingEvent - Event
+<LI>XDefaultString - None
+<LI>XDestroyIC - Intl
+<LI>XDestroyOC - Intl
+<LI>XDestroyWindowEvent - Event
+<LI>XDeviceBell - Device
+<LI>XDeviceTimeCoord - Device
+<LI>XDirectionalDependentDrawing - Font
+<LI>XDisplayOfIM - Intl
+<LI>XDisplayOfOM - Intl
+<LI>XErrorEvent - Event
+<LI>XEvent - Event
+<LI>XExposeEvent - Event
+<LI>XExtendedMaxRequestSize - None (Int)
+<LI>XExtentsOfFontSet - Font
+<LI>XFocusChangeEvent - Event
+<LI>XFontSetExtents - Font
+<LI>XFontsOfFontSet - Font
+<LI>XFreeDeviceList - Device
+<LI>XFreeFontPath - None (Int)
+<LI>XFreeFontSet - Font
+<LI>XFreeStringList - None
+<LI>XGetDeviceButtonMapping - Device
+<LI>XGetDeviceControl - Device
+<LI>XGetDeviceDontPropagateList - Device
+<LI>XGetDeviceFocus - Device
+<LI>XGetDeviceKeyMapping - Device
+<LI>XGetDeviceModifierMapping - Device
+<LI>XGetDeviceMotionEvents - Device
+<LI>XGetExtensionVersion - None (Int)
+<LI>XGetFeedbackControl - Device
+<LI>XGetGCValues - Context
+<LI>XGetICValues - Intl
+<LI>XGetIMValues - Intl
+<LI>XGetKeyboardControl - RawKeyboard
+<LI>XGetModifierMapping - RawKeyboard
+<LI>XGetOCValues - Intl
+<LI>XGetOMValues - Intl
+<LI>XGetRGBColormaps - Palette
+<LI>XGetSelectedExtensionEvents - Device
+<LI>XGetTextProperty - None (Int)
+<LI>XGetWMColormapWindows - Frame
+<LI>XGetWMIconName - Frame
+<LI>XGetWMName - Frame
+<LI>XGetWMNormalHints - Frame
+<LI>XGetWMProtocols - Frame
+<LI>XGetWMSizeHints - Frame
+<LI>XGrabDevice - Device
+<LI>XGrabDeviceButton - Device
+<LI>XGrabDeviceKey - Device
+<LI>XGraphicsExposeEvent - Event
+<LI>XGravityEvent - Event
+<LI>XIMOfIC - Intl
+<LI>XIconSize - Frame
+<LI>XIconifyWindow - Frame
+<LI>XInitImage - Image
+<LI>XInitThreads - Process
+<LI>XInternalConnectionNumbers - None
+<LI>XKeyEvent - Event
+<LI>XKeyboardControl - RawKeyboard
+<LI>XKeymapEvent - Event
+<LI>XListDepths - Screen
+<LI>XListInputDevices - Device
+<LI>XListPixmapFormats - Image
+<LI>XLocaleOfFontSet - Font
+<LI>XLocaleOfIM - Intl
+<LI>XLocaleOfOM - Intl
+<LI>XLockDisplay - Process
+<LI>XMapEvent - Event
+<LI>XMapRequestEvent - Event
+<LI>XMappingEvent - Event
+<LI>XMaxRequestSize - Context (if any)
+<LI>XMotionEvent - Event
+<LI>XNoExposeEvent - Event
+<LI>XOMOfOC - Intl
+<LI>XOpenDevice - Device
+<LI>XOpenIM - Intl
+<LI>XOpenOM - Intl
+<LI>XPoint - Point
+<LI>XProcessInternalConnection - None
+<LI>XPropertyEvent - Event
+<LI>XQueryDeviceState - Device
+<LI>XReadBitmapFileData - Image
+<LI>XReconfigureWMWindow - Frame
+<LI>XRectangle - Rectangle
+<LI>XRegisterIMInstantiateCallback - Intl
+<LI>XRemoveConnectionWatch - None
+<LI>XReparentEvent - Event
+<LI>XResizeRequestEvent - Event
+<LI>XSelectExtensionEvent - Event
+<LI>XSelectionClearEvent - Event
+<LI>XSelectionEvent - Event
+<LI>XSelectionRequestEvent - Event
+<LI>XSendExtensionEvent - Event
+<LI>XSetDeviceButtonMapping - Device
+<LI>XSetDeviceFocus - Device
+<LI>XSetDeviceMode - Device
+<LI>XSetDeviceModifierMapping - Device
+<LI>XSetDeviceValuators - Device
+<LI>XSetLocaleModifiers - Intl
+<LI>XSetOCValues - Intl
+<LI>XSetOMValues - Intl
+<LI>XSetRGBColormaps - Process
+<LI>XSetTextProperty - Frame, Process
+<LI>XSetWMClientMachine - Frame
+<LI>XSetWMColormapWindows - Frame
+<LI>XSetWMIconName - Frame
+<LI>XSetWMName - Frame
+<LI>XSetWMNormalHints - Frame
+<LI>XSetWMProperties - Frame
+<LI>XSetWMProtocols - Frame
+<LI>XSetWMSizeHints - Frame
+<LI>XSupportsLocale - Process, Intl
+<LI>XTextPropertyToStringList - RichText
+<LI>XTimeCoord - Time
+<LI>XUngrabDevice - Device
+<LI>XUngrabDeviceButton - Device
+<LI>XUngrabDeviceKey - Device
+<LI>XUnlockDisplay - Process
+<LI>XUnmapEvent - Event
+<LI>XUnregisterIMInstantiateCallback - Intl
+<LI>XUnsetICFocus - Intl
+<LI>XVisibilityNotifyEvent - Event
+<LI>XVisualIDFromVisual - None
+<LI>XWMGeometry - Parent::addChild
+<LI>XWithdrawWindow - Frame
+<LI>XrmCombineDatabase - Resources/Preferences
+<LI>XrmCombineFileDatabase - Resources/Preferences
+<LI>XrmDestroyDatabase - Resources/Preferences
+<LI>XrmEnumerateDatabase - Resources/Preferences
+<LI>XrmGetDatabase - Resources/Preferences
+<LI>XrmLocaleOfDatabase - Resources/Preferences
+<LI>XrmOptionDescRec - Resources/Preferences
+<LI>XrmOptionKind - Resources/Preferences
+<LI>XrmPermStringToQuark - Resources/Preferences
+<LI>XrmQGetResource - Resources/Preferences
+<LI>XrmSetDatabase - Resources/Preferences
+<LI>XrmValue - Resources/Preferences
+</UL>
+<P>
+Not included in this are:
+<UL>
+<LI>XShape routines for non-rectangular windows
+<LI>Xcms routines for color management
+<LI>Xdbe routines from the double buffering extension
+<LI>Xmb routines for multibyte character sets
+<LI>Xwc routines for UNICODE characters
+<LI>Xmbuf routines for the multibuffer and stereo extensions
+</UL>
+<P>
+Routines outside the scope of this design effort:
+
+<UL>
+<LI>Xt routines (Widgets)
+<LI>Xm, Exm, Mrm, Xme, XmVa routines (Motif)
+<LI>XF86DGA, XF86Misc, and XF86Vid routines for XFree86 extensions
+<LI>Xau routines for client/server authentication
+</UL>
+
+
+
+</BODY>
+</HTML>

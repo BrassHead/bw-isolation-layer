@@ -1,0 +1,23 @@
+// <bw> -- main header file for GUI apps (includes all client headers)
+
+Copyright 1997-2013 Brian Bray
+
+TODO: Out of date
+*/
+
+
+#include <bw/bwassert.h>
+#include <bw/string.h>
+#include <bw/button.h>
+#include <bw/canvas.h>
+#include <bw/custom.h>
+#include <bw/exception.h>
+#include <bw/figure.h>
+#include <bw/file.h>
+#include <bw/process.h>
+#include <bw/scene.h>
+#include <bw/styletools.h>
+#include <bw/tools.h>
+#include <bw/trace.h>
+
+

@@ -1,0 +1,28 @@
+                  	BW installation instructions
+                  	============================
+
+
+Testing
+=======
+
+You need to have the following packages installed:
+	c++11 compiler
+	make
+	Xlib development
+	Xext development
+	unixodbc development
+	
+To build and test the software, type
+
+	make check
+
+This compiles and runs some very simple tests within the "test" subdirectory, 
+including a "hello world" program.  The UI tests are interactive, so you will
+need to follow the instructions.
+
+
+Installation
+============
+
+This is an isolation layer, install by placing or linking the source into your project
+and then compiling and linking with calling code. For an example, look at the tests.

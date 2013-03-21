@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>B W</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<div class="content">
+
+<center>
+<H1>BW -- Isolation Layer for Applications</H1>
+
+<BR /><FONT SIZE=1>
+Copyright &copy; 1996-2013, Brian Bray.
+</FONT><BR />
+</center>
+
+<P>
+Applications need to isolate themselves
+from their OS environment for long term viability and cross platform
+development.  The BW project is an isolation layer
+to explore this concept in C++ application code.
+</P><P>
+The architecture of this effort is based on the concept of reverse
+dependency. A technology supplier typically defines an API to a library
+of useful application services. Naive use of this API then binds the
+application to this service provider by creating a dependency on both
+the API and the library. Concepts and definitions from the API tend to
+propagate throughout the application. When multiple APIs for different
+unrelated services are used, these definition collide and conflict within
+the application code. Namespaces mitigate this problem but are infrequently used.
+</p><p>
+For example, even very basic types, like integers, are frequently defined in API's.
+Application code can end up littered with INT32's, int32's, WINT's, VENDORINT's, 
+SDWORD's etc. all refering to possibly different types and defined with a mix of
+typedef's and macro's in the same namespace. The problem is intense for complex types
+that require memory management, like strings.
+</p><p>
+This dependency is created when application code #includes the library headers that
+define the API. In a reverse dependency, library code #includes headers from the
+application. These application headers define the interface expected and used along with
+a factory interface that lets the library supply object(s) that comply with the interface.
+If the goal of the application developer is to avoid overdependence on a single vendor, then
+the APIs are defined using the fundamental types of the language as much as possible, and
+application significant types where needed. 
+</p><P>
+In theory, each application would have a completely independent set of needs and thus 
+define a totally unique interface. In practice, however, the needs of applications in a single
+domain are similar, exploit similar specific technologies, and library APIs are designed to make typical application
+development easy by meeting these common needs. Long established services frequently
+support standardized APIs and competition causes convergence of service features even if the
+API's are not identical. So applications want to use APIs from major service providers
+without becoming dependent on them.
+</P><p>
+So this creates a pragmatic opportunity for an isolation layer whose implementation(s) depend on 
+major service provider libraries and application interfaces defined as subsets of language centric
+bindings of common standards. The same isolation layer could interface similar applications
+in a domain to a range of competing service providers.
+</p><p>
+	<b>BW is an exploration of what happens when this concept is tested.</b>
+</p>
+<P>
+The details of the C++ language centric bindings to the selected common standards 
+are described in the 
+<A HREF="auto/index.html">superset API documentation here.</A>
+Applications would use a subset of these definitions.
+</P>
+<P>
+Some ideas for applications in my domain of interest are <A HREF="Applications.htm">given here</A>.
+</P>
+<p>
+Legacy documentation links (i.e. these are obsolete):
+</p>
+<UL>
+<LI><A HREF="Vision.htm">Project Vision</A></LI>
+<LI><A HREF="Goals.htm">Goals</A></LI>
+<LI><A HREF="Scope.htm">Scope</A></LI>
+<LI><A HREF="Language.htm">Language</A></LI>
+<LI><A HREF="Windowing.htm">Graphics</A></LI>
+<LI><A HREF="Files.htm">Files and directories</A></LI>
+<LI><A HREF="Customization.htm">Resources and preferences</A></LI>
+<LI><A HREF="Processes.htm">Processes and threads</A></LI>
+<LI><A HREF="Persistence.htm">Persistent storage</A></LI>
+<LI><A HREF="Network.htm">Network access</A></LI>
+<LI><A HREF="Distributed.htm">Distributed objects</A></LI>
+<LI><A HREF="FileFormat.htm">File format experts</A></LI>
+<LI><A HREF="Scripts.htm">Scripting</A></LI>
+<LI><A HREF="Help.htm">Help system</A></LI>
+<LI><A HREF="Localization.htm">Localization</A></LI>
+<LI><A HREF="Posix.html">Cross Reference to POSIX</A></LI>
+<LI><A HREF="Win32Notes.htm">WIN32 Notes</A></LI>
+</UL>
+
+</div>
+</BODY>
+</HTML>

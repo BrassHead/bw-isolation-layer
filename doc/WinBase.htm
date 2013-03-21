@@ -1,0 +1,155 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Base Windows Services in BW</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=white>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+<H1>Base Services</H1>
+<P>
+This section documents the base services of the windowing subsystem in BW.
+The base services provide a level of functionality approximately equivalent
+to Xlib in X Windows.  That is: manipulation of basic windows, drawing primitives,
+fonts, colours, bitmaps, events, keyboard focus, and clipping regions.
+<P>
+This document Is not a specification, but merely indicates a direction
+and is used as a cross check on the actual design.  Only the portions of
+this functionality actually used by some BW application (or a reasonable
+extension of one) will be implemented.  This is consistent with the 
+concept that BW is an isolation layer for a set of applications and not 
+a general isolation layer for any arbitrary graphic application.
+<P>
+This design work provides the framework so that new features can be added
+consistently over time as they are required for BW applications.  It is
+also a cross check on the design because it's completeness can be used
+to identify design alternatives that are insufficiently general to be
+expandable in ways known to be needed by some applications.
+<P>
+Because it cross references the two primary platforms for delivery of BW,
+it highlights routines that may have to be added to one of the platforms
+in the implementation.
+<P>
+These calls are based on a analysis of the calls and events in 
+<A HREF="WinBaseWin32.htm">WIN32</A> and
+<A HREF="WinBaseX.htm">Xlib.</A>  These lists are "complete" in the following
+sense:  All of the Xlib calls are listed and for each Xlib call a search 
+was made for WIN32 call(s) that provide the a similar service.
+<P>
+See the detailed documentation (extracted from the source) for
+specifics on which routines are available, their parameters, and 
+notes on their usage.
+<P>
+<H3>Objects</H3>
+<P>
+The objects covered by this portion of the specification are:
+<UL>
+<LI>Screen
+<LI>Control
+<LI>Context
+<LI>Font
+<LI>FontPallette
+<LI>Colour
+<LI>ColourMap
+<LI>Image
+<LI>Icon
+<LI>BitMap
+<LI>PixelMap
+<LI>Stipple?
+<LI>Cursor
+<LI>Point
+<LI>Rectangle
+<LI>Region (for clipping)
+<LI>Pixel
+<LI>MonochromePixel?
+<LI>IndexedPixel?
+<LI>TrueColourPixel?
+<LI>Palette
+<LI>PointingDevice?
+<LI>PositioningDevice?
+<LI>Event?
+<LI>MouseButton?
+<LI>ShiftKey?
+<LI>Keyboard?
+<LI>ControlKey?
+<LI>Timer?
+<LI>TimeInterval?
+</UL>
+<P>
+Not included here are:
+<UL>
+<LI>Action
+<LI>Menu
+</UL>
+
+<P>
+
+<H3>Screen</H3>
+
+<H3>Control</H3>
+
+<H3>Context</H3>
+
+<H3>Font</H3>
+
+<H3>FontPallette</H3>
+
+<H3>Colour</H3>
+
+<H3>ColourMap</H3>
+
+<H3>Image</H3>
+
+<H3>Icon</H3>
+
+<H3>BitMap</H3>
+
+<H3>PixelMap</H3>
+
+<H3>Stipple?</H3>
+
+<H3>Cursor</H3>
+
+<H3>Point</H3>
+
+<H3>Rectangle</H3>
+
+<H3>Region (for clipping)</H3>
+
+<H3>Pixel</H3>
+
+<H3>MonochromePixel?</H3>
+
+<H3>IndexedPixel?</H3>
+
+<H3>TrueColourPixel?</H3>
+
+<H3>Palette</H3>
+
+<H3>PointingDevice?</H3>
+
+<H3>PositioningDevice?</H3>
+
+<H3>Event?</H3>
+
+<H3>MouseButton?</H3>
+
+<H3>ShiftKey?</H3>
+
+<H3>Keyboard?</H3>
+
+<H3>ControlKey?</H3>
+
+<H3>Timer?</H3>
+
+<H3>TimeInterval?</H3>
+
+
+
+</BODY>
+</HTML>

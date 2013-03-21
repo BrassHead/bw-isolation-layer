@@ -1,0 +1,612 @@
+<HTML>
+<!DOCTYPE HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Windowing Object Model</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=white>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+
+<H1>BW Windowing Object Model</H1>
+
+<H2>The Scene</H2>
+<P>
+During an interactive session, a user sees a <b>scene</b> on the display and 
+interacts with <b>figures</b> within the scene.  The OS is responsible for
+displaying the figures from multiple applications in a coherent single
+scene and distributing the 
+interaction events to the appropriate application.
+<P>
+Within a BW application, the key visual object is the figure.  A figure
+is an object that can draw itself on demand and optionally accepts 
+interaction input from the user.  Figures can contain other figures, meaning
+that the image of the contained figure appears as a part of the image
+of the containing figure.  Figures can also be "owned" by another figure
+meaning that their iconic state and active lifetimes are tied together.
+<P>
+The figure interface is lightweight and is intended to be added to domain
+objects for a direct coupling between an object and its viewable 
+representation.  Figures and hierarchies of figures can be created and then
+moved in or out of the scene as the users view changes.  This is in contrast
+to other interface toolkits where the focus of the architecture is the reuse
+of standardized widgets or controls that are configured by separate application
+code.  For making basic dialogs and forms, BW has a standard set of controls
+that interact with a script language, so that the conventional architecture
+is also supported.  These controls are built using the figure hierarchy
+and use the same methods as other figures -- they have no special status.
+<P>
+BW has a scene graph that references all the 
+figures currently active in the interaction.  Active figures may 
+or may not be visible depending on their state and their locations
+relative to other figures.  Methods are available to add figures to
+the scene, to add sub-figures to a figure, to move and resize figures,
+and to replace a figure in the scene with another.  The same figure can
+only appear in a scene once.
+<p>
+The parent figure completely controls the location, size, drawing order, and
+tab order of child figures.  These are initially set when figures are added
+to the parent.  Additional methods are provided that can change all of these
+attributes except the tab order dynamically.  There are also methods that
+allow a child to request changes and for the parent to grant, modify, or
+deny these requests.
+<P>
+Conceptually,
+the scene is displayed in a series of <b>frames</b> where the frame
+rate is somewhere between .01 and 1 second.  Screen updates can be
+made immediately or deferred to the next frame of the scene.  Internally,
+each frame starts by a <b>flash</b>.  The purpose of the flash is to allow
+each figure to plan its appearance in the next frame and to "freeze" the
+scene so that a consistent view is presented.  After the flash, figures
+that need to be (re)drawn are called to modify the screen image.  During
+this drawing period, BW will prevent changes to the scene graph by blocking
+other threads.  During the period from the start of the flash to the end
+of the drawing period, new user interaction events will be queued for later
+processing.
+<p>
+Unlike other window systems, bw gives screen updates priority over
+application actions during frame changes.  
+It uses two separate threads to drive the draw loop
+and to react to user interaction.  When the screen needs update as a result of
+and input event, the figure can either:
+<OL>
+<LI>Draw the change immediately (with or without delaying the frame)
+<LI>Flag the changed region as invalid, which will cause it to be 
+redrawn either at the next flash, or after all input events are processed, 
+whichever comes first.
+<LI>Flag the changed region as DeferredInvalid, which will cause it to 
+be redrawn at the next flash.
+<LI>Do nothing, which means that the figure will determine itself if it 
+needs updating at the next flash.
+<LI>Disable the figure, which will prevent redrawing during critical 
+data structure updates.
+</OL>
+[Note:  This needs more thought and experience.  Alternatives are 
+A) to just have client code spawn
+threads when doing something long, but keep interaction in the draw loop, or 
+B) have input events in the same thread as drawing, but move actions 
+to a new thread.]
+<P>
+Only regions of the screen that have changed since the last frame need to
+be drawn.  These changes may be due to underlying changes in the domain
+objects, changes due to the passage of time (in an animation), or changes
+due to interactions with other figures and applications.  During the flash,
+each figure needs to determine the areas of its image that need updating.
+It also makes any required changes in the scene graph (locations, sizes, and 
+sub-figures).
+<P>
+There are a set of stock figures that can be used to display and update
+common data types and data structures in standard forms.  There are other
+stock figures whose purpose is primarily visual, such as figures that draw
+a frame around another figure, or that group figures together.
+
+
+
+<H2>Figure base classes</H2>
+<P>
+Figures are subclasses of the <code>Figure</code> base class. 
+There are a variety of
+mix-in bases that add additional interfaces and implement the processing
+required to make these interfaces active.
+<P>
+The <code>Figure</code> base class provides the following 
+services to it's subclasses:
+<UL>
+<LI>Set display attributes.  There are a variety of display attributes 
+    that adjust the behaviour of the BW windowing system:
+    <UL>
+    <LI>Automatically draw background before drawing
+    <LI>Set fill and pen before drawing
+    <LI>Clip children -- don't let me draw over them
+    <LI>Redraw after movement
+    <LI>etc.
+    </UL>
+<LI>doAction -- initiate an action within the context of the figure's
+    parent.
+<LI>isActive -- query figure state
+<LI>getSize
+<LI>getLocation
+<LI>invalidate -- mark a portion of the drawing area for future redraw
+<LI>getScene -- return pointer to containing <code>Scene</code>
+<LI>holdFlash -- cause drawing thread to wait
+<LI>releaseFlash
+<LI>disable -- causes drawing thread to forget about this control 
+    (and it's children)
+<LI>enable -- starts drawing again.
+</UL>
+
+Subclasses of <code>Figure</code> provide the following interface:
+<UL>
+<LI>draw -- called to draw the figure by calling output primitives.
+    Only figures in the update region will be drawn.  
+    There is no default action, this method must be implemented.
+<LI>onFlash -- as described above. Default action is to do nothing.
+<LI>onEnterScene -- indicates to the figure that it has been added to the 
+    active scene.  Default action is to do nothing.
+<LI>onExitScene -- indicates to the figure that it is being removed 
+    from the active scene.
+    Default action is to do nothing.
+<LI>OnQuerySize -- called by parent figures to determine the 
+    minimum / optimal size for a child control.
+    Default is to request the entire area of the parent with a minimum size
+    of a square with sides roughly equal one line space in the system font.
+<LI>OnQueryLocation -- called by some parent figures to locate child figures.
+    Default is (0,0).
+</UL>
+<P>
+Mix-in classes provide new services to the subclass and define the interfaces 
+and default behaviour of new methods implemented in the subclass.
+
+
+<DL>
+<DT><code>Parent</code>
+<DD>
+This mix-in base indicates that the figure expects to have child figures.
+<p>
+Services are:
+<UL>
+<LI>addChild - Adding child figures at specific locations and sizes.  
+    The position of child figures can be linked to the sides of the parent.
+<LI>removeChild
+<LI>removeAllChildren
+<LI>numChildren -- counts number of child figures
+<LI>addModal -- add an child not constrained to draw within the drawing area
+    of the parent.
+</UL>
+<p>
+Interface provided by the subclass:
+<UL>
+<LI>onAction -- process command initiated by a child figure
+<LI>isTabGroup -- returns true if the parent encloses a tab group.  
+    I.E. the tab key moves the focus between descendents only.
+</UL>
+
+<DT><code>Layout</code>
+<DD>
+This mix-in class indicates that the figure will dynamically change the layout
+(size and location) of its children.  Child figures can request changes 
+in size and location within their parent.  
+<p>
+If this interface is not included, then child requests for changes are denied.
+<p>
+If it is included, then child requests for changes are granted by default.
+More complex behaviour can be implemented by overriding the default methods in
+the interface.
+<p>
+Services are:
+<UL>
+<LI>moveChild
+<LI>resizeChild
+<LI>relocateChild -- changes both size and location.
+<LI>raiseChild -- in stacking order
+<LI>lowerChild -- in stacking order
+<LI>replaceChild -- Removes the replaced figure from 
+    the scene graph and adds a new child at the same location and size.
+</UL>
+Interface provided by the subclass:
+<UL>
+<LI>onSizeRequest -- a child is requesting a size change.
+    Default action is to grant the request unconditionally.
+<LI>onMoveRequest -- a child is requesting a move.
+    Default action is to grant the request unconditionally.
+<LI>onRelocateRequest -- a child is request a change in both 
+    size and position.  Default action
+    is to grant the request unconditionally.
+<LI>onRaiseRequest -- indicates that child has requested to be raised.  
+    Default is to raise the child.
+<LI>onLowerRequest -- indicates that a child has requested to be lowered.
+    Default is to lower the child.
+<LI>onReplaceRequest -- child has requested replacement by another figure
+</UL>
+
+
+<DT><code>Size</code>
+<DD>
+The existence of this interface indicates that a figure wants some control
+or knowledge of it's size and location within its parent.
+<p>
+Services are:
+<UL>
+<LI>requestResize
+<LI>requestMove
+<LI>requestRelocate
+<LI>requestRaise
+<LI>requestLower
+<LI>requestReplace
+</UL>
+<p>
+Interface provided by the subclass:
+<UL>
+<LI>onResize -- figure is changing size
+<LI>onMove -- figure moving relative to parent 
+<LI>onRelocate -- figure is changing size and location 
+<LI>onRaise
+<LI>onLower
+</UL>
+
+
+<DT><code>Frame</code>
+<DD>
+The presence of this interface indicates that this figure is intended 
+as a direct child of the scene and that adornments should be provided 
+according to the standards of the platform.
+<p>
+Services are:
+<UL>
+<LI>setTitle -- set title for icon and adornments
+<LI>setIcon
+<LI>setMenu -- sets a menu tree for the window.  
+    By default, no menu is displayed.
+<LI>setHotKeys -- sets list of active hot keys [Called during 
+    initialization].  By default there are no hot-keys defined.
+<LI>setToolBar?? -- sets a ToolBar figure to be displayed with
+    the associated window.  [Called during initialization] 
+    By default, no toolbar.
+<LI>setStatusBar?? -- sets a StatusBar control to be displayed with
+    the associated window.  [Called during initialization] 
+    By default, no statusbar.
+</UL>
+Interface provided by the subclass:
+<UL>
+<LI>onClose -- User has requested that the window (and thus, typically)
+    the application be closed.
+    By default, control is returned to main.
+<LI>onMinimize -- User has requested minimization.
+    By default, no action is taken (figure is minimized)
+<LI>onRestore -- User has restored a minimized window.
+    By default, no special action is taken (figure is restored)
+</UL>
+
+
+<DT><code>Mouse</code>
+<DD>
+This interface is included if the figure wants to take action when 
+the mouse enters it's region of the screen or is clicked.  
+By default, mouse input is ignored.
+<p>
+Services are:
+<UL>
+<LI>setLocalCursor -- sets the cursor displayed when the mouse 
+    is over the figure.
+</UL>
+<p>
+Interface methods:
+<UL>
+<LI>onMouseEnter -- Mouse entered window. 
+<LI>onMouseExit -- Mouse exited window. 
+<LI>onMouseButton -- Mouse button pressed or released
+</UL>
+
+
+<DT><code>MouseMove</code>
+<DD>
+This interface is included if the control wants notification of mouse 
+movements.
+<p>
+Services are:
+<UL>
+<LI>grabMouse -- causes notifications for all subsequent mouse 
+    movement even if the mouse
+    strays from the screen region where the figure is located.
+<LI>releaseMouse -- releases a previous mouse grab.
+</UL>
+<p>
+Interface provided by the subclass is:
+<UL>
+<LI>onMouseMove -- Mouse movement. 
+    This method is called when the mouse moves -- either within the area of
+    the window or after a "mouse grab".  If not provided by the control, mouse
+    movement is ignored.
+</UL>
+
+
+<DT><code>Character</code>
+<DD>
+This interface is used by figures accepting keyboard input.  
+If included, the figure can
+get the keyboard focus by mouse or keyboard actions.  
+If it is not included, keyboard input
+to the figure is not possible.
+<p>
+Services are:
+<UL>
+<LI>takeKeyboardFocus
+<LI>releaseKeyboardFocus
+<LI>tabKeyboardFocus
+</UL>
+<p>
+Interface methods are:
+<UL>
+<LI>onGotFocus -- indicates that the window now has the keyboard focus.
+<LI>onLostFocus -- indicates that the window no longer has the keyboard
+	focus.
+<LI>onKey -- called for each input character.  "Hot-keys" are dispatched
+	to the enclosing window with a Frame interface. 
+</UL>
+
+
+<DT><code>Keyboard</code>
+<DD>
+This interface provides access to a lower level interface to keyboard 
+input needed by some
+applications.  If included, low level keyboard events are just transformed
+into character events.
+<p>
+Interface provided by the subclass is:
+<UL>
+<LI>onKeyPress -- Key was pressed.
+<LI>onKeyRelease -- Key was released.
+</UL>
+
+<DT><code>Timer</code>
+<DD>
+This interface provides access to timers.
+<p>
+Services are:
+<UL>
+<LI>addTimer
+<LI>deleteTimer
+</UL>
+<P>
+Interface provided by the subclass:
+<UL>
+<LI>onTimer
+</UL>
+
+
+<DT><code>Selection</code>
+<DD>Indicates that the figure allows some subset of it's content to 
+be "selected".  Lot's of unknown issues here (interaction with 
+keyboard focus, routing of cut/paste actions, etc.)
+
+
+<DT>System changes
+<DD>
+There are a variety of notifications that can arrive when changes to 
+global resources are made.  
+These resources include the palette and attached devices.  The services
+and subclass interface for these notifications is yet to be determined.
+</DL>
+
+
+<H3>Figure Implementation Details</H3>
+<p>
+A figure not in a scene is a 
+lightweight object (12 bytes or less).  It is intended that BW applications
+will have figures in all of their domain objects which participate in 
+user interaction.
+<P>
+Figures range in size and complexity from a simple output of an icon
+with no interaction to figures that are parents of dynamically changing
+subtrees of active figures.  It is desirable that simple figures don't
+incur the overhead needed for complex figures.  The solution to this
+in BW is to use event handling to call C++ methods.  The Figure base class
+manages an event handler chain.  Each mix-in base class adds an event
+handler that fully processes a range
+of events and defines the interface and default actions for the 
+client subclass.
+<P>
+The presence of particular mix-in bases also effects whether a window is
+created for the figure, the window attributes, which adornments are shown, 
+and which events are requested from the OS.  The implementation of the 
+base classes is platform independent, but uses facilities private to bw.
+In particular, the existence, format, and types of events are private
+to the BW implementation.
+<P>
+In the long term, this event mechanism may be overloaded to support other
+platform dependent interfaces, such as COM or Corba.
+<P>
+The bw windowing architecture can be understood in layers as follows:
+<PRE>
+          ----------------------
+                Scripts
+          ----------------------
+                Figures
+          ----------------------
+           Platform Independent
+          ----------------------
+            Platform Dependent
+          ----------------------
+</PRE>
+<p>
+The platform dependent layer consists of an isolation layer over system
+provided window and drawing facilities.
+<p>
+The platform independent layer implements the infrastructure supporting the 
+Figure and drawing interfaces.  This includes the figure base classes and 
+drawing tools.
+<p>
+Figures are either stock figures (buttons, text fields, etc.) or application
+specific figures.
+<p>
+Figures initiate scripts upon user action.  These scripts can be interpreted
+directly by application code, or passed to a script engine that provides for
+user customization of the interface.  With an engine, portions of the 
+application itself could be written as scripts.  The selection of script 
+language is up to the application.
+
+
+<h2>Fonts</h2>
+
+<p>
+Fonts are selected by filling in a <code>FontSpec</code> structure with the
+desired attributes.  The system then matches this to the nearest available
+font on the platform.  A font is allways matched, even if it is far from
+the request.
+
+<p>
+Member variables of a <code>FontSpec</code> are:
+<ul>
+<li>Name -- Friendly name (eg: "Courier 10 bold")
+<li>Family -- Font family (eg: "courier")
+<li>Foundary -- Font producer (eg: adobe, bitstream, etc)
+<li>Weight -- "medium", "bold", "default"
+<li>Slant -- "roman", "italic", "oblique"
+<li>SetWidth -- "normal", "condensed", "narrow", "double"
+<li>PointSize -- in 1/10 points
+<li>Charset -- "iso8839-1", "unicode", ...
+</ul>
+
+
+<h2>Images</h2>
+
+<p>
+Images come in a bewildering range of format variations.  Because images are
+large, it is necessary to be able to manipulate them in binary form.
+Depending on what you are doing with the image, 
+binary forms should match the display hardware, the host CPU, or
+image file formats.  Conversions are needed between these formats.
+
+<p>
+An <b>image</b> consists of an array of <b>pixels</b> and some kind of 
+<b>colourmap</b> that maps (either algorithmically or via a lookup table)
+from a pixel value to a colour specification.  The image array in the general
+case is 3 dimensional -- a one dimensional array of two dimensional 
+<b>fields</b>.  The pixel value in a multi-field image is the concatenation
+of values at the same x and y co-ordinate in each field.
+
+<p>
+The variations in common image formats can be described by:
+
+<p>
+For the pixels:
+<ul>
+<li>xoffset -- bit offset on each row before first pixel {0, >0}
+<li>fields -- number of separate pixel arrays in image {1, >1}
+<li>byte_order -- {MSB, LSB}
+<li>bitmap_unit -- processing unit for bit-order ops {8, 16, 32, 64}
+<li>bit_order -- {MSB, LSB}
+<li>scanline_order -- {TopToBot, BotToTop}
+<li>bits_per_pixel -- {1, 4, 8, 16, 24, 32, 64, 128}
+<li>depth -- significant bits_per_pixel {1, 2, 4, 6, 8, 10, 12, 15, 16, 24, 30,
+    36, 48, 64}
+<li>alpha -- alpha level stored with each pixel {Yes, No}
+<li>pixel_format -- {Index, TrueColour (w/various bit combinations), Float}
+<li>bitmap_pad -- each row is rounded up to next unit of this size {8, 16, 32,
+    64}
+</ul>
+<p>
+For the colourmap
+<ul>
+<li>type -- {MonoChrome, ColourRGB, RGBA, other colour spaces}
+<li>bits_per_entry -- {8, 16, 24, 32, 48, 64, larger}
+<li>Alpha_type -- {none, fixed, float}
+<li>size -- number of colourmap entries (related to depth) {2, 4, 16, 64,
+    256, 1024, 4096, 8192, 16384}
+</ul>
+<p>
+Because the colourmap data is much smaller than the pixel data, it is
+efficient to use a small set of standard colormap formats.
+<p>
+These variables are still not sufficient to describe the most common file
+formats, because of compression and other issues.
+
+<p>
+To cope with this complexity, a very general abstract base class 
+(<code>IImage</code>) is provided.  An IImage object is one that can set and
+retrieve pixel values addressed by X and Y co-ordinates.  It may also be
+able to provide a pointer to a memory area describable by the variables 
+above that contains the image array.  The purpose of this base class is to
+provide a general way to deal with images read and written from external
+formats.
+
+<p>
+Six subclasses of IImage are defined.  Two are device specific formats and the
+other four are "standard" formats.  The exact image layout for the device 
+specific formats is not known until runtime.  The standard formats have fixed,
+platform independent memory and file formats so that code can be written
+to manipulate and convert to/from these formats efficiently.
+<ul>
+<li>PBitmap -- a bitmap (depth=1) image in an efficient format for the display
+    hardware.
+<li>PPixmap -- an image format matching the display hardware
+<li>BWBitmap -- A bitmap format efficient for manipulation by the host platform
+<li>BWIndexImage -- An indexed image format efficient for manipulation by the
+    host platform
+<li>BWTrueImage -- A true colour image format efficient for manipulation by
+    the host platform
+<li>BWFloatImage -- A floating point RGBA format efficient for manipulation
+    by the host platform.
+</ul>
+
+<p>
+The BW image formats have simple and transportable binary and character 
+file formats.  The character formats are in the form of "C" or "C++" code 
+so that these images may be used in resources compiled into an application.
+
+<p>
+Since these image formats are fixed, special purpose code can be written (or
+is already available) on the host platform to convert between the standard
+formats and device formats.
+
+<p>
+It is expected that file format experts for a variety of common image formats
+will be defined as part of bw.  These will be convertable to and from the
+standard formats.
+
+
+
+<H2>Object Naming Process</H2>
+<P>
+The names of bw classes have been chosen carefully to indicate their intended
+use and to avoid conflicts with host platform names.
+The process of selecting and naming object classes proceeds as follows:
+<OL>
+<LI>A noun from a Vision, Requirements Document, Specification, or
+documentation of an actual window system is identified.  These are
+the "candidates".  Because the same candidates keep cropping up from
+different contexts, candidates are never actually deleted from the list
+but their final disposition is "flagged" in the steps that follows.
+(This eliminates the problem of the same items showing up again and again.
+An item in the list that is unflagged represents an entity that is
+not currently modeled in BW, but that may need to be modeled in
+future.
+<LI>Some time later (possibly a lot later) a design decision is made
+that selects a particular name for use in BW from all of the potential
+aliases in the candidate list.  The name and it's aliases are flagged in
+the candidate list. (Selected class name with a *, aliases by indicating
+the chosen name)
+<LI>In some cases, the entity identified by the name is known not to
+represented by a class in BW.  This may be because the name refers to
+an attribute of a class or objects in the class, or because the entity
+refers to a state or condition that a BW object can be in.  These are
+flagged by the word "Culled" in the list along with a reason.
+<LI>In cases where the alias represents an actual entity in a target
+platform, there may very well be a class with that name in the
+*implementation* for that platform.  These are not BW classes because they
+are internal to the implementation and they are not exposed to client 
+code.  These implementation classes are also flagged 
+in the candidate list by giving the platform name(s) in parenthesis.
+</OL>
+The current candidate list for BW is <A HREF=Candidates.txt>here.</A>
+
+
+
+
+</BODY>
+</HTML>

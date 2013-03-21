@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>BW Databases and persistent storage</TITLE>
+<link rel="stylesheet" type="text/css" href="bwtheme.css" />
+</HEAD>
+<BODY BGCOLOR=#FFFFFF>
+
+<CENTER>
+<H1>BW</H1>
+<H3>An application framework</H3>
+</CENTER>
+
+
+<H1>Databases</H1>
+<P>
+To be written.
+<p>
+The intent is to model the classes on SQL/CLI (aka ODBC).  Candidate objects are:
+<ul>
+<li>Database -- represents a connection to a database
+<li>Statement -- represents an SQL statement with methods for binding parameters
+<li>RowSet -- result of executing a statement
+<li>Row -- a base class for individual results.  A table in the subclass 
+defines the binding between SQL fields and object members.
+</ul>
+
+<H1>Persistent storage</H1>
+
+<p>
+A mechanism for cross platform structured storage of an object graph.
+<P>
+Hint -- use text!  Current intent is to base this on XML.
+
+
+</BODY>
+</HTML>
