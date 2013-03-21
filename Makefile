@@ -80,7 +80,8 @@ clean:
 	rm -f *.o
 	rm -f *~ include/*~ include/bw/*~ doc/*~
 	rm -f core
-	-rm -f libbw.a
+	rm -f libbw.a
+	rm -f doc/auto/*
 	
 dist: docgen
 	( \
