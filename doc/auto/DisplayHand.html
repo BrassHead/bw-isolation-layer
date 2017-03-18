@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>DisplayHand</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="DisplayHand"></A>
+<H1>DisplayHand</H1>
+<P>
+This is an INTERNAL handle class for the connection to the
+display/keyboard/mouse.
+<P>
+It should only be referenced by the BW framework itself, not application
+code.
+<P>
+As a handle class, it can be copied, stored, and efficiently passed as a
+parameter.
+<P>
+Usually only one display connection is created for an application.
+<DL>
+</DL>
+<H3>DisplayHand member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#DisplayHand">DisplayHand()</A>
+</TD><TD>
+Constructor.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#assumedPixelsPerInch">assumedPixelsPerInch()</A>
+</TD><TD>
+Returns the assumed display resolution
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#assumedPixelsPerMeter">assumedPixelsPerMeter()</A>
+</TD><TD>
+Returns the assumed display resolution.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#assumedScreenHeightMM">assumedScreenHeightMM()</A>
+</TD><TD>
+Returns the assumed height of the display.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#assumedScreenWidthMM">assumedScreenWidthMM()</A>
+</TD><TD>
+Returns the assumed width of the display.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#close">close()</A>
+</TD><TD>
+Closes a display connection and sets the handle to "invalid".</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#colormapSize">colormapSize()</A>
+</TD><TD>
+Returns the size of the colormap.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#countEventsPending">countEventsPending()</A>
+</TD><TD>
+Returns an approximate count of the number of events pending.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#flush">flush()</A>
+</TD><TD>
+Causes all queued display functions to be initiated.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getScreenPalette">getScreenPalette()</A>
+</TD><TD>
+Returns the physical palette for the display.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#isValid">isValid()</A>
+</TD><TD>
+Returns true if the handle is valid.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#localeIsSet">localeIsSet()</A>
+</TD><TD>
+This function sets the locale for the windowing system according to the
+operating system locale.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#newBitmap">newBitmap()</A>
+</TD><TD>
+Creates a new bitmap (drawable) for the display.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#newCursor">newCursor()</A>
+</TD><TD>
+Creates a new cursor for the display from a list of predefined types.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#newFrameWindow">newFrameWindow()</A>
+</TD><TD>
+Creates a new Frame (root level) window for the application.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#newPrinter">newPrinter()</A>
+</TD><TD>
+Creates a Printer Handle with characteristics that match the display.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#nextEvent">nextEvent()</A>
+</TD><TD>
+Get next pending event for dispatching.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#numPlanes">numPlanes()</A>
+</TD><TD>
+Returns the number of active bits in pixel values.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#open">open()</A>
+</TD><TD>
+Opens a connection to a display/keyboard/mouse.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#planeMask">planeMask()</A>
+</TD><TD>
+Returns a mask for significant bits in Pixel values.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#rootWindow">rootWindow()</A>
+</TD><TD>
+Returns the root window for the display.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#screenHeight">screenHeight()</A>
+</TD><TD>
+Returns the display height in pixels.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#screenName">screenName()</A>
+</TD><TD>
+Returns a printable string with the name of the connected display.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#screenWidth">screenWidth()</A>
+</TD><TD>
+Returns the display width in pixels.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#setErrorHandler">setErrorHandler()</A>
+</TD><TD>
+This function sets the error handler for all display connections.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#setFatalErrorHandler">setFatalErrorHandler()</A>
+</TD><TD>
+This function sets the fatal error handler for all display connections.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#setWinProc">setWinProc()</A>
+</TD><TD>
+Sets the window event processing function for all windows.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#sync">sync()</A>
+</TD><TD>
+Causes all queued display functions to be executed immediately and waits
+for completion.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="DisplayHand"></A>
+<H1>DisplayHand::DisplayHand()</H1>
+<P>
+<I>
+DisplayHand::DisplayHand()
+	</I><P>
+Constructor.
+<P>
+The default constructor creates an "not valid" display handle that can
+only be changed by assignment from a valid DisplayHand or by calling 'open'
+to initiate a display connection.
+<DL>
+</DL>
+
+<HR>
+<A NAME="assumedPixelsPerInch"></A>
+<H1>DisplayHand::assumedPixelsPerInch()</H1>
+<P>
+<I>
+int DisplayHand::assumedPixelsPerInch()
+</I><P>
+Returns the assumed display resolution
+<DL>
+</DL>
+
+<HR>
+<A NAME="assumedPixelsPerMeter"></A>
+<H1>DisplayHand::assumedPixelsPerMeter()</H1>
+<P>
+<I>
+int DisplayHand::assumedPixelsPerMeter()
+</I><P>
+Returns the assumed display resolution.
+<DL>
+</DL>
+
+<HR>
+<A NAME="assumedScreenHeightMM"></A>
+<H1>DisplayHand::assumedScreenHeightMM()</H1>
+<P>
+<I>
+int DisplayHand::assumedScreenHeightMM()
+</I><P>
+Returns the assumed height of the display.
+<DL>
+</DL>
+
+<HR>
+<A NAME="assumedScreenWidthMM"></A>
+<H1>DisplayHand::assumedScreenWidthMM()</H1>
+<P>
+<I>
+int DisplayHand::assumedScreenWidthMM()
+</I><P>
+Returns the assumed width of the display.
+<DL>
+</DL>
+
+<HR>
+<A NAME="close"></A>
+<H1>DisplayHand::close()</H1>
+<P>
+<I>
+void DisplayHand::close()
+</I><P>
+Closes a display connection and sets the handle to "invalid".
+<P>
+Note that other copies of the original handle remain valid, but their use
+is undefined.
+<DL>
+</DL>
+
+<HR>
+<A NAME="colormapSize"></A>
+<H1>DisplayHand::colormapSize()</H1>
+<P>
+<I>
+int DisplayHand::colormapSize()
+</I><P>
+Returns the size of the colormap.  I.E. the number of different colours
+that can be displayed at the same time.
+<DL>
+</DL>
+
+<HR>
+<A NAME="countEventsPending"></A>
+<H1>DisplayHand::countEventsPending()</H1>
+<P>
+<I>
+int DisplayHand::countEventsPending()
+</I><P>
+Returns an approximate count of the number of events pending.
+<DL>
+</DL>
+
+<HR>
+<A NAME="flush"></A>
+<H1>DisplayHand::flush()</H1>
+<P>
+<I>
+void DisplayHand::flush()
+</I><P>
+Causes all queued display functions to be initiated.
+<DL>
+</DL>
+
+<HR>
+<A NAME="getScreenPalette"></A>
+<H1>DisplayHand::getScreenPalette()</H1>
+<P>
+<I>
+PhysicalPalette&amp; DisplayHand::getScreenPalette()
+</I><P>
+Returns the physical palette for the display.
+<P>
+The physical palette can be used to interrogate and change the display
+palette or the private palette for the application.
+<DL>
+</DL>
+
+<HR>
+<A NAME="isValid"></A>
+<H1>DisplayHand::isValid()</H1>
+<P>
+<I>
+bool DisplayHand::isValid()
+</I><P>
+Returns true if the handle is valid.  I.E. If the handle has been opened or
+is a copy of an open handle.
+<DL>
+</DL>
+
+<HR>
+<A NAME="localeIsSet"></A>
+<H1>DisplayHand::localeIsSet()</H1>
+<P>
+<I>
+bool DisplayHand::localeIsSet(const char *modifiers)
+</I><P>
+This function sets the locale for the windowing system according to the
+operating system locale.
+<P>
+The modifers parameter provides optional additional information about the
+locale (eg: Input method).
+<P>
+This routine should be called after the "setlocale" C/C++ function.
+A false return indicates that the locale is not supported by the
+windowing system and the program should exit gracefully.
+<DL>
+</DL>
+
+<HR>
+<A NAME="newBitmap"></A>
+<H1>DisplayHand::newBitmap()</H1>
+<P>
+<I>
+BitmapHand DisplayHand::newBitmap(int w, int h)
+</I><P>
+Creates a new bitmap (drawable) for the display.
+<P>
+A bitmap is drawable area with binary pixels managed by the windowing
+system.  Bitmaps can be copied onto the display or used for pixel
+masking operations.
+<DL>
+</DL>
+
+<HR>
+<A NAME="newCursor"></A>
+<H1>DisplayHand::newCursor()</H1>
+<P>
+<I>
+CursorHand DisplayHand::newCursor(DefinedCursor cs)
+</I><P>
+Creates a new cursor for the display from a list of predefined types.
+<DL>
+</DL>
+
+<HR>
+<A NAME="newFrameWindow"></A>
+<H1>DisplayHand::newFrameWindow()</H1>
+<P>
+<I>
+WinHand DisplayHand::newFrameWindow
+(
+    EventMask em,
+    Figure* pfig,
+    const char* pszAppName,
+    int x, int y, int w, int h
+)
+</I><P>
+Creates a new Frame (root level) window for the application.
+<P>
+The EventMask indicates which types of events should be generated for this
+window.  It is any combination of:
+<ul>
+<li>EMNone
+<li>EMKeyPress
+<li>EMKeyRelease
+<li>EMButtonPress
+<li>EMButtonRelease
+<li>EMEnterWindow
+<li>EMLeaveWindow
+<li>EMMouseMotion
+<li>EMButtonMotion
+<li>EMExposure
+<li>EMVisibility
+<li>EMStructure
+<li>EMSubstructure
+<li>EMFocus
+</ul>
+<P>
+The Figure* parameter is stored transparently for subsequent event dispatch.
+<P>
+The AppName parameter indicates the name that should appear on the title
+line for the window and for it's icon (if any).
+<P>
+The other parameters specify the recommended size and location of the window.
+These parameters can be overriden from command line parameters and/or the
+windowing system.
+<DL>
+</DL>
+
+<HR>
+<A NAME="newPrinter"></A>
+<H1>DisplayHand::newPrinter()</H1>
+<P>
+<I>
+//PrinterHand DisplayHand::newPrinter(const char* name, PrintQuality)
+//</I><P>
+Creates a Printer Handle with characteristics that match the display.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="nextEvent"></A>
+<H1>DisplayHand::nextEvent()</H1>
+<P>
+<I>
+EventRef DisplayHand::nextEvent()
+</I><P>
+Get next pending event for dispatching.  This routine may block waiting for
+user input.
+<DL>
+</DL>
+
+<HR>
+<A NAME="numPlanes"></A>
+<H1>DisplayHand::numPlanes()</H1>
+<P>
+<I>
+int DisplayHand::numPlanes()
+</I><P>
+Returns the number of active bits in pixel values.
+<DL>
+</DL>
+
+<HR>
+<A NAME="open"></A>
+<H1>DisplayHand::open()</H1>
+<P>
+<I>void DisplayHand::open(int&amp; argc, char* argv[], VisualType pref=DynamicPalette, const char* displayName=0)
+</I><P>
+Opens a connection to a display/keyboard/mouse.  A copy of argc and argc
+are passed which will be modified to delete standard parameters.
+<P>
+The VisualType preference indicates the type of display expected by the
+application.  The isolation layer will make the best match possible.
+<P>
+The default visual type is DynamicPalette.  A visual type of PrintOnly
+indicates that the application will use the print Graphics Contexts only --
+no connection is made to a display.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="planeMask"></A>
+<H1>DisplayHand::planeMask()</H1>
+<P>
+<I>
+long DisplayHand::planeMask()
+</I><P>
+Returns a mask for significant bits in Pixel values.
+<DL>
+</DL>
+
+<HR>
+<A NAME="rootWindow"></A>
+<H1>DisplayHand::rootWindow()</H1>
+<P>
+<I>
+WinHand DisplayHand::rootWindow()
+</I><P>
+Returns the root window for the display.
+<DL>
+</DL>
+
+<HR>
+<A NAME="screenHeight"></A>
+<H1>DisplayHand::screenHeight()</H1>
+<P>
+<I>
+int DisplayHand::screenHeight()
+</I><P>
+Returns the display height in pixels.
+<DL>
+</DL>
+
+<HR>
+<A NAME="screenName"></A>
+<H1>DisplayHand::screenName()</H1>
+<P>
+<I>
+const char&amp; DisplayHand::screenName()
+</I><P>
+Returns a printable string with the name of the connected display.
+<DL>
+</DL>
+
+<HR>
+<A NAME="screenWidth"></A>
+<H1>DisplayHand::screenWidth()</H1>
+<P>
+<I>
+int DisplayHand::screenWidth()
+</I><P>
+Returns the display width in pixels.
+<DL>
+</DL>
+
+<HR>
+<A NAME="setErrorHandler"></A>
+<H1>DisplayHand::setErrorHandler()</H1>
+<P>
+<I>
+void DisplayHand::setErrorHandler(ErrorProc ep)
+</I><P>
+This function sets the error handler for all display connections.
+<P>
+A call to the error handler indicates a failure to execute a previously
+executed drawing call.  This could be because of resource exhaustion or
+an invalid parameter.  The call may show up much later than the original
+call.
+<P>
+The error event passed back indicates the type of failure.
+<P>
+The isolation layer attempts to reduce the probability of this error
+type through assertions on parameters (debug mode only) and exceptions
+thrown from resource intensive routines.
+<P>
+It may be possible to continue after this type of error, but the error may
+reoccur and some expected resources (eg: fonts, pixmaps) may be unavailable.
+<DL>
+</DL>
+
+<HR>
+<A NAME="setFatalErrorHandler"></A>
+<H1>DisplayHand::setFatalErrorHandler()</H1>
+<P>
+<I>
+void DisplayHand::setFatalErrorHandler(FatalErrorProc fep)
+</I><P>
+This function sets the fatal error handler for all display connections.
+<P>
+A call to the fatal error handler indicates a loss of connection to
+the display.  Further graphics calls cannot be made.
+<P>
+The most common cause of this error is a user initiated "kill" of an
+application window.
+<P>
+The appropriate response to this error is an orderly shutdown of the
+application on the relevent display.
+<DL>
+</DL>
+
+<HR>
+<A NAME="setWinProc"></A>
+<H1>DisplayHand::setWinProc()</H1>
+<P>
+<I>void (*WinProc)(Figure*, EventRef);
+</I><P>
+<I>static void DisplayHand::setWinProc(WinProc wp)
+
+</I><P>
+Sets the window event processing function for all windows.
+A caller specific pointer is kept for each window
+and passed back to the WinProc so that events can be distributed
+appropriately.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="sync"></A>
+<H1>DisplayHand::sync()</H1>
+<P>
+<I>
+void DisplayHand::sync()
+</I><P>
+Causes all queued display functions to be executed immediately and waits
+for completion.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

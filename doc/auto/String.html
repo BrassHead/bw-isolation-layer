@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>String</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="String"></A>
+<H1>String</H1>
+<P>
+Represents a null terminated string.
+<P>
+This implementation is uses pointers to null terminated character arrays.
+Reference counts are not used.  Characters are "char"s, not "wchar_t"s in
+the "C" locale.
+<DL>
+</DL>
+<H3>String member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#String">String()</A>
+</TD><TD>
+Constructors.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#append">append()</A>
+</TD><TD>
+Append to string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#capacity">capacity()</A>
+</TD><TD>
+Returns capacity of string (not including terminator)
+
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#compareTo">compareTo()</A>
+</TD><TD>
+Case sensitive comparison
+
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#ensureCapacity">ensureCapacity()</A>
+</TD><TD>
+Make sure buffer is big enough.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#equals">equals()</A>
+</TD><TD>
+Case sensitive comparison for equality
+
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#equalsIgnoreCase">equalsIgnoreCase()</A>
+</TD><TD>
+Case insensitive comparison for equality.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#indexOf">indexOf()</A>
+</TD><TD>
+Finds first occurrance of character or string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#lastIndexOf">lastIndexOf()</A>
+</TD><TD>
+Finds last occurrance of character or string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#length">length()</A>
+</TD><TD>
+Return length to terminator
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#operator(char*)">operator(char*)()</A>
+</TD><TD>
+char* conversion
+
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#operator+">operator+()</A>
+</TD><TD>
+String concatenation operators.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#operator=">operator=()</A>
+</TD><TD>
+Assignment operators.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#operator==">operator==()</A>
+</TD><TD>
+Comparison operators for strings.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#startsWith">startsWith()</A>
+</TD><TD>
+Tells if this string starts with the given string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#substring">substring()</A>
+</TD><TD>
+Extracts a substring.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#toLowerCase">toLowerCase()</A>
+</TD><TD>
+Convert String to lower case.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#toUpperCase">toUpperCase()</A>
+</TD><TD>
+Convert String to upper case.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~String">~String()</A>
+</TD><TD>
+Destructor
+</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="String"></A>
+<H1>String::String()</H1>
+<P>
+<I>String( const int length=0 )
+</I><P>
+<I>String( const String&amp; str );
+</I><P>
+<I>String( const char* psz );
+</I><P>
+<I>String( const char* ps, const int len );
+</I><P>
+Constructors.   Parameters specify an initial string in one of a variety
+of formats or give an integer for the initial capacity.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="append"></A>
+<H1>String::append()</H1>
+<P>
+<I>void append( const String&amp; str) inline
+</I><P>
+<I>void append( const char* psz )
+</I><P>
+<I>void append( char ch )
+</I><P>
+Append to string.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="capacity"></A>
+<H1>String::capacity()</H1>
+<P>
+<I>int capacity() const inline;
+</I><P>
+Returns capacity of string (not including terminator)
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="compareTo"></A>
+<H1>String::compareTo()</H1>
+<P>
+<I>int compareTo( const String&amp; str ) const
+</I><P>
+<I>int compareTo( const char* psz ) const
+
+</I><P>
+Case sensitive comparison
+<P>
+<DL>
+<DT>Returns:
+<DD>0 if the strings are equal, >0 if the this string is
+greater than the given string, &lt;0 if this string is less than
+the given string.
+</DL>
+
+<HR>
+<A NAME="ensureCapacity"></A>
+<H1>String::ensureCapacity()</H1>
+<P>
+<I>
+void String::ensureCapacity( int len )
+</I><P>
+Make sure buffer is big enough.
+<DL>
+</DL>
+
+<HR>
+<A NAME="equals"></A>
+<H1>String::equals()</H1>
+<P>
+<I>bool equals( const char* psz ) const
+</I><P>
+<I>bool equals( const String&amp; str ) const
+</I><P>
+Case sensitive comparison for equality
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="equalsIgnoreCase"></A>
+<H1>String::equalsIgnoreCase()</H1>
+<P>
+<I>bool equalsIgnoreCase( const char* psz ) const
+</I><P>
+<I>bool equalsIgnoreCase( const String&amp; str ) const
+</I><P>
+Case insensitive comparison for equality.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="indexOf"></A>
+<H1>String::indexOf()</H1>
+<P>
+<I>int indexOf( char ch ) const
+</I><P>
+<I>int indexOf( const char* psz ) const
+</I><P>
+<I>int indexOf( const String&amp; str ) const
+
+</I><P>
+Finds first occurrance of character or string.
+<P>
+<DL>
+<DT>Returns:
+<DD>Index of first occurrance or -1 if not found
+</DL>
+
+<HR>
+<A NAME="lastIndexOf"></A>
+<H1>String::lastIndexOf()</H1>
+<P>
+<I>int lastIndexOf( char ch ) const
+</I><P>
+<I>int lastIndexOf( const char* psz ) const
+</I><P>
+<I>int lastIndexOf( const String&amp; str ) const
+
+</I><P>
+Finds last occurrance of character or string.
+<P>
+<DL>
+<DT>Returns:
+<DD>Index of last occurrance or -1 if not found
+</DL>
+
+<HR>
+<A NAME="length"></A>
+<H1>String::length()</H1>
+<P>
+<I>
+int String::length() const
+</I><P>
+Return length to terminator
+<DL>
+</DL>
+
+<HR>
+<A NAME="operator(char*)"></A>
+<H1>String::operator(char*)()</H1>
+<P>
+<I>operator const char*() const inline;
+</I><P>
+char* conversion
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="operator+"></A>
+<H1>String::operator+()</H1>
+<P>
+<I>char* + String
+</I><P>
+<I>String + String
+</I><P>
+<I>String + char*
+</I><P>
+String concatenation operators.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="operator="></A>
+<H1>String::operator=()</H1>
+<P>
+<I>(String) = (String);
+</I><P>
+<I>(String) = (char *);
+</I><P>
+<I>(String) = (char);
+</I><P>
+Assignment operators.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="operator=="></A>
+<H1>String::operator==()</H1>
+<P>
+<I>(String) &lt;op> (String)
+</I><P>
+<I>(String) &lt;op> (char*)
+</I><P>
+<I>(char*) &lt;op> (String)
+</I><P>
+Comparison operators for strings.  These are case sensitive and not
+localized.
+<P>
+There are a complete set of comparison operators for String's and
+char*'s.  Operators are: ==, !=, &lt;=, >=, &lt;, and >.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="startsWith"></A>
+<H1>String::startsWith()</H1>
+<P>
+<I>bool startsWith( const char* psz ) const
+</I><P>
+<I>bool startsWith( const String&amp; str ) const
+</I><P>
+Tells if this string starts with the given string. Case dependent.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="substring"></A>
+<H1>String::substring()</H1>
+<P>
+<I>String substring( int start ) const
+</I><P>
+<I>String substring( int start, int end ) const
+</I><P>
+Extracts a substring.
+<P>
+Extracts from the start index to just before the end index.  If
+no end index is given, extracts to the end of the string.  The
+indices must be contained within the string and end>=start.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="toLowerCase"></A>
+<H1>String::toLowerCase()</H1>
+<P>
+<I>
+void String::toLowerCase()
+</I><P>
+Convert String to lower case.  Current c locale is used.
+<DL>
+</DL>
+
+<HR>
+<A NAME="toUpperCase"></A>
+<H1>String::toUpperCase()</H1>
+<P>
+<I>
+void String::toUpperCase()
+</I><P>
+Convert String to upper case.  Current c locale is used.
+<DL>
+</DL>
+
+<HR>
+<A NAME="~String"></A>
+<H1>String::~String()</H1>
+<P>
+<I>
+String::~String()
+</I><P>
+Destructor
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

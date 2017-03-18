@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Brush</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Brush"></A>
+<H1>Brush</H1>
+<P>
+Drawing object for lines and filled areas.
+<DL>
+</DL>
+<H3>Brush member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#Brush">Brush()</A>
+</TD><TD>
+Constructors.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#fillRectangle">fillRectangle()</A>
+</TD><TD>
+Fills the interior of a rectangle.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="Brush"></A>
+<H1>Brush::Brush()</H1>
+<P>
+<I>Brush::Brush( Canvas&amp; cvs, const Colour&amp; c)
+</I><P>
+<I>Brush::Brush( Canvas&amp; cvs, const StyleIndex ic=Text )
+</I><P>
+Constructors.
+<P>
+The parameters are the Canvas to draw on and optionally the colour of the
+pen.  If no colour is specified, the default foreground Text colour will
+be used.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="fillRectangle"></A>
+<H1>Brush::fillRectangle()</H1>
+<P>
+<I>
+void Brush::fillRectangle( int x, int y, int w, int h )
+</I><P>
+Fills the interior of a rectangle.  The parameters specify the upper left
+corner and size of the rectangle.  Only the interior is filled, the sides
+are not drawn.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

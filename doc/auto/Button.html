@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Button</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Button"></A>
+<H1>Button</H1>
+<P>
+This is a basic button Figure.  It is written as a true BW figure without
+using a native control.
+<P>
+Button is a subclass of <A HREF=Figure.html>Figure</A>,
+<A HREF=Focus.html>Focus</A>, and <A HREF=Mouse.html>Mouse</A> and defines
+event handling functions declared in these base classes.
+<DL>
+</DL>
+<H3>Button member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#Button">Button()</A>
+</TD><TD>
+Constructor.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#draw">draw()</A>
+</TD><TD>
+Draws button.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#makeDefault">makeDefault()</A>
+</TD><TD>
+Makes this button the default button in a group.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#onQuerySize">onQuerySize()</A>
+</TD><TD>
+Returns the minimum size button that will confortably fit the text.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~Button">~Button()</A>
+</TD><TD>
+Destructor.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="Button"></A>
+<H1>Button::Button()</H1>
+<P>
+<I>
+Button::Button( const char* pszLabel, const char* pszAction )
+	</I><P>
+Constructor.  The arguments give a constant label for the button and
+indicate the action that will be signalled if the button is pushed.
+<DL>
+</DL>
+
+<HR>
+<A NAME="draw"></A>
+<H1>Button::draw()</H1>
+<P>
+<I>
+void Button::draw( Canvas&amp; cvs )
+</I><P>
+Draws button.  This buttons style has quite generic 3D look.  Focus is
+indicated by a dashed line just inside the button face.  The standard
+style colours (Face, ButtonFace, etc) are used.  The default button is
+indicated with a black border.
+<DL>
+</DL>
+
+<HR>
+<A NAME="makeDefault"></A>
+<H1>Button::makeDefault()</H1>
+<P>
+<I>void Button::makeDefault( bool isDefault=true )
+</I><P>
+Makes this button the default button in a group.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="onQuerySize"></A>
+<H1>Button::onQuerySize()</H1>
+<P>
+<I>
+void Button::onQuerySize( LogPos&amp; lposWidth, LogPos&amp; lposHeight )
+</I><P>
+Returns the minimum size button that will confortably fit the text.
+<DL>
+</DL>
+
+<HR>
+<A NAME="~Button"></A>
+<H1>Button::~Button()</H1>
+<P>
+<I>
+Button::~Button()
+</I><P>
+Destructor.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

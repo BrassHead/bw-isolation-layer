@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>html</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="html"></A>
+<H1>html</H1>
+<P>
+<I>os &lt;&lt; html::httpProlog( const String&amp; sMimeType );
+</I><P>
+<I>os &lt;&lt; html::prolog( const String&amp; sTitle, const String&amp; sGenerator=&quot;bw&quot; );
+</I><P>
+<I>os &lt;&lt; html::epilog;
+
+</I><P>
+<I>os &lt;&lt; html::heading1( const String&amp; sHead );
+</I><P>
+<I>os &lt;&lt; html::heading2( const String&amp; sHead );
+</I><P>
+<I>os &lt;&lt; html::heading3( const String&amp; sHead );
+</I><P>
+<I>os &lt;&lt; html::heading4( const String&amp; sHead );
+
+</I><P>
+<I>os &lt;&lt; html::beginTable( int nCols );
+</I><P>
+<I>os &lt;&lt; html::beginRow;
+</I><P>
+<I>os &lt;&lt; html::beginCell;
+</I><P>
+<I>os &lt;&lt; html::nextCell;
+</I><P>
+<I>os &lt;&lt; html::endCell;
+</I><P>
+<I>os &lt;&lt; html::endRow;
+</I><P>
+<I>os &lt;&lt; html::endTable;
+
+</I><P>
+<I>os &lt;&lt; html::beginDefinitionList;
+</I><P>
+<I>os &lt;&lt; html::definition( const String&amp; sWhat );
+</I><P>
+<I>os &lt;&lt; html::endDefinitionList;
+
+</I><P>
+<I>os &lt;&lt; html::beginLink( const String&amp; sWhere );
+</I><P>
+<I>os &lt;&lt; html::beginLink2Link( const String&amp; sWhere );
+</I><P>
+<I>os &lt;&lt; html::endLink;
+</I><P>
+<I>os &lt;&lt; html::defineLink( const String&amp; sWhere );
+
+</I><P>
+<I>os &lt;&lt; html::rule;
+</I><P>
+<I>os &lt;&lt; html::newPara;
+</I><P>
+<I>os &lt;&lt; html::boldOn;
+</I><P>
+<I>os &lt;&lt; html::boldOff;
+</I><P>
+<I>os &lt;&lt; html::italicOn;
+</I><P>
+<I>os &lt;&lt; html::italicOff;
+
+</I><P>
+<I>os &lt;&lt; html::literal( const String&amp; sWhat );
+</I><P>
+<I>os &lt;&lt; html::smartFormat( const String&amp; sWhat );
+
+</I><P>
+Ostream manipulators for writing HTML files.
+<P>
+<P>
+
+<P>
+These manipulators send HTML formatting codes to an ostream.
+<P>
+The prolog and epilog manipulators write everything necessary to
+start and end the BODY of an HTML document.
+<P>
+html::rule inserts a horizontal rule.
+<P>
+html::literal( foo ) outputs foo expanding &lt;'s, &quot;'s
+and &amp;'s so that
+they appear literally in the output and are not interpreted as HTML
+commands.  Newlines are converted to "<br>" directives if isMultiLine
+is true.
+<P>
+html::smartFormat( foo ) inserts paragraph markers into foo wherever
+blank lines are found.
+<P>
+Here are a few examples to clarify the other ones that are not self evident:
+<P>
+<DL>
+<DT>Definitions:
+<DD>
+<BR>os << html::beginDefinitionList;
+<BR>os << html::definition( "Item1" );
+<BR>os << "The definition of Item1";
+<BR>os << html::definition( "Item2" );
+<BR>os << "The definition of Item2";
+<BR>...
+<BR>os << html:endDefinitionList;
+
+<DT>Links:
+<DD>
+<BR>os << html::beginLink( "http://www.somewhere.com/" );
+<BR>os << "Click here";
+<BR>os << html::endLink;
+<BR>
+<BR>
+<BR>os << html::defineLink( "top" );
+<BR>os << "Some text.";
+<BR>...
+<BR>os << "Blah blah blah...";
+<BR>os << html::beginLink2Link( "top" );
+<BR>os << "Return to top of page.";
+<BR>os << endLink;
+
+</DL>
+<TABLE COLS=02>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+</BODY>
+</HTML>

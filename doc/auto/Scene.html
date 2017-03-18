@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Scene</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Scene"></A>
+<H1>Scene</H1>
+<P>
+Represents the display.  Scene is a special Figure class that is the root
+of all active Figures.  Adding a child Figure to the Scene causes a new
+window to be displayed.  Normally, only one Scene object is defined in an
+application's Process::main() routine.  Main then adds child figures for each
+root window of the application (again, normally just one) and then calls
+Scene::nextAction() to get and process action commands from the user
+interface.  This command processing loop terminates with a particular
+command (eg: "quit") and Process::main then exits.
+<P>
+In addition, the Scene class has a number of query methods to determine
+characteristics of the display and to control overall display / keyboard /
+mouse activity.
+<DL>
+</DL>
+<H3>Scene member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#Scene">Scene()</A>
+</TD><TD>
+Constructor.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#addFrame">addFrame()</A>
+</TD><TD>
+Add a frame figure to the scene.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getScreen">getScreen()</A>
+</TD><TD>
+Return the name of the screen where this scene is displayed.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#nextAction">nextAction()</A>
+</TD><TD>
+Start / Continue user interface processing.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#removeFrame">removeFrame()</A>
+</TD><TD>
+Removes a Figure from the Scene.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#setFlashRate">setFlashRate()</A>
+</TD><TD>
+Sets the flash rate in milliseconds.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~Scene">~Scene()</A>
+</TD><TD>
+Destructor.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="Scene"></A>
+<H1>Scene::Scene()</H1>
+<P>
+<I>Scene(String strScreen=&quot;&quot;, int msecFlashRate=0)
+
+</I><P>
+Constructor.  The first optional parameter is a platform dependent string
+indicating which display head to connect to.
+<P>
+On UNIX, it's syntax is the same as the X DISPLAY environment variable
+or a -display parameter.
+<P>
+If the string is null, then the created Scene represents the default
+display in the users environment.
+<P>
+The second optional parameter is the flash rate in milliseconds.  Zero
+indicates no flash, One indicates that the rate should be synchronized
+with the vertical retrace.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="addFrame"></A>
+<H1>Scene::addFrame()</H1>
+<P>
+<I>void Scene::addFrame( Figure* pfig )
+</I><P>
+<I>void Scene::addFrame( Figure* pfig, LogPos lposWidth, LogPos lposHeight )
+</I><P>
+<I>void Scene::addFrame( Figure* pfig,
+LogPos lposX, LogPos lposY,
+LogPos lposWidth, LogPos lposHeight )
+</I><P>
+Add a frame figure to the scene.  Positions and sizes can be specified, but
+these may or may not be honored by the windowing system.
+<P>
+By default, the child is asked for it's desired size and location.  If the
+size returned is FullWindow, then a platform dependent size is chosen (1/4
+of the screen or more).
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="getScreen"></A>
+<H1>Scene::getScreen()</H1>
+<P>
+<I>
+const String&amp; Scene::getScreen()
+</I><P>
+Return the name of the screen where this scene is displayed.  This may
+be different from the Screen string passed to the constructor.
+<DL>
+</DL>
+
+<HR>
+<A NAME="nextAction"></A>
+<H1>Scene::nextAction()</H1>
+<P>
+<I>
+const String&amp; Scene::nextAction()
+</I><P>
+Start / Continue user interface processing.  This method starts an event
+processing loop that results in method calls on active figures.
+<P>
+The loop continues until a "doAction" call is made that propogates to
+the screen.  The action command is queued and then returned by this
+routine after event processing finishes.
+<P>
+It is an error to call this routine if no Figures are active.
+<DL>
+</DL>
+
+<HR>
+<A NAME="removeFrame"></A>
+<H1>Scene::removeFrame()</H1>
+<P>
+<I>
+void Scene::removeFrame( Figure* pfig )
+</I><P>
+Removes a Figure from the Scene.
+<DL>
+</DL>
+
+<HR>
+<A NAME="setFlashRate"></A>
+<H1>Scene::setFlashRate()</H1>
+<P>
+<I>
+void Scene::setFlashRate( int msec )
+</I><P>
+Sets the flash rate in milliseconds.  Zero
+indicates no flash, One indicates that the rate should be synchronized
+with the vertical retrace.
+<DL>
+</DL>
+
+<HR>
+<A NAME="~Scene"></A>
+<H1>Scene::~Scene()</H1>
+<P>
+<I>
+Scene::~Scene() throw()
+</I><P>
+Destructor.  Removes all child Figures from the Display and terminates
+the graphical user interface of the application.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Figure</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Figure"></A>
+<H1>Figure</H1>
+<P>
+The Figure abstract base class defines an object that can draw itself
+on demand and that may accept user input (mouse and/or keyboard).
+<P>
+Figure provides a set of services to it's subclasses and provides
+default definitions of an interface called by the BW windowing system.
+All member functions in this interface have default definitions except
+for the 'draw' function.  The expectations and default actions of these
+interface functions and services is detailed below.
+<P>
+There are a number of "mix-in" base classes that add services and
+interface functions to the basics of the Figure class.  The BW
+windowing system uses the presence of these mix-ins to control:
+<UL>
+<LI>the style of window displayed,
+<LI>the types of adornments displayed,
+<LI>which input events are processed, and
+<LI>some behaviours of the Figure.
+<UL>
+<P>
+In the long term, The mix-ins available will be:
+<DL>
+<DT><A HREF="Parent.html">Parent</A>
+<DD>Indicates that this Figure can have child figures.
+<DT><A HREF="Size.html">Size</A>
+<DD>Indicates that this figure wants notification of size and location
+changes within it's parent Figure.
+<DT><A HREF="Frame.html">Frame</A>
+<DD>Indicates that OS adornments should be drawn around this figure
+when it is a child of the screen.
+<DT><A HREF="Mouse.html">Mouse</A>
+<DD>Indicates that this figure wants notification when the mouse pointer
+enters or leaves the screen area drawn by the figure or when the
+mouse is clicked over the figure.
+<DT><A HREF="MouseMove.html">MouseMove</A>
+<DD>Indicates that this figure want notification of mouse movements
+when the mouse pointer is over the figure.
+<DT><A HREF="Focus.html">Focus</A>
+<DD>Indicates that this figure accepts keyboard input and can be the Keyboard
+focus.
+<DT><A HREF="RawKeyboard.html">RawKeyboard</A>
+<DD>Indicates that this Figure needs detailed information about keypresses
+and releases.
+<DT><A HREF="VScroll.html">VScroll</A>
+<DD>Indicates that this figure wants notification of vertical scrolling
+events when it is a child of a scrolling figure.
+<DT><A HREF="HScroll.html">HScroll</A>
+<DD>Indicates that this figure wants notification of horizontal scrolling
+events when it is a child of a scrolling figure.
+<DT><A HREF="Main.html">Main</A>
+<DD>Indicates that this Figure is a primary interface of the application
+and will be displayed on startup.
+</DL>
+<P>
+<DL>
+</DL>
+<H3>Figure member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#Figure">Figure()</A>
+</TD><TD>
+Constructor
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#doAction">doAction()</A>
+</TD><TD>
+Initiate processing of an Action routine.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getLocation">getLocation()</A>
+</TD><TD>
+Returns the current location of the Figure in relation to it's parent
+(in pixels).</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getScene">getScene()</A>
+</TD><TD>
+Returns the Scene for which this active figure is a part.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getSize">getSize()</A>
+</TD><TD>
+Returns the size of the Figure in pixels.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#invalidate">invalidate()</A>
+</TD><TD>
+Invalidates the entire drawing surface of a Figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#isActive">isActive()</A>
+</TD><TD>
+Returns true if this Figure is "active".</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~Figure">~Figure()</A>
+</TD><TD>
+Destructor
+</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="Figure"></A>
+<H1>Figure::Figure()</H1>
+<P>
+<I>
+Figure::Figure()
+</I><P>
+Constructor
+<DL>
+</DL>
+
+<HR>
+<A NAME="doAction"></A>
+<H1>Figure::doAction()</H1>
+<P>
+<I>
+bool Figure::doAction( const String&amp; strCommand )
+</I><P>
+Initiate processing of an Action routine.
+<P>
+Processing starts at the parent of the calling control.  The Command argument
+contains a string indicating which action should be taken.  The syntax of the
+commands is application dependent.
+<P>
+Action processing generally goes up the Figure hierarchy until an ancestor
+recognizes the command and takes the action.  If processing reaches the
+screen, then the command is posted for processing by the 'main' routine in
+applications Process object.
+<P>
+A 'true' return indicates that an ancestor processed the command.  A 'false'
+return indicates that the command was posted to the 'main' routine if the
+originating Figure is active or was discarded for inactive Figures.
+<P>
+The default 'main' routine handles the single command "quit" and ignores all
+others.
+<DL>
+</DL>
+
+<HR>
+<A NAME="getLocation"></A>
+<H1>Figure::getLocation()</H1>
+<P>
+<I>
+void Figure::getLocation( unsigned int&amp; x, unsigned int&amp; y )
+</I><P>
+Returns the current location of the Figure in relation to it's parent
+(in pixels).
+<P>
+The Figure must be active.
+<DL>
+</DL>
+
+<HR>
+<A NAME="getScene"></A>
+<H1>Figure::getScene()</H1>
+<P>
+<I>
+Scene&amp; Figure::getScene() const
+</I><P>
+Returns the Scene for which this active figure is a part.
+<P>
+Throws BGUIError if the scene is not active or in the process of becoming
+active.
+<DL>
+</DL>
+
+<HR>
+<A NAME="getSize"></A>
+<H1>Figure::getSize()</H1>
+<P>
+<I>
+void Figure::getSize( int&amp; width, int&amp; height )
+</I><P>
+Returns the size of the Figure in pixels.  The Figure must be active. or
+an error is thrown.
+<DL>
+</DL>
+
+<HR>
+<A NAME="invalidate"></A>
+<H1>Figure::invalidate()</H1>
+<P>
+<I>
+void Figure::invalidate()
+</I><P>
+Invalidates the entire drawing surface of a Figure.
+<P>
+This will eventually cause a draw call to refresh the display.
+<DL>
+</DL>
+
+<HR>
+<A NAME="isActive"></A>
+<H1>Figure::isActive()</H1>
+<P>
+<I>
+bool Figure::isActive()
+</I><P>
+Returns true if this Figure is "active".  I.E. part of a scene.
+<DL>
+</DL>
+
+<HR>
+<A NAME="~Figure"></A>
+<H1>Figure::~Figure()</H1>
+<P>
+<I>
+Figure::~Figure()
+</I><P>
+Destructor
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

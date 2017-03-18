@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Canvas</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Canvas"></A>
+<H1>Canvas</H1>
+<P>
+The canvas is a drawing surface upon which drawing tools can operate.
+<P>
+<DL>
+<DT>Implementation:
+<DD>The Canvas, Drawing Tools, and Paint each manage
+elements of a GC as follows:
+<PRE>
+function		Paint
+plane_mask		Paint
+foreground		Paint
+background		Paint, Press, Pen, Brush
+line_width		Pen, Brush
+line_style		Brush
+cap_style		Pen, Brush
+join_style		Brush
+fill_style		Brush
+fill_rule		Brush
+arc_mode		Brush
+tile			Paint
+stipple		Paint
+ts_x_origin		Canvas
+ts_y_origin		Canvas
+font			Press
+subwindow_mode	Canvas
+graphics_exposures	???
+clip_x_origin		Canvas
+clip_y_origin		Canvas
+clip_mask		Canvas
+dash_offset		Pen, Brush
+dashes		Pen, Brush
+</PRE>
+
+GCs are allocated from a pool maintained by the Scene.  They are assigned
+to each Canvas and to frequently used Paints.  Client code combines
+a canvas, a drawing tool, and a Paint when constructing a tool.  The GC
+assigned to the Paint will be used if the Canvas has
+no clipping area defined.  Otherwise, the Canvas GC will be reused by all
+tools.
+
+GC attributes are not preserved.  Each tool sets the attributes it needs
+on each use.  Paints tend to set more attributes than Tools.
+
+Associated with each Figure is a Context object that holds the
+clip Region.
+</DL>
+<H3>Canvas member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#getScene">getScene()</A>
+</TD><TD>
+Returns a reference to the Scene object that is the basis for this
+Canvas.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="getScene"></A>
+<H1>Canvas::getScene()</H1>
+<P>
+<I>
+Scene&amp; Canvas::getScene() const
+</I><P>
+Returns a reference to the Scene object that is the basis for this
+Canvas.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

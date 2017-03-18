@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Mouse</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Mouse"></A>
+<H1>Mouse</H1>
+<P>
+This is a mix-in class for Figures that indicates that the Figure wants
+notification of when the mouse is over the Figure and mouse clicks within
+the figure.
+<DL>
+</DL>
+<H3>Mouse member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#Mouse">Mouse()</A>
+</TD><TD>
+Constructor.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#onMouseButton">onMouseButton()</A>
+</TD><TD>
+This overridable method is called whenever a mouse button is pushed
+while the mouse pointer is over the area covered by the Figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#onMouseEnter">onMouseEnter()</A>
+</TD><TD>
+This overridable method is called whenever the mouse pointer enters the
+area covered by the Figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#onMouseExit">onMouseExit()</A>
+</TD><TD>
+This overridable method is called whenever the mouse pointer leaves the
+area covered by the Figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~Mouse">~Mouse()</A>
+</TD><TD>
+Destructor.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="Mouse"></A>
+<H1>Mouse::Mouse()</H1>
+<P>
+<I>Mouse::Mouse()
+</I><P>
+Constructor.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="onMouseButton"></A>
+<H1>Mouse::onMouseButton()</H1>
+<P>
+<I>Mouse::onMouseButton(int button, bool isPress)
+</I><P>
+This overridable method is called whenever a mouse button is pushed
+while the mouse pointer is over the area covered by the Figure.
+<P>
+The default action is to ignore this event.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="onMouseEnter"></A>
+<H1>Mouse::onMouseEnter()</H1>
+<P>
+<I>Mouse::onMouseEnter()
+</I><P>
+This overridable method is called whenever the mouse pointer enters the
+area covered by the Figure.
+<P>
+The default action is to ignore this event.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="onMouseExit"></A>
+<H1>Mouse::onMouseExit()</H1>
+<P>
+<I>Mouse::onMouseExit()
+</I><P>
+This overridable method is called whenever the mouse pointer leaves the
+area covered by the Figure.
+<P>
+The default action is to ignore this event.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="~Mouse"></A>
+<H1>Mouse::~Mouse()</H1>
+<P>
+<I>Mouse::~Mouse()
+</I><P>
+Destructor.
+<P>
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

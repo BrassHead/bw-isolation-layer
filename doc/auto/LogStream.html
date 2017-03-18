@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>LogStream</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="LogStream"></A>
+<H1>LogStream</H1>
+<P>
+Output stream for event logging.
+<P>
+This is a simple logging stream.  It doesn't interface to syslog()
+and expects good co-operation with the caller.
+<P>
+<DL>
+<DT>Example:
+<DD>
+LogStream lout;
+lout(ERR) << "An error message." << endl;
+
+<DT>Rules:
+<DD>
+Ident should be program name
+Don't send '\n's
+Always end message with endl
+
+<DT>Output:
+<DD>
+Outputs lines starting with the date and time followed by the ident:
+and the message.
+</DL>
+<H3>LogStream member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#LogStream">LogStream()</A>
+</TD><TD>
+Constructors.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#close">close()</A>
+</TD><TD>
+Closes open logging stream.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#open">open()</A>
+</TD><TD>
+Open logging stream.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#reopen">reopen()</A>
+</TD><TD>
+Close and then re-open logging stream.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~LogStream">~LogStream()</A>
+</TD><TD>
+Destructor.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="LogStream"></A>
+<H1>LogStream::LogStream()</H1>
+<P>
+<I>LogStream::LogStream()
+</I><P>
+<I>LogStream::LogStream(const char* ident)
+</I><P>
+<I>LogStream::LogStream(const char* ident, const char* filename)
+</I><P>
+Constructors.
+<P>
+A LogStream must be 'open'ed before use if the default constructor is used.
+<P>
+If no filename is given, logging is to clog (same as cerr).
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="close"></A>
+<H1>LogStream::close()</H1>
+<P>
+<I>
+void LogStream::close()
+</I><P>
+Closes open logging stream.
+<DL>
+</DL>
+
+<HR>
+<A NAME="open"></A>
+<H1>LogStream::open()</H1>
+<P>
+<I>void LogStream::open(const char* ident, const char* filename=&quot;&quot;)
+</I><P>
+Open logging stream.
+<P>
+If a filename is not given, then output goes to cerr.
+<P>
+The logging stream must have been previously closed with close() or
+created with the default constructor.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="reopen"></A>
+<H1>LogStream::reopen()</H1>
+<P>
+<I>
+void LogStream::reopen()
+</I><P>
+Close and then re-open logging stream.
+<P>
+This routine is provided for log rotation.
+<DL>
+</DL>
+
+<HR>
+<A NAME="~LogStream"></A>
+<H1>LogStream::~LogStream()</H1>
+<P>
+<I>
+LogStream::~LogStream()
+</I><P>
+Destructor.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Size</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Size"></A>
+<H1>Size</H1>
+<P>
+This is a mix-in class for Figures that indicates that the Figure wants
+notification of size and location changes or wants to request size and
+location changes.
+<DL>
+</DL>
+<H3>Size member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#Size">Size()</A>
+</TD><TD>
+Constructor.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#requestMove">requestMove()</A>
+</TD><TD>
+Request the parent figure to move this one.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#requestRelocate">requestRelocate()</A>
+</TD><TD>
+Request the parent figure to move and resize this one.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#requestResize">requestResize()</A>
+</TD><TD>
+Request the parent figure to resize this one.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~Size">~Size()</A>
+</TD><TD>
+Destructor.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="Size"></A>
+<H1>Size::Size()</H1>
+<P>
+<I>Size::Size()
+</I><P>
+Constructor.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="requestMove"></A>
+<H1>Size::requestMove()</H1>
+<P>
+<I>
+void Size::requestMove( LogPos lposX, LogPos lposY )
+</I><P>
+Request the parent figure to move this one.  The request is in logical
+terms and can be relative to the parent size or a request to call
+onQueryLocation dynamically.
+<DL>
+</DL>
+
+<HR>
+<A NAME="requestRelocate"></A>
+<H1>Size::requestRelocate()</H1>
+<P>
+<I>
+void Size::requestRelocate(
+    LogPos lposX, LogPos lposY,
+    LogPos lposWidth, LogPos lposHeight )
+</I><P>
+Request the parent figure to move and resize this one.  The request
+is in logical terms and can be relative to the parent size or can be
+a request to call onQuerySize and onQueryLocation dynamically.
+<DL>
+</DL>
+
+<HR>
+<A NAME="requestResize"></A>
+<H1>Size::requestResize()</H1>
+<P>
+<I>
+void Size::requestResize( LogPos lposWidth, LogPos lposHeight )
+</I><P>
+Request the parent figure to resize this one.  The request is in logical
+terms and can be relative to the parent size or a request to call
+onQuerySize dynamically.
+<DL>
+</DL>
+
+<HR>
+<A NAME="~Size"></A>
+<H1>Size::~Size()</H1>
+<P>
+<I>Size::~Size()
+</I><P>
+Destructor.
+<P>
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

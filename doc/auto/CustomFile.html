@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>CustomFile</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="CustomFile"></A>
+<H1>CustomFile</H1>
+<P>
+User customization parameters stored in a file or files.
+<P>
+This is a subclass of the <a href="Custom.html">Custom</a> class.
+The routines to access and change customization values are defined in the
+base class.
+<P>
+The file format approximatelly matches the ".INI" file format of KDE and
+Gnome.  This is an extension of the old Microsoft Windows INI file format.
+<P>
+<DL>
+</DL>
+<H3>CustomFile member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#CustomFile">CustomFile()</A>
+</TD><TD>
+Constructor.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#mergeFile">mergeFile()</A>
+</TD><TD>
+Merges another file of customization settings with this one.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~CustomFile">~CustomFile()</A>
+</TD><TD>
+Destructor.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="CustomFile"></A>
+<H1>CustomFile::CustomFile()</H1>
+<P>
+<I>
+CustomFile::CustomFile(const String&amp; filename, const char* locale)
+	</I><P>
+Constructor.  Parameters are the filename to access and the locale (if any)
+for the customizations.
+<P>
+Customization files can contain locale specific parameters by terminating
+the key with [ locale ].  Eg: foo[fr], or abc123[fr_CA.iso-8859-1].
+<P>
+If a locale is specified, then only the most specific matching localization
+for each key value will be loaded and the Custom object will not be writable.
+<DL>
+</DL>
+
+<HR>
+<A NAME="mergeFile"></A>
+<H1>CustomFile::mergeFile()</H1>
+<P>
+<I>
+void CustomFile::mergeFile(const String&amp; filename)
+</I><P>
+Merges another file of customization settings with this one.
+<P>
+Duplicate settings are overwritten by the merged file.
+<DL>
+</DL>
+
+<HR>
+<A NAME="~CustomFile"></A>
+<H1>CustomFile::~CustomFile()</H1>
+<P>
+<I>
+CustomFile::~CustomFile()
+</I><P>
+Destructor.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

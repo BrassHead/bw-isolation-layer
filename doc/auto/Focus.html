@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Focus</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Focus"></A>
+<H1>Focus</H1>
+<P>
+This is a mix-in class for Figures that indicates that the Figure accepts
+keyboard input and/or it can be the input focus for the application.
+<DL>
+</DL>
+<H3>Focus member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#Focus">Focus()</A>
+</TD><TD>
+Constructor.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#releaseFocus">releaseFocus()</A>
+</TD><TD>
+Causes the Figure to cease to be the input focus.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#tabFocus">tabFocus()</A>
+</TD><TD>
+Moves the input focus to the next Figure in the current tab group.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#takeFocus">takeFocus()</A>
+</TD><TD>
+Causes the Figure to become the active input focus.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~Focus">~Focus()</A>
+</TD><TD>
+Destructor.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="Focus"></A>
+<H1>Focus::Focus()</H1>
+<P>
+<I>
+Focus::Focus()
+</I><P>
+Constructor.
+<DL>
+</DL>
+
+<HR>
+<A NAME="releaseFocus"></A>
+<H1>Focus::releaseFocus()</H1>
+<P>
+<I>
+void Focus::releaseFocus()
+</I><P>
+Causes the Figure to cease to be the input focus.  The location for input
+focus after the call is undefined.
+<DL>
+</DL>
+
+<HR>
+<A NAME="tabFocus"></A>
+<H1>Focus::tabFocus()</H1>
+<P>
+<I>
+void Focus::tabFocus()
+</I><P>
+Moves the input focus to the next Figure in the current tab group.
+<P>
+<DL>
+<DT>TODO:
+<DD>How are tab groups defined?
+</DL>
+
+<HR>
+<A NAME="takeFocus"></A>
+<H1>Focus::takeFocus()</H1>
+<P>
+<I>
+void Focus::takeFocus()
+</I><P>
+Causes the Figure to become the active input focus.
+<DL>
+</DL>
+
+<HR>
+<A NAME="~Focus"></A>
+<H1>Focus::~Focus()</H1>
+<P>
+<I>
+Focus::~Focus()
+</I><P>
+Destructor.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

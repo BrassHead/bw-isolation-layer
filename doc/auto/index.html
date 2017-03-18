@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Project BW</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="BW"></A>
+<H1>Project BW</H1>
+<P>
+Isolation layer for writing long term GUI code.
+<DL>
+</DL>
+<H3>Project BW classes</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF=".html"></A>
+</TD><TD>
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="BAssert.html">BAssert</A>
+</TD><TD>
+This class holds static routines accessed by assertion macros.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="BFile.html">BFile</A>
+</TD><TD>
+Binary file object.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Bevel.html">Bevel</A>
+</TD><TD>
+Drawing tool for beveled effects, primarily buttons.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Brush.html">Brush</A>
+</TD><TD>
+Drawing object for lines and filled areas.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Button.html">Button</A>
+</TD><TD>
+This is a basic button Figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Canvas.html">Canvas</A>
+</TD><TD>
+The canvas is a drawing surface upon which drawing tools can operate.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Context.html">Context</A>
+</TD><TD>
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Custom.html">Custom</A>
+</TD><TD>
+Abstract class for user customization parameters.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="CustomFile.html">CustomFile</A>
+</TD><TD>
+User customization parameters stored in a file or files.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Directory.html">Directory</A>
+</TD><TD>
+A directory object acts like a forward iterator over a list of FileNames.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="DisplayHand.html">DisplayHand</A>
+</TD><TD>
+This is an INTERNAL handle class for the connection to the
+display/keyboard/mouse.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Event.html">Event</A>
+</TD><TD>
+The Event class communicate information from the Windowing system to
+the BW framework code.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Figure.html">Figure</A>
+</TD><TD>
+The Figure abstract base class defines an object that can draw itself
+on demand and that may accept user input (mouse and/or keyboard).</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="FileName.html">FileName</A>
+</TD><TD>
+Represents a filename in the host OS.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Focus.html">Focus</A>
+</TD><TD>
+This is a mix-in class for Figures that indicates that the Figure accepts
+keyboard input and/or it can be the input focus for the application.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="FontMetric.html">FontMetric</A>
+</TD><TD>
+Represents a Font specialized for a particular device.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Frame.html">Frame</A>
+</TD><TD>
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="LineTool.html">LineTool</A>
+</TD><TD>
+Base class for line Drawing objects.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="LogStream.html">LogStream</A>
+</TD><TD>
+Output stream for event logging.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Main.html">Main</A>
+</TD><TD>
+Indicates that Figure should be shown on startup as the applications
+main Figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Mouse.html">Mouse</A>
+</TD><TD>
+This is a mix-in class for Figures that indicates that the Figure wants
+notification of when the mouse is over the Figure and mouse clicks within
+the figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Parent.html">Parent</A>
+</TD><TD>
+Mix-in class for Parent Figures.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Pen.html">Pen</A>
+</TD><TD>
+Drawing object for narrow lines with solid colours.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Press.html">Press</A>
+</TD><TD>
+Drawing object for text.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Process.html">Process</A>
+</TD><TD>
+Represents the current process.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Scene.html">Scene</A>
+</TD><TD>
+Represents the display.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Size.html">Size</A>
+</TD><TD>
+This is a mix-in class for Figures that indicates that the Figure wants
+notification of size and location changes or wants to request size and
+location changes.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="String.html">String</A>
+</TD><TD>
+Represents a null terminated string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="Tool.html">Tool</A>
+</TD><TD>
+Base class for Drawing tool objects.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="UString.html">UString</A>
+</TD><TD>
+Represents a null terminated unicode string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="html.html">html</A>
+</TD><TD>
+Ostream manipulators for writing HTML files.</TD>
+</TR>
+</TABLE>
+
+<HR>
+<H3>Project BW globals</H3>
+<A NAME=""></A>
+<H1></H1>
+<DL>
+</DL>
+<H3> member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#TheApp">TheApp()</A>
+</TD><TD>
+This routine returns a reference to a customization object for
+customizations independent of the user and the installation site,
+but dependent on the locale (language and country/territory) and the
+Application.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="TheApp"></A>
+<H1>::TheApp()</H1>
+<P>
+<I>
+Custom&amp; TheApp()
+</I><P>
+This routine returns a reference to a customization object for
+customizations independent of the user and the installation site,
+but dependent on the locale (language and country/territory) and the
+Application.
+<P>
+Both the internal and external data is organized into default data,
+overiden by language specific data, overiden by territory specific data
+for that language.
+<P>
+BW assumes the locale is made up of Language, Territory, and Charset fields.
+It assumes <Language>_<Territory>.<Charset> as the format.  By preference,
+ISO639 (RFC1766) codes should be used for the language, ISO 3166
+codes for the territories.
+<P>
+When reading customization files, the value with longest matching locale
+will be used.  For example, with the file,
+<P>
+foo=1
+foo[en]=2
+foo[en_US]=3
+foo[en_US.iso-8859-1]=4
+<P>
+Foo will have the one of the following values:
+<P>
+Locale		foo
+======		===
+<P>
+"C"			1
+fr_FR			1
+en_CA			2
+en_US.utf8		3
+<P>
+Note that the default locale is probably not "".  "C" and "POSIX" are
+more likely.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

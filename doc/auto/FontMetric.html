@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>FontMetric</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="FontMetric"></A>
+<H1>FontMetric</H1>
+<P>
+Represents a Font specialized for a particular device.
+<P>
+Methods enable the font to be queried for sizes, attributes, and text
+extents.
+<DL>
+</DL>
+<H3>FontMetric member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#FontMetric">FontMetric()</A>
+</TD><TD>
+Constructor.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#ascent">ascent()</A>
+</TD><TD>
+Returns the largest ascent of any character in the font.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#descent">descent()</A>
+</TD><TD>
+Returns the largest descent of any character in the font.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getTextExtent">getTextExtent()</A>
+</TD><TD>
+Returns the size required to render a string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getTextLength">getTextLength()</A>
+</TD><TD>
+Returns the length in pixels of the rendering of the specified string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#height">height()</A>
+</TD><TD>
+Returns the height of a bounding box sufficient to render any character in
+the font.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#width">width()</A>
+</TD><TD>
+Returns the width of a bounding box sufficient to render any character
+in the font.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="FontMetric"></A>
+<H1>FontMetric::FontMetric()</H1>
+<P>
+<I>FontMetric( const Canvas&amp; cvs, FontIndex findx )
+</I><P>
+<I>FontMetric( const Figure&amp; fig, FontIndex findx )
+</I><P>
+Constructor.
+<P>
+Parameters are the Canvas for which the font is desired along with parameters
+to identify the font.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="ascent"></A>
+<H1>FontMetric::ascent()</H1>
+<P>
+<I>
+int FontMetric::ascent()
+</I><P>
+Returns the largest ascent of any character in the font.
+<DL>
+</DL>
+
+<HR>
+<A NAME="descent"></A>
+<H1>FontMetric::descent()</H1>
+<P>
+<I>
+int FontMetric::descent()
+</I><P>
+Returns the largest descent of any character in the font.
+<DL>
+</DL>
+
+<HR>
+<A NAME="getTextExtent"></A>
+<H1>FontMetric::getTextExtent()</H1>
+<P>
+<I>
+TextExtent FontMetric::getTextExtent( const String&amp; str )
+</I><P>
+Returns the size required to render a string.
+<P>
+Fields in the TextExtent indicate the width, height, ascent and descent
+of the rendering.
+<DL>
+</DL>
+
+<HR>
+<A NAME="getTextLength"></A>
+<H1>FontMetric::getTextLength()</H1>
+<P>
+<I>
+int FontMetric::getTextLength( const String&amp; str )
+</I><P>
+Returns the length in pixels of the rendering of the specified string.
+<DL>
+</DL>
+
+<HR>
+<A NAME="height"></A>
+<H1>FontMetric::height()</H1>
+<P>
+<I>
+int FontMetric::height()
+</I><P>
+Returns the height of a bounding box sufficient to render any character in
+the font.
+<DL>
+</DL>
+
+<HR>
+<A NAME="width"></A>
+<H1>FontMetric::width()</H1>
+<P>
+<I>
+int FontMetric::width()
+</I><P>
+Returns the width of a bounding box sufficient to render any character
+in the font.  This is the width of the widest character.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

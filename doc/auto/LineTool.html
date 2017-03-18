@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>LineTool</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="LineTool"></A>
+<H1>LineTool</H1>
+<P>
+Base class for line Drawing objects.
+<DL>
+</DL>
+<H3>LineTool member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#line">line()</A>
+</TD><TD>
+Draws a line from (x1,y1) to (x2,y2).</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#rectangle">rectangle()</A>
+</TD><TD>
+Draws a rectangle given upper left corner and size.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#setDashes">setDashes()</A>
+</TD><TD>
+Sets the tool for drawing dashed lines.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="line"></A>
+<H1>LineTool::line()</H1>
+<P>
+<I>
+void LineTool::line(int x1, int y1, int x2, int y2)
+</I><P>
+Draws a line from (x1,y1) to (x2,y2).
+<DL>
+</DL>
+
+<HR>
+<A NAME="rectangle"></A>
+<H1>LineTool::rectangle()</H1>
+<P>
+<I>
+void LineTool::rectangle( int x, int y, int w, int h )
+</I><P>
+Draws a rectangle given upper left corner and size.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="setDashes"></A>
+<H1>LineTool::setDashes()</H1>
+<P>
+<I>
+void LineTool::setDashes( int on, int off )
+</I><P>
+Sets the tool for drawing dashed lines.  The two parameters give the dash
+on and off lengths in pixels.  If 'off' is 0, then a solid line is drawn.
+This is the default for a new LineTool.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

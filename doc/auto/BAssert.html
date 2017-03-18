@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>BAssert</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="BAssert"></A>
+<H1>BAssert</H1>
+<P>
+This class holds static routines accessed by assertion macros.
+These routines should not be called directly, but accessed from the
+macros provided.  These macros expand into appropriate calls
+unless BWASSERTDISCARD is defined.
+<P>
+<DL>
+</DL>
+<H3>BAssert member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#bwassert">bwassert()</A>
+</TD><TD>
+Asserts that the expression X is true.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#bwverify">bwverify()</A>
+</TD><TD>
+Unit test assertion.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="bwassert"></A>
+<H1>BAssert::bwassert()</H1>
+<P>
+<I>bwassert( X );
+</I><P>
+Asserts that the expression X is true.  If not, it throws an exception
+containing the file name and line number where the error
+occurred along with the expression that failed. If BWASSERTDISCARD is
+#defined, then the expression is not evaluated and no exception is thrown.
+<P>
+This macro is intended for additional checking for unexpected errors in
+inner loop (frequent) operations too inefficient to verify in production. Non
+critical applications should never #define BWASSERTDISCARD. Code not
+in high frequency code segments should throw regular exceptions, such as
+std::invalid_argument or std::domain_error, etc.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="bwverify"></A>
+<H1>BAssert::bwverify()</H1>
+<P>
+<I>bwverify( X );
+</I><P>
+Unit test assertion.
+<P>
+Verifies that the expression X is true.  If not, it displays a
+message on std::cerr containing the file name and line number of the bwverify
+along with the expression. Execution then continues.
+<P>
+If BWASSERTDISCARD is #defined, X will still be tested and this type of
+assertion will throw an exception if X is false.
+<P>
+This macro is intended for use in test harnesses and unit tests, and should
+not be used in application code.
+<P>
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>UString</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="UString"></A>
+<H1>UString</H1>
+<P>
+Represents a null terminated unicode string.
+<P>
+This implementation is uses pointers to null terminated wide character
+arrays.
+Reference counts are not used.  Characters are unicode.
+<DL>
+</DL>
+<H3>UString member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#UString">UString()</A>
+</TD><TD>
+Constructors.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#append">append()</A>
+</TD><TD>
+Append to string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#capacity">capacity()</A>
+</TD><TD>
+Returns capacity of string (not including terminator)
+
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#compareTo">compareTo()</A>
+</TD><TD>
+Case sensitive comparison
+
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#ensureCapacity">ensureCapacity()</A>
+</TD><TD>
+Make sure buffer is big enough.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#equals">equals()</A>
+</TD><TD>
+Case sensitive comparison for equality
+
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#equalsIgnoreCase">equalsIgnoreCase()</A>
+</TD><TD>
+Case insensitive comparison for equality.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#indexOf">indexOf()</A>
+</TD><TD>
+Finds first occurrance of character or string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#lastIndexOf">lastIndexOf()</A>
+</TD><TD>
+Finds last occurrance of character or string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#length">length()</A>
+</TD><TD>
+Return length to terminator
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#operator(wchar_t*)">operator(wchar_t*)()</A>
+</TD><TD>
+wchar_t* conversion
+
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#operator+">operator+()</A>
+</TD><TD>
+UString concatenation operators.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#operator=">operator=()</A>
+</TD><TD>
+Assignment operators.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#operator==">operator==()</A>
+</TD><TD>
+Comparison operators for strings.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#startsWith">startsWith()</A>
+</TD><TD>
+Tells if this string starts with the given string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#substring">substring()</A>
+</TD><TD>
+Extracts a substring.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#toLowerCase">toLowerCase()</A>
+</TD><TD>
+Convert UString to lower case.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#toUpperCase">toUpperCase()</A>
+</TD><TD>
+Convert UString to upper case.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~UString">~UString()</A>
+</TD><TD>
+Destructor
+</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="UString"></A>
+<H1>UString::UString()</H1>
+<P>
+<I>UString( const int length=0 )
+</I><P>
+<I>UString( const String&amp; str );
+</I><P>
+<I>UString( const wchar_t* psz );
+</I><P>
+<I>UString( const wchar_t* ps, const int len );
+</I><P>
+Constructors.   Parameters specify an initial string in one of a variety
+of formats or give an integer for the initial capacity.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="append"></A>
+<H1>UString::append()</H1>
+<P>
+<I>void append( const UString&amp; str) inline
+</I><P>
+<I>void append( const wchar_t* psz )
+</I><P>
+<I>void append( wchar_t ch )
+</I><P>
+Append to string.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="capacity"></A>
+<H1>UString::capacity()</H1>
+<P>
+<I>int capacity() const inline;
+</I><P>
+Returns capacity of string (not including terminator)
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="compareTo"></A>
+<H1>UString::compareTo()</H1>
+<P>
+<I>int compareTo( const UString&amp; str ) const
+</I><P>
+<I>int compareTo( const wchar_t* psz ) const
+
+</I><P>
+Case sensitive comparison
+<P>
+<DL>
+<DT>Returns:
+<DD>0 if the strings are equal, >0 if the this string is
+greater than the given string, &lt;0 if this string is less than
+the given string.
+</DL>
+
+<HR>
+<A NAME="ensureCapacity"></A>
+<H1>UString::ensureCapacity()</H1>
+<P>
+<I>
+void UString::ensureCapacity( int len )
+</I><P>
+Make sure buffer is big enough.
+<DL>
+</DL>
+
+<HR>
+<A NAME="equals"></A>
+<H1>UString::equals()</H1>
+<P>
+<I>bool equals( const wchar_t* psz ) const
+</I><P>
+<I>bool equals( const UString&amp; str ) const
+</I><P>
+Case sensitive comparison for equality
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="equalsIgnoreCase"></A>
+<H1>UString::equalsIgnoreCase()</H1>
+<P>
+<I>bool equalsIgnoreCase( const wchar_t* psz ) const
+</I><P>
+<I>bool equalsIgnoreCase( const UString&amp; str ) const
+</I><P>
+Case insensitive comparison for equality.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="indexOf"></A>
+<H1>UString::indexOf()</H1>
+<P>
+<I>int indexOf( wchar_t ch ) const
+</I><P>
+<I>int indexOf( const wchar_t* psz ) const
+</I><P>
+<I>int indexOf( const UString&amp; str ) const
+
+</I><P>
+Finds first occurrance of character or string.
+<P>
+<DL>
+<DT>Returns:
+<DD>Index of first occurrance or -1 if not found
+</DL>
+
+<HR>
+<A NAME="lastIndexOf"></A>
+<H1>UString::lastIndexOf()</H1>
+<P>
+<I>int lastIndexOf( wchar_t ch ) const
+</I><P>
+<I>int lastIndexOf( const wchar_t* psz ) const
+</I><P>
+<I>int lastIndexOf( const UString&amp; str ) const
+
+</I><P>
+Finds last occurrance of character or string.
+<P>
+<DL>
+<DT>Returns:
+<DD>Index of last occurrance or -1 if not found
+</DL>
+
+<HR>
+<A NAME="length"></A>
+<H1>UString::length()</H1>
+<P>
+<I>
+int UString::length() const
+</I><P>
+Return length to terminator
+<DL>
+</DL>
+
+<HR>
+<A NAME="operator(wchar_t*)"></A>
+<H1>UString::operator(wchar_t*)()</H1>
+<P>
+<I>operator const wchar_t*() const inline;
+</I><P>
+wchar_t* conversion
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="operator+"></A>
+<H1>UString::operator+()</H1>
+<P>
+<I>wchar_t* + UString
+</I><P>
+<I>UString + UString
+</I><P>
+<I>UString + wchar_t*
+</I><P>
+UString concatenation operators.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="operator="></A>
+<H1>UString::operator=()</H1>
+<P>
+<I>(UString) = (UString);
+</I><P>
+<I>(UString) = (wchar_t *);
+</I><P>
+<I>(UString) = (wchar_t);
+</I><P>
+Assignment operators.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="operator=="></A>
+<H1>UString::operator==()</H1>
+<P>
+<I>(UString) &lt;op> (UString)
+</I><P>
+<I>(UString) &lt;op> (wchar_t*)
+</I><P>
+<I>(wchar_t*) &lt;op> (UString)
+</I><P>
+Comparison operators for strings.  These are case sensitive and not
+localized.
+<P>
+There are a complete set of comparison operators for UString's and
+wchar_t*'s.  Operators are: ==, !=, &lt;=, >=, &lt;, and >.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="startsWith"></A>
+<H1>UString::startsWith()</H1>
+<P>
+<I>bool startsWith( const wchar_t* psz ) const
+</I><P>
+<I>bool startsWith( const UString&amp; str ) const
+</I><P>
+Tells if this string starts with the given string. Case dependent.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="substring"></A>
+<H1>UString::substring()</H1>
+<P>
+<I>UString substring( int start ) const
+</I><P>
+<I>UString substring( int start, int end ) const
+</I><P>
+Extracts a substring.
+<P>
+Extracts from the start index to just before the end index.  If
+no end index is given, extracts to the end of the string.  The
+indices must be contained within the string and end>=start.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="toLowerCase"></A>
+<H1>UString::toLowerCase()</H1>
+<P>
+<I>
+void UString::toLowerCase()
+</I><P>
+Convert UString to lower case.  Current c locale is used.
+<DL>
+</DL>
+
+<HR>
+<A NAME="toUpperCase"></A>
+<H1>UString::toUpperCase()</H1>
+<P>
+<I>
+void UString::toUpperCase()
+</I><P>
+Convert UString to upper case.  Current c locale is used.
+<DL>
+</DL>
+
+<HR>
+<A NAME="~UString"></A>
+<H1>UString::~UString()</H1>
+<P>
+<I>
+UString::~UString()
+</I><P>
+Destructor
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

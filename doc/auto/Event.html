@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Event</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Event"></A>
+<H1>Event</H1>
+<P>
+The Event class communicate information from the Windowing system to
+the BW framework code.  This is an INTERNAL class only; it should never
+be referenced from application code.
+<P>
+Events are requested by calls to Display::nextEvent and are normally
+distributed to a procedure for each type of window class used.
+<P>
+The Event class is abstract and derived from "countable".  Normally, events
+are accessed through an EventRef which behaves like an Event*.  The event is
+kept in memory as long as there is an EventRef that points to it.
+<P>
+Events can be generated from the windowing system itself, the BW application
+framework, the calling application, or other applications.
+<P>
+System events contain information specific to each event type.  Const member
+functions provide access to this information in generic terms:
+<P>
+<ul>
+<li>The display
+<li>The window destination
+<li>The window that is the subject of the event (usually a child of the
+destination)
+<li>A location (x,y)
+<li>A size (w,h)
+<li>A mouse button
+<li>A keyboard/mouse modifier state (shift keys and mouse buttons)
+<li>A keyboard button
+<ul>
+<P>
+If one of these pieces of information is requested for an event type that
+does not provide the information, a default value is returned.
+<P>
+Events are also used to communication error conditions.
+<P>
+User events can contain 20 bytes, 10 shorts, or 5 longs of arbitrary data.
+<P>
+<DL>
+</DL>
+<H3>Event member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#button">button()</A>
+</TD><TD>
+Returns a mouse button.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#cookKeyNum">cookKeyNum()</A>
+</TD><TD>
+Returns a string containing the characters entered from a keypress event in
+the default locale of the application.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#destination">destination()</A>
+</TD><TD>
+Returns the destination window for the event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#display">display()</A>
+</TD><TD>
+Returns the display for the event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#h">h()</A>
+</TD><TD>
+Returns a height associated with the event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#keyNum">keyNum()</A>
+</TD><TD>
+Returns an identifier for a keyboard key.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#modifiers">modifiers()</A>
+</TD><TD>
+Returns keyboard shift state and/or mouse button state that may modify the
+meaning of the event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#name">name()</A>
+</TD><TD>
+Returns a desciptive name of the event type for diagnostic purposes.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#object">object()</A>
+</TD><TD>
+Returns the window that is the object of the event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#origin">origin()</A>
+</TD><TD>
+Returns a code indicating the originator of the event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#subType">subType()</A>
+</TD><TD>
+Returns the subtype of the event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#type">type()</A>
+</TD><TD>
+Returns a code indicating the type of event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#userData">userData()</A>
+</TD><TD>
+Returns the user data associated with a user defined event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#w">w()</A>
+</TD><TD>
+Returns a width associated with the event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#x">x()</A>
+</TD><TD>
+Returns an X co-ordinate associated with the event.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#y">y()</A>
+</TD><TD>
+Returns a Y co-ordinate associated with the event.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="button"></A>
+<H1>Event::button()</H1>
+<P>
+<I>MouseButton Event::button() const
+</I><P>
+Returns a mouse button.  Valid for button press and release events.  Default
+value is NoButton.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="cookKeyNum"></A>
+<H1>Event::cookKeyNum()</H1>
+<P>
+<I>int Event::cookKeyNum(char* buf, int buflen)
+</I><P>
+Returns a string containing the characters entered from a keypress event in
+the default locale of the application.  Note that many keypress events do not
+generate character input and some will return multiple characters.  This call
+only supports narrow string input.
+<P>
+The characters returned may be from the current event or from a combination
+of earlier events.
+<P>
+The int returned is the number of 'char's returned in the buffer.  The number
+of characters may be less if a multibyte character set is in effect.  A
+return value of zero indicates no input.
+<P>
+If the buffer is too short for the resulting string, it is truncated.  The
+buffer is not NULL terminated.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="destination"></A>
+<H1>Event::destination()</H1>
+<P>
+<I>WinHand Event::destination() const
+</I><P>
+Returns the destination window for the event.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="display"></A>
+<H1>Event::display()</H1>
+<P>
+<I>DisplayHand Event::display() const
+</I><P>
+Returns the display for the event.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="h"></A>
+<H1>Event::h()</H1>
+<P>
+<I>int Event::h() const
+</I><P>
+Returns a height associated with the event.  This is either a window height
+or the height of a region within a window.  Zero is the default value.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="keyNum"></A>
+<H1>Event::keyNum()</H1>
+<P>
+<I>const KeyNum Event::keyNum() const
+</I><P>
+Returns an identifier for a keyboard key.  Valid for key press and release
+events.  The default value is KeyNum::KS_NoSymbol.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="modifiers"></A>
+<H1>Event::modifiers()</H1>
+<P>
+<I>Modifier Event::modifiers() const
+</I><P>
+Returns keyboard shift state and/or mouse button state that may modify the
+meaning of the event.  The default value is ModNone.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="name"></A>
+<H1>Event::name()</H1>
+<P>
+<I>const char* Event::name() const
+</I><P>
+Returns a desciptive name of the event type for diagnostic purposes.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="object"></A>
+<H1>Event::object()</H1>
+<P>
+<I>WinHand Event::object() const
+</I><P>
+Returns the window that is the object of the event.  This is normally the
+destination window or one of its descendents.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="origin"></A>
+<H1>Event::origin()</H1>
+<P>
+<I>EVOrigin Event::origin() const
+</I><P>
+Returns a code indicating the originator of the event.  One of:
+<ul>
+<li>Event::Local
+<li>Event::App
+<li>Event::System
+<li>Event::SystemFailure
+<li>Event::Failure
+</ul>
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="subType"></A>
+<H1>Event::subType()</H1>
+<P>
+<I>int Event::subtype() const
+</I><P>
+Returns the subtype of the event.  The values and semantics of this field
+depend on the event type.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="type"></A>
+<H1>Event::type()</H1>
+<P>
+<I>EventType Event::type() const
+</I><P>
+Returns a code indicating the type of event.  One of:
+<ul>
+<li>NoEvent - should be ignored
+<li>EVKeyPress
+<li>EVKeyRelease
+<li>EVButtonPress - mouse button
+<li>EVButtonRelease
+<li>EVMotionNotify - mouse movement
+<li>EVEnterNotify
+<li>EVLeaveNotify
+<li>EVFocusIn - Keyboard Focus change
+<li>EVFocusOut
+<li>EVExpose - window redraw required
+<li>EVVisibilityNotify
+<li>EVCreateNotify
+<li>EVDestroyNotify
+<li>EVUnmapNotify
+<li>MapNotify
+<li>EVReparentNotify
+<li>EVConfigureNotify
+<li>EVGravityNotify
+<li>EVCirculateNotify
+<li>EVSelectionClear
+<li>EVSelectionRequest
+<li>EVSelectionNotify
+<li>EVColormapNotify
+<li>EVClientMessage
+<li>EVMappingNotify
+<li>EVCloseRequest
+<li>EVAlarm
+<li>EVError
+<li>Activate
+<li>PreActivate
+<li>PostActivate
+<li>InvalidateRect
+<li>InvalidateParentRect
+<li>Draw
+<li>Flash
+<li>Deactivate
+<li>PreDeactivate
+<li>AppSpecific
+<li>MaxEvent - 1 larger than largest event number
+</ul>
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="userData"></A>
+<H1>Event::userData()</H1>
+<P>
+<I>UserData Event::userData() const
+</I><P>
+Returns the user data associated with a user defined event.  The default is
+an empty (0) UserData.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="w"></A>
+<H1>Event::w()</H1>
+<P>
+<I>int Event::w() const
+</I><P>
+Returns a width associated with the event.  This is either a window width
+or the width of a region within a window.  Zero is the default value.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="x"></A>
+<H1>Event::x()</H1>
+<P>
+<I>int Event::x() const
+</I><P>
+Returns an X co-ordinate associated with the event.  This is either a mouse
+position, a position within a window, or a window position within
+it's parent.  Zero is the default value.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="y"></A>
+<H1>Event::y()</H1>
+<P>
+<I>int Event::y() const
+</I><P>
+Returns a Y co-ordinate associated with the event.  This is either a mouse
+position, a position within a window, or a window position within
+it's parent.  Zero is the default value.
+<P>
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

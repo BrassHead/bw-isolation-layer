@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Press</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Press"></A>
+<H1>Press</H1>
+<P>
+Drawing object for text.
+<DL>
+</DL>
+<H3>Press member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#Press">Press()</A>
+</TD><TD>
+Constructors.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#changeFont">changeFont()</A>
+</TD><TD>
+Changes the font used for printing.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#drawText">drawText()</A>
+</TD><TD>
+Draws the given string.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="Press"></A>
+<H1>Press::Press()</H1>
+<P>
+<I>Press::Press( Canvas&amp; cvs, FontIndex findx=FaceFont )
+</I><P>
+Constructors.
+<P>
+The parameters are the Canvas to draw on and optionally the font of the
+text face.  If no font is specified, the default foreground Text font
+will be used.  The text colour is set to the default foreground text
+colour and the text background colour is set to the default background.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="changeFont"></A>
+<H1>Press::changeFont()</H1>
+<P>
+<I>
+void Press::changeFont( FontIndex findx )
+</I><P>
+Changes the font used for printing.
+<DL>
+</DL>
+
+<HR>
+<A NAME="drawText"></A>
+<H1>Press::drawText()</H1>
+<P>
+<I>
+void Press::drawText( int x, int y, String str )
+</I><P>
+Draws the given string.  Only the pixels within the font are affected
+(no background box is drawn).
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

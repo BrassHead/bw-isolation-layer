@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Frame</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME=""></A>
+<H1>Frame</H1>
+<DL>
+</DL>
+<H3>Frame member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#Frame">Frame()</A>
+</TD><TD>
+Constructor
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#onClose">onClose()</A>
+</TD><TD>
+Overidable interface to Frame Figures.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#setTitle">setTitle()</A>
+</TD><TD>
+Sets the title to be displayed on the Frame's adornments and the icon
+(if any).</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~Frame">~Frame()</A>
+</TD><TD>
+Destructor
+</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="Frame"></A>
+<H1>Frame::Frame()</H1>
+<P>
+<I>
+Frame::Frame()
+</I><P>
+Constructor
+<DL>
+</DL>
+
+<HR>
+<A NAME="onClose"></A>
+<H1>Frame::onClose()</H1>
+<P>
+<I>
+void Frame::onClose()
+</I><P>
+Overidable interface to Frame Figures.
+<P>
+This routine is called when the user has selected the "close" or "quit" or
+whatever button, menu, and/or key from their host OS.
+<P>
+The correct response is to cleanly exit.  Additional dialog boxes can be
+raised to query the user about saving data, etc.
+<P>
+The default action is 'doAction("exit(0)")'
+<DL>
+</DL>
+
+<HR>
+<A NAME="setTitle"></A>
+<H1>Frame::setTitle()</H1>
+<P>
+<I>
+void Frame::setTitle( String strTitle )
+</I><P>
+Sets the title to be displayed on the Frame's adornments and the icon
+(if any).
+<DL>
+</DL>
+
+<HR>
+<A NAME="~Frame"></A>
+<H1>Frame::~Frame()</H1>
+<P>
+<I>
+Frame::~Frame()
+</I><P>
+Destructor
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

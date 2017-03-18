@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>BFile</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="BFile"></A>
+<H1>BFile</H1>
+<P>
+Binary file object.
+Represents a disk or network file.
+<P>
+<B>Concrete class</B>
+<P>
+<P>
+<DL>
+<DT>Superclass:
+<DD>
+none
+<DT>Subclasses:
+<DD>
+none
+
+</DL>
+<H3>BFile member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#ctor2">BFile()</A>
+</TD><TD>
+
+
+Creates unopened file object.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#atEof">atEof()</A>
+</TD><TD>
+Indicates that file position is at the end.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#close">close()</A>
+</TD><TD>
+Closes open file (if any).</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#commit">commit()</A>
+</TD><TD>
+Flushes output to device.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#create">create()</A>
+</TD><TD>
+Opens file for writing.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#isOpen">isOpen()</A>
+</TD><TD>
+Indicates if file is open.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#open">open()</A>
+</TD><TD>
+Opens file.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#read">read()</A>
+</TD><TD>
+Reads length bytes into buffer.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#readUpTo">readUpTo()</A>
+</TD><TD>
+Reads up to length bytes into buffer.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#seek">seek()</A>
+</TD><TD>
+Positions read/write pointer in file.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#tell">tell()</A>
+</TD><TD>
+Indicates current read/write position.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#write">write()</A>
+</TD><TD>
+Writes length bytes into buffer
+
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~BFile">~BFile()</A>
+</TD><TD>
+Closes file (if open) and deletes object
+</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="ctor2"></A>
+<H1>BFile::BFile()</H1>
+<P>
+<I>
+BFile::BFile()
+	</I><P>
+<I>
+BFile::BFile
+(
+    const char* fileName,
+    FileMode fm
+)
+	</I><P>
+
+<P>
+Creates unopened file object.  Call open or create to open after
+creation.
+<P>
+
+<P>
+Creates open file object for reading or writing
+<P>
+<DL>
+<DT>Throws:
+<DD>BFileException if unable to open for any reason
+</DL>
+
+<HR>
+<A NAME="atEof"></A>
+<H1>BFile::atEof()</H1>
+<P>
+<I>
+bool
+BFile::atEof() const
+</I><P>
+Indicates that file position is at the end.
+<P>
+<DL>
+<DT>Requires:
+<DD>
+Currently opened file
+
+<DT>Throws:
+<DD>BFileException on serious errors.
+</DL>
+
+<HR>
+<A NAME="close"></A>
+<H1>BFile::close()</H1>
+<P>
+<I>
+void
+BFile::close()
+</I><P>
+Closes open file (if any).
+<P>
+<DL>
+<DT>Throws:
+<DD>BFileException on serious errors
+</DL>
+
+<HR>
+<A NAME="commit"></A>
+<H1>BFile::commit()</H1>
+<P>
+<I>
+void
+BFile::commit()
+</I><P>
+Flushes output to device.
+<P>
+<DL>
+<DT>Requires:
+<DD>Currently opened mode ReadWrite, Create, or CreateNew
+<DT>Throws:
+<DD>BFileException on error
+</DL>
+
+<HR>
+<A NAME="create"></A>
+<H1>BFile::create()</H1>
+<P>
+<I>
+void
+BFile::create
+(
+    const char* fileName
+)
+</I><P>
+Opens file for writing.  Creates if necessary, truncates existing files
+<DL>
+<DT>Requires:
+<DD>Not currently open
+<DT>Throws:
+<DD>BFileException on other errors
+</DL>
+
+<HR>
+<A NAME="isOpen"></A>
+<H1>BFile::isOpen()</H1>
+<P>
+<I>
+bool
+BFile::isOpen() const
+</I><P>
+Indicates if file is open.
+<DL>
+</DL>
+
+<HR>
+<A NAME="open"></A>
+<H1>BFile::open()</H1>
+<P>
+<I>
+bool
+BFile::open
+(
+    const char* fileName,
+    FileMode fm
+)
+</I><P>
+Opens file.
+<P>
+<DL>
+<DT>Requires:
+<DD>Not currently open
+
+<DT>Returns:
+<DD>true on success, false if file doesn't exist in ReadOnly or ReadWrite modes
+
+<DT>Throws:
+<DD>BFileException on all other errors
+</DL>
+
+<HR>
+<A NAME="read"></A>
+<H1>BFile::read()</H1>
+<P>
+<I>
+void
+BFile::read
+(
+    void* buffer,
+    long length
+)
+</I><P>
+Reads length bytes into buffer.
+<P>
+<DL>
+<DT>Requires:
+<DD>Currently opened file
+
+<DT>Promises:
+<DD>Sets atEof() if no more data after this read
+
+<DT>Throws:
+<DD>BFileException if unable to fully fill buffer
+</DL>
+
+<HR>
+<A NAME="readUpTo"></A>
+<H1>BFile::readUpTo()</H1>
+<P>
+<I>
+long
+BFile::readUpTo
+(
+    void* buffer,
+    long length
+)
+</I><P>
+Reads up to length bytes into buffer.
+<P>
+<DL>
+<DT>Requires:
+<DD>Currently opened file
+<DT>Promises:
+<DD>Sets atEof() if end of file reached
+<DT>Returns:
+<DD>actual count of bytes read (may be 0)
+<DT>Throws:
+<DD>BfileException if unable to complete operation
+</DL>
+
+<HR>
+<A NAME="seek"></A>
+<H1>BFile::seek()</H1>
+<P>
+<I>
+long
+BFile::seek
+(
+    long position,
+    SeekMode sm
+)
+</I><P>
+Positions read/write pointer in file.
+<P>
+<DL>
+<DT>Requires:
+<DD>Currently opened file
+<DT>Returns:
+<DD>new file position
+<DT>Throws:
+<DD>BfileException if unable to comply
+</DL>
+
+<HR>
+<A NAME="tell"></A>
+<H1>BFile::tell()</H1>
+<P>
+<I>
+long
+BFile::tell() const
+</I><P>
+Indicates current read/write position.
+<P>
+<DL>
+<DT>Requires:
+<DD>Currently opened file
+<DT>Returns:
+<DD>file position
+</DL>
+
+<HR>
+<A NAME="write"></A>
+<H1>BFile::write()</H1>
+<P>
+<I>
+void
+BFile::write
+(
+    const void* buffer,
+    long length
+)
+</I><P>
+Writes length bytes into buffer
+<P>
+<DL>
+<DT>Requires:
+<DD>Currently opened mode ReadWrite, Create, or CreateNew
+<DT>Throws:
+<DD>BFileException if complete buffer is not written
+</DL>
+
+<HR>
+<A NAME="~BFile"></A>
+<H1>BFile::~BFile()</H1>
+<P>
+<I>
+BFile::~BFile()
+</I><P>
+Closes file (if open) and deletes object
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

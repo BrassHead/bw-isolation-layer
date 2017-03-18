@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Custom</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Custom"></A>
+<H1>Custom</H1>
+<P>
+Abstract class for user customization parameters.  The Custom class holds
+parameters obtained from the windowing system configuration and from
+configuration files.  The nature of file storage depends on the OS/Window
+system in use.  Customizations stored in files have a standard format --
+see the description of <a href="CustomFile.html">CustomFile</a> for details.
+<P>
+Three customization categories are predefined.  References to the relevent
+customization objects are available from global procedures:
+<ul>
+<li>TheSite() - administrator defined parameters.
+<li>TheUser() - Settings specific to this user for all applications.
+<li>TheApp() - Settings specific to this application for all sites.
+</ul>
+<P>
+Each Custom object is logically composed of "categories" containing "keys".
+There is always a blank category ("").  Each key has a value that can be
+interpreted as a string or as a long integer.
+<P>
+When retrieving values, a default is always provided.  If the key is not
+found, the default value is returned.  For numeric values, the default
+is also returned if the value cannot be converted to a long integer.
+<P>
+It is common to store an array of related values using keys that end with
+an integer.  Helper routines are provided for retrieving and setting these
+indexed keys.
+<P>
+The value of a key can be changed at any time.  A "writable" custom
+object is one where changes are written to permanent storage.  Whether
+an instance is writable or not depends on the OS/Windowing system in use
+and the access rights of the executing process.
+<P>
+Some customization files contain keys indexed by locale.  When loaded, only
+the values without locales or for the requested locale are read.  The
+Locale name is interpreted with the pattern:
+<P>
+&lt;Language> [ _&lt;region> [ .&lt;character-set> ] ]
+<P>
+The most specific locale is matched.  Typically, the language is in lower
+case and the region is in upper case.  E.g. "fr" is french, "fr_FR" is
+french as written in France, and "fr_CA.iso-8859-1" is french as written
+in Canada in the iso-8859-1 (latin-1) character set.
+<DL>
+</DL>
+<H3>Custom member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#getKeys">getKeys()</A>
+</TD><TD>
+Returns a list&lt;> of the keys in the specified category.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getNumber">getNumber()</A>
+</TD><TD>
+Returns the numeric value of the specified key in the specified category.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getString">getString()</A>
+</TD><TD>
+Returns the string value of the specified key in the specified category.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#isWritable">isWritable()</A>
+</TD><TD>
+Returns true if changes to this custom object will be written to
+permanent storage.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#putNumber">putNumber()</A>
+</TD><TD>
+Writes the value of the specified key in the specified category.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#putString">putString()</A>
+</TD><TD>
+Writes the value of the specified key in the specified category.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="getKeys"></A>
+<H1>Custom::getKeys()</H1>
+<P>
+<I>list&lt;String> getKeys( const String&amp; strCategory ) const
+</I><P>
+Returns a list&lt;> of the keys in the specified category.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="getNumber"></A>
+<H1>Custom::getNumber()</H1>
+<P>
+<I>long getNumber( const String&amp; strCategory,
+const String&amp; strKey,
+long lDefault ) const
+
+</I><P>
+<I>long getIndxNumber( const String&amp; strCategory,
+const String&amp; strKey,
+int index,
+long lDefault ) const
+
+</I><P>
+Returns the numeric value of the specified key in the specified category.
+If the key has no defined value in the customization object, then the
+default value is returned.  If the key value cannot be interpreted as a
+number, then the default value is returned.
+<P>
+The variant with an index is identical to searching for a key name consisting
+of the given key name followed by the index converted to a character string.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="getString"></A>
+<H1>Custom::getString()</H1>
+<P>
+<I>String getString(const String&amp; strCategory,
+const String&amp; strKey,
+const String&amp; strDefault ) const
+</I><P>
+<I>String getIndxString( const String&amp; strCategory,
+const String&amp; strKey,
+int index,
+const String&amp; strDefault ) const
+</I><P>
+Returns the string value of the specified key in the specified category.
+If the key has no defined value in the customization object, then the
+default value is returned.
+<P>
+The variant with an index is identical to searching for a key name consisting
+of the given key name followed by the index converted to a character string.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="isWritable"></A>
+<H1>Custom::isWritable()</H1>
+<P>
+<I>bool isWritable() const
+
+</I><P>
+Returns true if changes to this custom object will be written to
+permanent storage.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="putNumber"></A>
+<H1>Custom::putNumber()</H1>
+<P>
+<I>void putNumber( const String&amp; strCategory,
+const String&amp; strKey,
+long lValue )
+
+</I><P>
+<I>void putIndxNumber( const String&amp; strCategory,
+const String&amp; strKey,
+int index,
+long lValue )
+</I><P>
+Writes the value of the specified key in the specified category.
+<P>
+The variant with an index is identical to setting the key name consisting
+of the given key name followed by the index converted to a character string.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="putString"></A>
+<H1>Custom::putString()</H1>
+<P>
+<I>void putString( const String&amp; strCategory,
+const String&amp; strKey,
+const String&amp; strValue )
+</I><P>
+<I>void putIndxString( const String&amp; strCategory,
+const String&amp; strKey,
+int index,
+const String&amp; strValue )
+</I><P>
+Writes the value of the specified key in the specified category.
+<P>
+The variant with an index is identical to setting the key name consisting
+of the given key name followed by the index converted to a character string.
+<P>
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

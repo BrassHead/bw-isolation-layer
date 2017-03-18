@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Parent</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Parent"></A>
+<H1>Parent</H1>
+<P>
+Mix-in class for Parent Figures.
+<P>
+The Parent mix-in class provides services for managing child and owned
+Figures and supports a set of events related to child activity.
+<P>
+It maintains a pointer in each Parent to a linked list node for each child.
+The node records a pointer to each child along with its logical position
+and size.
+<P>
+Each child also has a pointer to it's parent.
+<DL>
+</DL>
+<H3>Parent member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#OnMoveRequest">OnMoveRequest()</A>
+</TD><TD>
+Called when a child figure has requested a change in position.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#OnRelocateRequest">OnRelocateRequest()</A>
+</TD><TD>
+Called when a child figure has requested a change in location and size.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#OnResizeRequest">OnResizeRequest()</A>
+</TD><TD>
+Called when a child figure has requested a change in size.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#Parent">Parent()</A>
+</TD><TD>
+Constructor
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#addChild">addChild()</A>
+</TD><TD>
+Adds a child figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#moveChild">moveChild()</A>
+</TD><TD>
+Moves the logical position of the specified child figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#numChildren">numChildren()</A>
+</TD><TD>
+Returns the number of children currently parented.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#onAction">onAction()</A>
+</TD><TD>
+Handle action commands from descendent Figures.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#relocateChild">relocateChild()</A>
+</TD><TD>
+Changes the logical size and position of the specified child figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#removeAllChildren">removeAllChildren()</A>
+</TD><TD>
+Removes all child Figures from under this one.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#removeChild">removeChild()</A>
+</TD><TD>
+Removes a child Figure from under this Figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#resizeChild">resizeChild()</A>
+</TD><TD>
+Changes the logical size of the specified child figure.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#~Parent">~Parent()</A>
+</TD><TD>
+Destructor
+</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="OnMoveRequest"></A>
+<H1>Parent::OnMoveRequest()</H1>
+<P>
+<I>void onMoveRequest( Figure* fig, LogPos lposX, LogPos lposY )
+</I><P>
+Called when a child figure has requested a change in position.
+<P>
+The default action is to grant the request by calling moveChild.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="OnRelocateRequest"></A>
+<H1>Parent::OnRelocateRequest()</H1>
+<P>
+<I>void onRelocateRequest( Figure* fig, LogPos lposX, LogPos lposY, LogPos lposWidth, LogPos lposHeight )
+</I><P>
+Called when a child figure has requested a change in location and size.
+<P>
+The default action is to grant the request by calling relocateChild.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="OnResizeRequest"></A>
+<H1>Parent::OnResizeRequest()</H1>
+<P>
+<I>void onResizeRequest( Figure* fig, LogPos lposWidth, LogPos lposHeight )
+</I><P>
+Called when a child figure has requested a change in size.
+<P>
+The default action is to grant the request by calling resizeChild.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="Parent"></A>
+<H1>Parent::Parent()</H1>
+<P>
+<I>
+Parent::Parent()
+	</I><P>
+Constructor
+<DL>
+</DL>
+
+<HR>
+<A NAME="addChild"></A>
+<H1>Parent::addChild()</H1>
+<P>
+<I>addChild( Figure* fig,
+LogPos lposX=0, LogPos lposY=0,
+LogPos lposWidth=FullWidth, LogPos lposHeight=FullHeight );
+
+</I><P>
+Adds a child figure.
+<P>
+If a size is not given, the child is queried for it's desired size.
+<P>
+<P>
+
+The X and Y values give the location of the child within the parent.
+(0,0) is the upper left corner with increasing x values to the right and
+increasing y values going down.
+<P>
+All values are Logical Positions (LogPos).  LogPos is a typedef to an
+platform dependent integral type.
+<P>
+Logical Positions
+can either be absolute positions and lengths
+measured in pixels or specifications relative to the size of the parent
+Figure as follows:
+<UL>
+<LI>FullWidth-x -- x pixels from the right hand side of the parent
+<LI>FullHeight-y -- y pixels from the bottom
+<LI>MidWidth+/-x -- x pixels offset from the center of the parent
+<LI>MidHeight+/-y -- y pixels offset from the center of the parent
+<LI>Percentile*x -- x% of the parent width or height
+<LI>AskChild -- asks child control for desired location or size
+</UL>
+<P>
+There is no requirement or guarantee that the location and size of the child
+control be within the drawing area of the parent.
+Negative x and y co-ordinates are permitted, but sizes must be positive.
+<DL>
+</DL>
+
+<HR>
+<A NAME="moveChild"></A>
+<H1>Parent::moveChild()</H1>
+<P>
+<I>
+void Parent::moveChild( Figure* pfig, LogPos lposX, LogPos lposY )
+</I><P>
+Moves the logical position of the specified child figure.
+<DL>
+</DL>
+
+<HR>
+<A NAME="numChildren"></A>
+<H1>Parent::numChildren()</H1>
+<P>
+<I>
+int Parent::numChildren()
+</I><P>
+Returns the number of children currently parented.
+<DL>
+</DL>
+
+<HR>
+<A NAME="onAction"></A>
+<H1>Parent::onAction()</H1>
+<P>
+<I>bool onAction( const String&amp; strCommand )
+
+</I><P>
+Handle action commands from descendent Figures.
+<P>
+This routine is called whenever a descendent Figure has called 'doAction'
+and no intervening Figure has handled the action.
+<P>
+The routine should check the Command argument for actions appropriate to
+this Figure and return true if the action is fully processed.
+<P>
+Unprocessed actions should be forwarded to the parent Figure by calling
+doAction with the same parameter.
+<P>
+By default all actions are forwarded.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="relocateChild"></A>
+<H1>Parent::relocateChild()</H1>
+<P>
+<I>
+void Parent::relocateChild(
+    Figure* pfig,
+    LogPos lposX, LogPos lposY,
+    LogPos lposWidth, LogPos lposHeight )
+</I><P>
+Changes the logical size and position of the specified child figure.
+<DL>
+</DL>
+
+<HR>
+<A NAME="removeAllChildren"></A>
+<H1>Parent::removeAllChildren()</H1>
+<P>
+<I>
+void Parent::removeAllChildren() throw()
+</I><P>
+Removes all child Figures from under this one.
+<DL>
+</DL>
+
+<HR>
+<A NAME="removeChild"></A>
+<H1>Parent::removeChild()</H1>
+<P>
+<I>
+void Parent::removeChild( Figure* pfig ) throw()
+</I><P>
+Removes a child Figure from under this Figure.
+<P>
+The child Figure is not deleted.
+<P>
+If the specified Figure is not a child, this request is silently ignored.
+<DL>
+</DL>
+
+<HR>
+<A NAME="resizeChild"></A>
+<H1>Parent::resizeChild()</H1>
+<P>
+<I>
+void Parent::resizeChild( Figure* pfig, LogPos lposWidth, LogPos lposHeight )
+</I><P>
+Changes the logical size of the specified child figure.
+<DL>
+</DL>
+
+<HR>
+<A NAME="~Parent"></A>
+<H1>Parent::~Parent()</H1>
+<P>
+<I>
+Parent::~Parent()
+</I><P>
+Destructor
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

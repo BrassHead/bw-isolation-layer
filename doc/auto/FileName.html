@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>FileName</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="FileName"></A>
+<H1>FileName</H1>
+<P>
+Represents a filename in the host OS.  These are created from a
+string and allow access to the elements of the name.
+<P>
+Win32 FileNames are divided into four parts:  Root, Directory, BaseName, and
+Extension.  Any or all of these parts can be null.  Some examples:
+<PRE>
+<P>
+readme.txt          "", "", "readme", ".txt"       Relative (win32), Absolute (POSIX)
+&#47;readme.txt         "/", "", "readme", ".txt"      Relative
+d&#58;\readme.txt       "d:\", "", "readme", ".txt"    Absolute
+d&#58;readme.txt        "d:", "", "readme", ".txt"     Relative
+d&#58;\src/readme       "d:\", "src/", "readme", ""    Absolute
+\\host\c\src\rm     "\\", "host\c\src\", "rm", ""  Absolute
+D&#58;\                 "D:\", "", "", ""              Absolute
+D&#58;\src.d            "D:\", "", "src", ".d"         Absolute
+D&#58;\src.d\           "D:\", "src.d\", "", ""        Absolute
+D&#58;\src.d\*.*        "D:\", "src.d\", "*", ".*"     Absolute, Pattern
+D&#58;\src\..           "D:\", "src\", "..", ""        Absolute
+D&#58;\src\.            "D:\", "src\", ".", ""         Absolute
+D&#58;\src\.foo         "D:\", "src\", "", ".foo"      Absolute
+</PRE>
+<P>
+On UNIX systems, the root is always either "/" or "".
+<DL>
+</DL>
+<H3>FileName member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#FileName">FileName()</A>
+</TD><TD>
+Constructor.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#append">append()</A>
+</TD><TD>
+Appends one filename to another.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#baseName">baseName()</A>
+</TD><TD>
+Returns BaseName component of filename.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#currentDirectory">currentDirectory()</A>
+</TD><TD>
+Returns a FileName object initialized to the current directory
+</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#directory">directory()</A>
+</TD><TD>
+Returns directory component of filename.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#empty">empty()</A>
+</TD><TD>
+Sets the filename to the null string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#extension">extension()</A>
+</TD><TD>
+Returns extension component of filename.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#fullName">fullName()</A>
+</TD><TD>
+Returns entire filename.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getFileType">getFileType()</A>
+</TD><TD>
+Checks to see if the named file exists and returns its type.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#isAbsolute">isAbsolute()</A>
+</TD><TD>
+Returns true if the Filename is an absolute path.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#isPattern">isPattern()</A>
+</TD><TD>
+Returns true if the filename is a pattern.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#makeAbsolute">makeAbsolute()</A>
+</TD><TD>
+Converts filename to an absolute filename based on the current
+directory.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#operator(char*)">operator(char*)()</A>
+</TD><TD>
+Conversion to character string.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#relativeName">relativeName()</A>
+</TD><TD>
+Returns final component of filename.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#root">root()</A>
+</TD><TD>
+Returns root component of filename.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#setName">setName()</A>
+</TD><TD>
+Sets the full name.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="FileName"></A>
+<H1>FileName::FileName()</H1>
+<P>
+<I>FileName::FileName(const char* pszFileName=&quot;&quot;);
+
+</I><P>
+Constructor.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="append"></A>
+<H1>FileName::append()</H1>
+<P>
+<I>
+void FileName::append(const FileName&amp; fn)
+</I><P>
+Appends one filename to another.  The appended filename must be
+a relative path without a drive or initial "/".
+<DL>
+</DL>
+
+<HR>
+<A NAME="baseName"></A>
+<H1>FileName::baseName()</H1>
+<P>
+<I>
+String FileName::baseName() const
+</I><P>
+Returns BaseName component of filename.
+<DL>
+</DL>
+
+<HR>
+<A NAME="currentDirectory"></A>
+<H1>FileName::currentDirectory()</H1>
+<P>
+<I>
+FileName FileName::currentDirectory()
+</I><P>
+Returns a FileName object initialized to the current directory
+<DL>
+</DL>
+
+<HR>
+<A NAME="directory"></A>
+<H1>FileName::directory()</H1>
+<P>
+<I>
+String FileName::directory() const
+</I><P>
+Returns directory component of filename.
+<DL>
+</DL>
+
+<HR>
+<A NAME="empty"></A>
+<H1>FileName::empty()</H1>
+<P>
+<I>
+void FileName::empty()
+</I><P>
+Sets the filename to the null string.
+<DL>
+</DL>
+
+<HR>
+<A NAME="extension"></A>
+<H1>FileName::extension()</H1>
+<P>
+<I>
+String FileName::extension() const
+</I><P>
+Returns extension component of filename.
+<DL>
+</DL>
+
+<HR>
+<A NAME="fullName"></A>
+<H1>FileName::fullName()</H1>
+<P>
+<I>
+String FileName::fullName() const
+</I><P>
+Returns entire filename.
+<DL>
+</DL>
+
+<HR>
+<A NAME="getFileType"></A>
+<H1>FileName::getFileType()</H1>
+<P>
+<I>
+FileName::Type FileName::getFileType() const
+</I><P>
+Checks to see if the named file exists and returns its type.
+<DL>
+</DL>
+
+<HR>
+<A NAME="isAbsolute"></A>
+<H1>FileName::isAbsolute()</H1>
+<P>
+<I>
+bool FileName::isAbsolute() const
+</I><P>
+Returns true if the Filename is an absolute path.  I.E. A path that
+is not relative to the current drive or directory
+<DL>
+</DL>
+
+<HR>
+<A NAME="isPattern"></A>
+<H1>FileName::isPattern()</H1>
+<P>
+<I>
+bool FileName::isPattern() const
+</I><P>
+Returns true if the filename is a pattern.  I.E. The BaseName or Extension
+contains "*" or "?" characters.
+<DL>
+</DL>
+
+<HR>
+<A NAME="makeAbsolute"></A>
+<H1>FileName::makeAbsolute()</H1>
+<P>
+<I>
+void FileName::makeAbsolute()
+</I><P>
+Converts filename to an absolute filename based on the current
+directory.  Throws BFileException on error.
+<DL>
+</DL>
+
+<HR>
+<A NAME="operator(char*)"></A>
+<H1>FileName::operator(char*)()</H1>
+<P>
+<I>
+FileName::operator const char*() const
+</I><P>
+Conversion to character string.  Allows FileName objects to be passed
+to any routine expecting a filename string.
+<DL>
+</DL>
+
+<HR>
+<A NAME="relativeName"></A>
+<H1>FileName::relativeName()</H1>
+<P>
+<I>
+String FileName::relativeName() const
+</I><P>
+Returns final component of filename. This is baseName()+extension()
+<DL>
+</DL>
+
+<HR>
+<A NAME="root"></A>
+<H1>FileName::root()</H1>
+<P>
+<I>
+String FileName::root() const
+</I><P>
+Returns root component of filename.
+<DL>
+</DL>
+
+<HR>
+<A NAME="setName"></A>
+<H1>FileName::setName()</H1>
+<P>
+<I>
+void FileName::setName(const char* pszFileName)
+</I><P>
+Sets the full name.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>

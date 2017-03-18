@@ -36,6 +36,7 @@ clean:
 	rm -f *~
 	-rm -f $(TESTPROGS)
 	-rm -f *~
+	rm -rf *.dSYM
 
 .PHONY: all check clean
 

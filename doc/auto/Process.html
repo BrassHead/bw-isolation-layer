@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>Process</TITLE>
+<META name="GENERATOR" content="docgen by Brian Bray">
+<style type="text/css">
+  body { max-width:43em; margin-left:auto; margin-right:auto }
+</style>
+</HEAD>
+<BODY BGCOLOR=white>
+<A NAME="Process"></A>
+<H1>Process</H1>
+<P>
+Represents the current process.
+<P>
+If a static or extern Process object is defined, it will be used.
+Otherwise, a default Process object will be created.
+<P>
+Process has a number of static functions that manage the run state.
+<P>
+It has one overridable function -- main -- with syntax and semantics
+similar to "C" main.  Main should create a Scene and then add
+one or more Frame windows to it.
+<P>
+It should then call nextAction() repeatedly until an exit command
+is received.
+<DL>
+</DL>
+<H3>Process member functions</H3>
+<TABLE COLS=02>
+<TR>
+<TD>
+<A HREF="#Main">Main()</A>
+</TD><TD>
+This is the 'Main' entry point for a BW application.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#fatalError">fatalError()</A>
+</TD><TD>
+Called upon fatal errors in BW and the underlying GUI subsystem.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getArgX">getArgX()</A>
+</TD><TD>
+Returns the command line arguments.</TD>
+</TR>
+<TR>
+<TD>
+<A HREF="#getLocale">getLocale()</A>
+</TD><TD>
+Returns the current operating locale of the program.</TD>
+</TR>
+</TABLE>
+<TABLE COLS=02>
+</TABLE>
+
+<HR>
+<A NAME="Main"></A>
+<H1>Process::Main()</H1>
+<P>
+<I>int Process::main(int argc, char* argv[])
+
+</I><P>
+This is the 'Main' entry point for a BW application.  It is necessary for
+BW to provide the OS 'main' both for initialization and because there
+are platform differences in the name 'main' for GUI applications.
+<P>
+If no user Process is statically defined, then a default Process is created.
+<P>
+The default main routine is:
+<PRE>
+{
+String strAction;
+Scene TheScene;
+<P>
+bwassert( Main::getMain() );
+TheScene.addFrame( Main::getMain() );
+<P>
+while ( !strAction.startsWith("exit(") )
+strAction = TheScene.nextAction();
+<P>
+return atoi(strAction.substring(5));
+}
+</PRE>
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="fatalError"></A>
+<H1>Process::fatalError()</H1>
+<P>
+<I>void fatalError(const BException&amp; e) throw()
+</I><P>
+Called upon fatal errors in BW and the underlying GUI subsystem.
+The routine is overridable.  This routine can be called before
+Process::main (in which case Process::main is never called).
+<P>
+If overriden, the routine should save whatever data it can to a save
+file and then exit.  The BException passed as a parameter indicates
+the nature of the fatal error.  This routine cannot throw an exception.
+<P>
+If the routine returns, a message is output to stderr and exit()
+is called.
+<P>
+The default routine in the base class just returns.
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="getArgX"></A>
+<H1>Process::getArgX()</H1>
+<P>
+<I>static int getArgc();
+</I><P>
+<I>static char** getArgv();
+
+</I><P>
+Returns the command line arguments.
+<P>
+<P>
+<DL>
+</DL>
+
+<HR>
+<A NAME="getLocale"></A>
+<H1>Process::getLocale()</H1>
+<P>
+<I>
+
+
+/*</I><P>
+Returns the current operating locale of the program.  The most common
+format is <Language>_<Territory>.<Charset> or a prefix of this form,
+such as "fr_CA.iso-8859-1" or, simply, "fr".
+<P>
+There are some special values such as "C" and "POSIX" that refer to the
+portable character sets for those standards.
+<P>
+This is *not* the same as the LANG environment variable -- a blank LANG=
+defaults to "C", for example.
+<DL>
+</DL>
+
+<HR>
+</BODY>
+</HTML>
