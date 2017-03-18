@@ -37,6 +37,7 @@ xcuserdata/
 *.sdf
 *.o
 *.dSYM/
+*.a
 
 # Node and friends
 #

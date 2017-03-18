@@ -81,6 +81,8 @@ clean:
 	rm -f *.o
 	rm -f *~ include/*~ include/bw/*~ doc/*~
 	rm -f core
+
+distclean: clean
 	rm -f libbw.a
 	rm -f doc/auto/*
 	
