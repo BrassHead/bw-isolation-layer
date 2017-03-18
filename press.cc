@@ -81,7 +81,7 @@ void Press::drawText( int x, int y, String str )
 */
 void Press::changeFont( FontIndex findx )
 {
-	FontMetric::changeFont( m_pcvs, findx );
+	FontMetric::FmChangeFont( m_pcvs, findx );
 	XGCValues xgcv;
 	xgcv.font = m_pfs->fid;;
 	BGC::changeValues( m_pbgc, GCFont, xgcv );

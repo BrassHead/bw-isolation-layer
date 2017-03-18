@@ -76,7 +76,7 @@ not be used in application code.
 BDebugException::BDebugException( const char* msg )
 {
 	strncpy( m_messageBuffer, msg, msgBufferSize );
-	m_messageBuffer[msgBufferSize] = '\0';	// Terminate
+	m_messageBuffer[msgBufferSize-1] = '\0';	// Terminate
 }
 
 BDebugException::~BDebugException()

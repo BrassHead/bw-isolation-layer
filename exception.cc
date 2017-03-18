@@ -125,7 +125,7 @@ BFormatException::BFormatException
 )
 {
 	strncpy( messageBuffer_, msg, msgBufferSize );
-	messageBuffer_[msgBufferSize] = '\0';	// Terminate
+	messageBuffer_[msgBufferSize-1] = '\0';	// Terminate
 }
 
 

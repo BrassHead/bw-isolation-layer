@@ -366,8 +366,8 @@ public:
 		int		majorColours;
 	};
 
-	virtual void describeData(int field, DataLayout&) const =0;
-	virtual void* getData(int field, DataLayout&) =0;
+	virtual DataLayout describeData(int field) const =0;
+	virtual void* getData(int field) =0;
 	virtual Colourmap getColourmap() =0;
 	virtual void getRGBAMap(RGBA* buf, int nBuf) const =0;
 

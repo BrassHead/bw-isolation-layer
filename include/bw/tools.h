@@ -156,7 +156,7 @@ public:
 	virtual int fitString( const String str, int w );
 
 protected:
-	virtual void changeFont( Canvas* pcvs, FontIndex findx );
+	virtual void FmChangeFont( Canvas* pcvs, FontIndex findx );
 	CXFontStruct*	m_pfs;
 };
 

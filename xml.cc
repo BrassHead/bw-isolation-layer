@@ -49,7 +49,7 @@ public:
 		return floc;
 	}
 	operator bool() const {
-		return ist;
+		return ist.good();
 	}
 
 private:

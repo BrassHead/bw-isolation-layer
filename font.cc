@@ -161,11 +161,11 @@ int FontMetric::fitString( const String str, int w )
 }
 
 
-/* FontMetric::changeFont()
+/* FontMetric::FmChangeFont()
 
    Internal routine so that Press can change fonts
 */
-void FontMetric::changeFont( Canvas* pcvs, FontIndex findx )
+void FontMetric::FmChangeFont( Canvas* pcvs, FontIndex findx )
 {
 	m_pfs = static_cast<CXFontStruct*>(FCanvas::getDevice( *pcvs )->getFontStruct( findx ));
 }

@@ -22,7 +22,8 @@ RANLIB = ranlib
 MAKE = make
 
 CXXOPTS = -g -D_DEBUG
-CCFLAGS = -std=c++11 -I./include -Wall -Werror $(DEFS)
+# CCFLAGS = -std=c++11 -I./include -Wall -Werror $(DEFS)
+CCFLAGS = -std=c++11 -I./include -I/opt/X11/include -Wall $(DEFS)
 
 %.o: %.cc
 	$(CXX) -c $(CXXOPTS) $(CCFLAGS) $<
