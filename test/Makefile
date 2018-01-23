@@ -7,7 +7,8 @@ SHELL = /bin/sh
 CXX = c++
 CXXOPTS = -g -D_DEBUG
 CCFLAGS = -std=c++11 -I../include -Wall -Werror $(DEFS)
-LDFLAGS = -Wl,-rpath,/usr/X11R6/lib -L/usr/X11R6/lib
+# LDFLAGS = -Wl,-rpath,/usr/X11R6/lib -L/usr/X11R6/lib
+LDFLAGS = -Wl,-rpath,/opt/X11/lib -L/opt/X11/lib
 LIBS = ../libbw.a -lX11
 
 %: %.cc ../libbw.a
