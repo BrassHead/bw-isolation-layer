@@ -6,10 +6,15 @@
 SHELL = /bin/sh
 CXX = c++
 CXXOPTS = -g -D_DEBUG
-CCFLAGS = -std=c++11 -I../include -Wall -Werror $(DEFS)
-# LDFLAGS = -Wl,-rpath,/usr/X11R6/lib -L/usr/X11R6/lib
-LDFLAGS = -Wl,-rpath,/opt/X11/lib -L/opt/X11/lib
+CCFLAGS = -std=c++11 -I../include -Wall $(DEFS)
 LIBS = ../libbw.a -lX11
+
+UNAME = $(shell uname)
+ifeq ($(UNAME), Darwin)
+LDFLAGS = -Wl,-rpath,/opt/homebrew/lib -L/opt/homebrew/lib
+else
+LDFLAGS = -Wl,-rpath,/usr/X11R6/lib -L/usr/X11R6/lib
+endif
 
 %: %.cc ../libbw.a
 	$(CXX) $(CXXOPTS) $(CCFLAGS) $(LDFLAGS) -o $@ $< $(LIBS)

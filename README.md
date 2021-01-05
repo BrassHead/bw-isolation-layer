@@ -16,3 +16,9 @@ https://github.com/BrassHead/selftest
 
 Enjoy, it's now available under the [MIT License](LICENSE-MIT.txt)
 
+
+## MacOS prerequisites
+
+- `brew install libx11`
+- `brew install unixodbc`
+- `brew install libxext`

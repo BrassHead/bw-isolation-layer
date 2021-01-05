@@ -21,9 +21,16 @@ AR = ar
 RANLIB = ranlib
 MAKE = make
 
+UNAME = $(shell uname)
+ifeq ($(UNAME), Darwin)
+INCPATH = -I/opt/homebrew/include -I/opt/homebrew/include/X11
+else
+INCPATH =
+endif
+
 CXXOPTS = -g -D_DEBUG
 # CCFLAGS = -std=c++11 -I./include -Wall -Werror $(DEFS)
-CCFLAGS = -std=c++11 -I./include -I/opt/X11/include -Wall $(DEFS)
+CCFLAGS = -std=c++11 -I./include $(INCPATH) -Wall $(DEFS)
 
 %.o: %.cc
 	$(CXX) -c $(CXXOPTS) $(CCFLAGS) $<
