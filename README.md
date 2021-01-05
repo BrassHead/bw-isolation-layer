@@ -22,3 +22,4 @@ Enjoy, it's now available under the [MIT License](LICENSE-MIT.txt)
 - `brew install libx11`
 - `brew install unixodbc`
 - `brew install libxext`
+- Install XQuartz from https://www.xquartz.org
